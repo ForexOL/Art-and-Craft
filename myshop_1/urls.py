@@ -5,6 +5,12 @@ from . import settings
 
 from django.conf.urls import url
 from django.views.static import serve
+from django.conf.urls import (
+                                handler400,
+                                handler403,
+                                handler404,
+                                handler500)
+
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -16,3 +22,9 @@ urlpatterns += static(settings.MEDIA_URL,
                               document_root=settings.MEDIA_ROOT)
 urlpatterns += static(settings.STATIC_URL,
                               document_root=settings.STATIC_ROOT)
+
+
+handler400 = 'shop.views.views.bad_request'
+handler403 = 'shop.views.views.permission_denied'
+handler404 = 'shop.views.views.page_not_found'
+handler500 = 'shop.views.views.server_error'

@@ -1,0 +1,159 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load mathfilters %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<!-- Bootstrap Breadcrumb Area Start -->
+<div class="breadcrumb-area py-3 bg-light">
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/Dashboard">Dashboard</a></li>
+                <li class="breadcrumb-item active" aria-current="page">{{ vendor.shop_name }}</li>
+            </ol>
+        </nav>
+    </div>
+</div>
+<!-- Bootstrap Breadcrumb Area End -->
+
+<!-- My Account Wrapper Start -->
+<div class="container my-4">
+    <div class="row">
+        <div class="col-lg-3 col-md-4">
+            <div class="list-group mb-4">
+                <a href="#dashboad" class="list-group-item list-group-item-action active" data-toggle="tab">
+                    <i class="fa fa-dashboard"></i> Dashboard
+                </a>
+                <a href="#orders" class="list-group-item list-group-item-action" data-toggle="tab">
+                    <i class="fa fa-cart-arrow-down"></i> Orders
+                </a>
+                <a href="#payment-method" class="list-group-item list-group-item-action" data-toggle="tab">
+                    <i class="fa fa-credit-card"></i> Payment Method
+                </a>
+                <a href="#address-edit" class="list-group-item list-group-item-action" data-toggle="tab">
+                    <i class="fa fa-map-marker"></i> Address
+                </a>
+                <a href="#account-info" class="list-group-item list-group-item-action" data-toggle="tab">
+                    <i class="fa fa-user"></i> Account Details
+                </a>
+                <a href="/logout" class="list-group-item list-group-item-action text-danger">
+                    <i class="fa fa-sign-out"></i> Logout
+                </a>
+            </div>
+        </div>
+        
+        <div class="col-lg-9 col-md-8">
+            <div class="tab-content">
+                <!-- Dashboard Tab Start -->
+                <div class="tab-pane fade show active" id="dashboad">
+                    <div class="card p-4 shadow-sm">
+                        <h3 class="mb-3">Dashboard</h3>
+                        <p><strong>Hello, {{ request.user.username }}</strong></p>
+                        <p>From your account dashboard, you can check your recent orders, manage addresses, and edit your account details.</p>
+                        <div class="d-flex gap-2">
+                            <a href="/vendor_add_product" class="btn btn-primary"><i class="fa fa-plus"></i> Add Product</a>
+                            <a href="/productboard" class="btn btn-secondary"><i class="fa fa-edit"></i> Manage Products</a>
+                            <a href="https://www.remove.bg/" class="btn btn-info">Remove Product Backgrounds</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Dashboard Tab End -->
+                
+                <!-- Orders Tab Start -->
+                <div class="tab-pane fade" id="orders">
+                    <div class="card p-4 shadow-sm">
+                        <h3 class="mb-3">Orders</h3>
+                        {% if orders %}
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th>Image</th>
+                                        <th>Product</th>
+                                        <th>Date</th>
+                                        <th>Price</th>
+                                        <th>Quantity</th>
+                                        <th>Total</th>
+                                        <th>Code</th>
+                                        <th>Cancel</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for order in orders %}
+                                    <tr>
+                                        <td><img class="rounded-circle" src="{{ order.product.image.url }}" alt="" style="height: 50px;"></td>
+                                        <td>{{ order.product.name }}</td>
+                                        <td>{{ order.date }}</td>
+                                        <td>{{ order.selling_price }}/=</td>
+                                        <td>{{ order.quantity }}</td>
+                                        <td>{{ order.quantity|mul:order.selling_price }}/=</td>
+                                        <td>{{ order.ordering_code }}</td>
+                                        <td><a href="/?order={{ order.id }}" class="btn btn-danger btn-sm">Delete</a></td>
+                                        <td><span class="badge {% if order.status %}badge-success{% else %}badge-warning{% endif %}">{% if order.status %}Completed{% else %}Pending{% endif %}</span></td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        {% else %}
+                        <p class="text-muted">No orders available. Your products are being advertised.</p>
+                        {% endif %}
+                    </div>
+                </div>
+                <!-- Orders Tab End -->
+                
+                <!-- Payment Method Tab Start -->
+                <div class="tab-pane fade" id="payment-method">
+                    <div class="card p-4 shadow-sm">
+                        <h3 class="mb-3">Payment Method</h3>
+                        {% if payment %}
+                        <table class="table table-bordered">
+                            <thead class="thead-light">
+                                <tr><th>Provider</th><th>Number</th><th>Registered Name</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>MTN</td><td>{{ payment.mtn }}</td><td>{{ payment.mtn_name }}</td></tr>
+                                <tr><td>Airtel</td><td>{{ payment.airtel }}</td><td>{{ payment.airtel_name }}</td></tr>
+                                <tr><td>Wave</td><td>{{ payment.wave }}</td><td>{{ payment.wave_name }}</td></tr>
+                            </tbody>
+                        </table>
+                        {% else %}
+                        <p class="text-muted">No registered payment details. <a href="/Payment" class="btn btn-primary">Add Payment Info</a></p>
+                        {% endif %}
+                    </div>
+                </div>
+                <!-- Payment Method Tab End -->
+                
+                <!-- Address Edit Tab Start -->
+                <div class="tab-pane fade" id="address-edit">
+                    <div class="card p-4 shadow-sm">
+                        <h3>Your Contact Info</h3>
+                        <p><strong>{{ request.user.username }}</strong></p>
+                        <p>Phone: 0{{ vendor.phone }}<br>Alternative: 0{{ vendor.alternative_Phone }}</p>
+                    </div>
+                </div>
+                <!-- Address Edit Tab End -->
+                
+                <!-- Account Info Tab Start -->
+                <div class="tab-pane fade" id="account-info">
+                    <div class="card p-4 shadow-sm">
+                        <h3>Account Details</h3>
+                        <p><strong>Username:</strong> {{ request.user.username }}</p>
+                        <p><strong>Store Name:</strong> {{ vendor.shop_name }}</p>
+                        <p><strong>Email:</strong> {{ request.user.email }}</p>
+                        <h4>Contact Info</h4>
+                        <p>Phone: 0{{ vendor.phone }}<br>Alternative: 0{{ vendor.alternative_Phone }}</p>
+                        <a href="/Vendor_update_get" class="btn btn-warning">Edit Vendor Info</a>
+                    </div>
+                </div>
+                <!-- Account Info Tab End -->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- My Account Wrapper End -->
+
+{% endblock %}

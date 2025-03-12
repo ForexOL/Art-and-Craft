@@ -1,0 +1,158 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load cart %}
+{% load custom_filter %}
+{% load static %}
+    <!-- Hero Section Begin -->
+    <section class="hero hero-normal">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="hero__categories  d-none d-md-block  hide-on-mobile" >
+                        <div class="hero__categories__all" style="background-color: #2f231b;">
+                            <i class="fa fa-bars"></i>
+                            <span>All departments</span>
+                        </div>
+                        <ul>
+                            {% for category in categories %}
+                            <li><a href="/?category={{category.id}}">{{ category.name }}</a></li>
+                            {% endfor %}
+                            {% for brand in brands %}
+                            <li><a href="/?brand={{brand.id}}">{{ brand.name }}</a></li>
+                            {% endfor %}
+                        </ul>
+                        
+                    </div>
+                    <div class="hero__categories  d-lg-none" >
+                        <div class="hero__categories__all" style="background-color: #2f231b;">
+                            <i class="fa fa-bars"></i>
+                            <span>All departments</span>
+                        </div>
+                        <ul>
+                            {% for category in categories %}
+                            <li><a href="/?category={{category.id}}">{{ category.name }}</a></li>
+                            {% endfor %}
+                            {% for brand in brands %}
+                            <li><a href="/?brand={{brand.id}}">{{ brand.name }}</a></li>
+                            {% endfor %}
+                        </ul>
+                        
+                    </div>
+                </div>
+                <div class="col-lg-9  hide-on-mobile">
+                    <div class="hero__search">
+                        <div class="hero__search__form">
+                            <form action="#">
+                                <div class="hero__search__categories">
+                                    All Categories
+                                    <span class="arrow_carrot-down"></span>
+                                </div>
+                                <input type="text" placeholder="What do yo u need?">
+                                <button type="submit" class="site-btn" style="background-color: #2f231b;">SEARCH</button>
+                            </form>
+                        </div>
+                        <div class="hero__search__phone  d-none d-md-block  hide-on-mobile">
+                            <div class="hero__search__phone__icon">
+                                <i class="fa fa-phone"></i>
+                            </div>
+                            <div class="hero__search__phone__text">
+                                <h5>+256781782288</h5>
+                                <span>support 24/7 time</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Hero Section End -->
+
+    <!-- Breadcrumb Section Begin -->
+    <section class="breadcrumb-section set-bg" data-setbg="{% static 'img/33.jpg' %}">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="breadcrumb__text">
+                        <h2>Shopping Cart</h2>
+                        <div class="breadcrumb__option">
+                            <a href="/">Home</a>
+                            <span>Shopping Cart</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+
+    <!-- Shoping Cart Section Begin -->
+    <section class="shoping-cart spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="shoping__cart__table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th class="shoping__product">Products</th>
+                                    <th>Price</th>
+                                    <th>Quantity</th>
+                                    <th>Total</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% if request.session.cart.keys|length == 0 %}
+                                <tr>Your Cart is Empty Go to  <a href="/store" class="btn btn-primary">Our Store</a>  To Shop Now </p>
+                                </tr>
+                                {% endif %}
+                                {% for product in productes %}
+                                <tr>
+                                    <td class="shoping__cart__item">
+                                        <img src="{{product.image.url}}" alt="" style="height:100px;width: 100px;">
+                                        <h5>{{product.name}}</h5>
+                                    </td>
+                                    <td class="shoping__cart__price">
+                                        ${{product.price}}
+                                    </td>
+                                    <td class="shoping__cart__quantity">
+                                    {{product|cart_quantity:request.session.cart}}
+
+                                    </td>
+                                    <td class="shoping__cart__total">
+                                        ${{product|price_total:request.session.cart}}
+                                    </td>
+                                    <td class="shoping__cart__item__close">
+                                        <span class="icon_close"></span>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="shoping__cart__btns">
+                        <a href="/" class="primary-btn cart-btn">CONTINUE SHOPPING</a>
+                    </div>
+                </div>
+
+                <div class="col-lg-12">
+                    <div class="shoping__checkout">
+                        <h5>Cart Total</h5>
+                        <ul>
+                            <li>Subtotal <span>${{products|total_cart_price:request.session.cart}}</span></li>
+                            <li>Total <span>${{products|total_cart_price_grand:request.session.cart}}</span></li>
+                        </ul>
+                        <a href="{% url 'checkout1' %}" class="primary-btn">PROCEED TO CHECKOUT</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Shoping Cart Section End -->
+{% endblock %}

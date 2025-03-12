@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% load crispy_forms_tags %}
+{% block content %}
+
+<!-- Breadcrumb Area Start -->
+<div class="breadcrumb-area py-3 bg-light">
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item">
+                    <a href="/Dashboard" class="text-primary">Dashboard</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">Add Product</li>
+            </ol>
+        </nav>
+    </div>
+</div>
+<!-- Breadcrumb Area End -->
+
+<!-- Payment Methods Section Start -->
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <!-- Payment Methods Content -->
+        <div class="col-lg-6 col-md-8">
+            <div class="card shadow-sm border-0">
+                <div class="card-body">
+                    <h2 class="mb-3">Payment Methods</h2>
+                    <p class="text-muted">
+                        Ways in which the company will make payments to you for any of your products bought by customers.
+                    </p>
+
+                    <!-- Payment Form -->
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        
+                        <div class="mb-3">
+                            {{ form | crispy }}
+                        </div>
+                                </br>
+                            </br>
+                        </br>
+                        <button type="submit" class="btn btn-primary w-100">Save Now</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Payment Methods Section End -->
+
+
+
+{% endblock %}

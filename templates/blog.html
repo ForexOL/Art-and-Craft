@@ -1,0 +1,573 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+    <!-- Hero Section Begin -->
+    <section class="hero">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="hero__categories">
+                        <div class="hero__categories__all" style="background-color: #2f231b;">
+                            <i class="fa fa-bars"></i>
+                            <span>All departments</span>
+                        </div>
+                        <ul>
+                            <li><a href="#">Bronze Sculptures</a></li>
+                            <li><a href="#">Wood Carvings</a></li>
+                            <li><a href="#">Marble Statues</a></li>
+                            <li><a href="#">Clay Modeling</a></li>
+                            <li><a href="#">Stone Reliefs</a></li>
+                            <li><a href="#">Metal Castings</a></li>
+                            <li><a href="#">Glass Art</a></li>
+                            <li><a href="#">Ice Sculptures</a></li>
+                            <li><a href="#">Sand Sculptures</a></li>
+                            <li><a href="#">Kinetic Art</a></li>
+                            <li><a href="#">Mixed Media Installations</a></li>
+                        </ul>
+                        
+                    </div>
+                </div>
+                <div class="col-lg-9">
+                    <div class="hero__search">
+                        <div class="hero__search__form">
+                            <form action="#">
+                                <div class="hero__search__categories">
+                                    All Categories
+                                    <span class="arrow_carrot-down"></span>
+                                </div>
+                                <input type="text" placeholder="What do yo u need?">
+                                <button type="submit" class="site-btn" style="background-color: #2f231b;">SEARCH</button>
+                            </form>
+                        </div>
+                        <div class="hero__search__phone  d-none d-md-block">
+                            <div class="hero__search__phone__icon">
+                                <i class="fa fa-phone"></i>
+                            </div>
+                            <div class="hero__search__phone__text">
+                                <h5>+256781782288</h5>
+                                <span>support 24/7 time</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper mySwiper">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <div class="hero__item set-bg" data-setbg="{% static 'img/hero/product--20.jpeg' %}">
+                                    <div class="hero__text">
+                                        <span>African Art</span>
+                                        <h2>Biggest Vendor<br />100% Organic</h2>
+                                        <p>Free Pickup and Delivery Available</p>
+                                        <a href="#" class="primary-btn" style="background-color: #A95922; color:white;">SHOP NOW</a>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="swiper-slide">
+                                <div class="hero__item set-bg" data-setbg="{% static 'img/hero/product--21.jpeg' %}">
+                                    <div class="hero__text">
+                                        <span>Handmade Crafts</span>
+                                        <h2>Authentic<br />Handmade Items</h2>
+                                        <p>Worldwide Shipping Available</p>
+                                        <a href="#" class="primary-btn" style="background-color: #A95922; color:white;">SHOP NOW</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <!-- Navigation Buttons -->
+                        <div class="swiper-button-next"></div>
+                        <div class="swiper-button-prev"></div>
+                    
+                        <!-- Pagination -->
+                        <div class="swiper-pagination"></div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Hero Section End -->
+
+    <!-- Categories Section Begin -->
+    <section class="categories">
+        <div class="container">
+            <div class="row">
+                <div class="categories__slider owl-carousel">
+                    <div class="col-lg-3">
+                        <div class="categories__item set-bg" data-setbg="{% static 'img/categories/product--7.jpeg' %}">
+                            <h5><a href="#" style="background-color: #A95922; color:white;">Fresh Fruit</a></h5>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="categories__item set-bg" data-setbg="{% static 'img/categories/product--9.jpeg' %}">
+                            <h5><a href="#" style="background-color: #A95922; color:white;">Dried Fruit</a></h5>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="categories__item set-bg" data-setbg="{% static 'img/categories/product--10.jpeg' %}">
+                            <h5><a href="#" style="background-color: #A95922; color:white;">Vegetables</a></h5>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="categories__item set-bg" data-setbg="{% static 'img/categories/product--14.jpeg' %}" >
+                            <h5><a href="#" style="background-color: #A95922; color:white;">drink fruits</a></h5>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="categories__item set-bg" data-setbg="{% static 'img/categories/product--21.jpg' %}">
+                            <h5><a href="#" style="background-color: #A95922; color:white;">drink fruits</a></h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Categories Section End -->
+
+    <!-- Featured Section Begin -->
+    <section class="featured spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title">
+                        <h2 style="color: #A95922;">Featured Product</h2>
+                    </div>
+                    <div class="featured__controls">
+                        <ul>
+                            <li class="active" data-filter="*">All</li>
+                            <li data-filter=".oranges">Oranges</li>
+                            <li data-filter=".fresh-meat">Fresh Meat</li>
+                            <li data-filter=".vegetables">Vegetables</li>
+                            <li data-filter=".fastfood">Fastfood</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row featured__filter">
+                <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
+                    <div class="featured__item">
+                        <div class="featured__item__pic set-bg" data-setbg="{% static 'img/featured/product--2.jpg' %}">
+                            <ul class="featured__item__pic__hover">
+                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                            </ul>
+                        </div>
+                        <div class="featured__item__text">
+                            <h6><a href="#" style="color: #A95922;">Crab Pool Security</a></h6>
+                            <h5>$30.00</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6 mix vegetables fastfood">
+                    <div class="featured__item">
+                        <div class="featured__item__pic set-bg" data-setbg="{% static 'img/featured/product--5.jpeg' %}">
+                            <ul class="featured__item__pic__hover">
+                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                            </ul>
+                        </div>
+                        <div class="featured__item__text">
+                            <h6><a href="#" style="color: #A95922;">Crab Pool Security</a></h6>
+                            <h5>$30.00</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6 mix vegetables fresh-meat">
+                    <div class="featured__item">
+                        <div class="featured__item__pic set-bg" data-setbg="{% static 'img/featured/product--4.webp' %}">
+                            <ul class="featured__item__pic__hover">
+                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                            </ul>
+                        </div>
+                        <div class="featured__item__text">
+                            <h6><a href="#" style="color: #A95922;">Crab Pool Security666</a></h6>
+                            <h5>$30.00</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6 mix fastfood oranges">
+                    <div class="featured__item">
+                        <div class="featured__item__pic set-bg" data-setbg="{% static 'img/featured/product--6.jpeg' %}">
+                            <ul class="featured__item__pic__hover">
+                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                            </ul>
+                        </div>
+                        <div class="featured__item__text">
+                            <h6><a href="#" style="color: #A95922;">Crab Pool Security 444</a></h6>
+                            <h5>$30.00</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6 mix fresh-meat vegetables">
+                    <div class="featured__item">
+                        <div class="featured__item__pic set-bg" data-setbg="{% static 'img/featured/product--8.jpeg' %}">
+                            <ul class="featured__item__pic__hover">
+                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                            </ul>
+                        </div>
+                        <div class="featured__item__text">
+                            <h6><a href="#" style="color: #A95922;">Crab Pool Security</a></h6>
+                            <h5>$30.00</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fastfood">
+                    <div class="featured__item">
+                        <div class="featured__item__pic set-bg" data-setbg="{% static 'img/featured/product--3.jpg' %}">
+                            <ul class="featured__item__pic__hover">
+                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                            </ul>
+                        </div>
+                        <div class="featured__item__text">
+                            <h6><a href="#" style="color: #A95922;">Crab Pool Security</a></h6>
+                            <h5>$30.00</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6 mix fresh-meat vegetables">
+                    <div class="featured__item">
+                        <div class="featured__item__pic set-bg" data-setbg="{% static 'img/featured/product--11.jpg' %}">
+                            <ul class="featured__item__pic__hover">
+                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                            </ul>
+                        </div>
+                        <div class="featured__item__text">
+                            <h6><a href="#" style="color: #A95922;">Crab Pool Security</a></h6>
+                            <h5>$30.00</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6 mix fastfood vegetables">
+                    <div class="featured__item">
+                        <div class="featured__item__pic set-bg" data-setbg="{% static 'img/featured/product--13.jpeg' %}">
+                            <ul class="featured__item__pic__hover">
+                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                            </ul>
+                        </div>
+                        <div class="featured__item__text">
+                            <h6><a href="#" style="color: #A95922;">Crab Pool Security</a></h6>
+                            <h5>$30.00</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Featured Section End -->
+
+    <!-- Banner Begin -->
+    <div class="banner">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="banner__pic">
+                        <img src="{% static 'img/banner/sculpture.jpg' %}" alt="" style="height: 270px;width: 570px;">
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="banner__pic">
+                        <img src="{% static 'img/banner/sculptures2.jpg' %}" alt="" style="height: 270px;width: 570px;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Banner End -->
+
+    <!-- Latest Product Section Begin -->
+    <section class="latest-product spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="latest-product__text">
+                        <h4 style="color: #A95922;">Latest Products</h4>
+                        <div class="latest-product__slider owl-carousel">
+                            <div class="latest-prdouct__slider__item">
+                                <a href="#" class="latest-product__item">
+                                    <div class="latest-product__item__pic">
+                                        <img src="{% static 'img/latest-product/product--11.jpg' %}" alt="" style="height: 100px;width: 100px;">
+                                    </div>
+                                    <div class="latest-product__item__text">
+                                        <h6 style="color: #A95922;">Crab Pool Security</h6>
+                                        <span>$30.00</span>
+                                    </div>
+                                </a>
+                                <a href="#" class="latest-product__item">
+                                    <div class="latest-product__item__pic">
+                                        <img src="{% static 'img/latest-product/product--12.jpeg' %}" alt="" style="height: 100px;width: 100px;">
+                                    </div>
+                                    <div class="latest-product__item__text">
+                                        <h6 style="color: #A95922;">Crab Pool Security</h6>
+                                        <span>$30.00</span>
+                                    </div>
+                                </a>
+                                <a href="#" class="latest-product__item">
+                                    <div class="latest-product__item__pic">
+                                        <img src="{% static 'img/latest-product/product--19.jpeg' %}" alt="" style="height: 100px;width: 100px;">
+                                    </div>
+                                    <div class="latest-product__item__text">
+                                        <h6 style="color: #A95922;">Crab Pool Security</h6>
+                                        <span>$30.00</span>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="latest-prdouct__slider__item">
+                                <a href="#" class="latest-product__item">
+                                    <div class="latest-product__item__pic">
+                                        <img src="{% static 'img/latest-product/product--15.jpeg' %}" alt="" style="height: 100px;width: 100px;">
+                                    </div>
+                                    <div class="latest-product__item__text">
+                                        <h6 style="color: #A95922;">Crab Pool Security</h6>
+                                        <span>$30.00</span>
+                                    </div>
+                                </a>
+                                <a href="#" class="latest-product__item">
+                                    <div class="latest-product__item__pic">
+                                        <img src="{% static 'img/latest-product/product--16.jpeg' %}" alt="" style="height: 100px;width: 100px;">
+                                    </div>
+                                    <div class="latest-product__item__text">
+                                        <h6 style="color: #A95922;">Crab Pool Security</h6>
+                                        <span>$30.00</span>
+                                    </div>
+                                </a>
+                                <a href="#" class="latest-product__item">
+                                    <div class="latest-product__item__pic">
+                                        <img src="{% static 'img/latest-product/product--17.jpeg' %}" alt="" style="height: 100px;width: 100px;">
+                                    </div>
+                                    <div class="latest-product__item__text">
+                                        <h6 style="color: #A95922;">Crab Pool Security</h6>
+                                        <span>$30.00</span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="latest-product__text">
+                        <h4 style="color: #A95922;">Top Rated Products</h4>
+                        <div class="latest-product__slider owl-carousel">
+                            <div class="latest-prdouct__slider__item">
+                                <a href="#" class="latest-product__item">
+                                    <div class="latest-product__item__pic">
+                                        <img src="{% static 'img/latest-product/product--11.jpg' %}" alt="" style="height: 100px;width: 100px;">
+                                    </div>
+                                    <div class="latest-product__item__text">
+                                        <h6 style="color: #A95922;">Crab Pool Security</h6>
+                                        <span>$30.00</span>
+                                    </div>
+                                </a>
+                                <a href="#" class="latest-product__item">
+                                    <div class="latest-product__item__pic">
+                                        <img src="{% static 'img/latest-product/product--12.jpeg' %}" alt="" style="height: 100px;width: 100px;">
+                                    </div>
+                                    <div class="latest-product__item__text">
+                                        <h6 style="color: #A95922;">Crab Pool Security</h6>
+                                        <span>$30.00</span>
+                                    </div>
+                                </a>
+                                <a href="#" class="latest-product__item">
+                                    <div class="latest-product__item__pic">
+                                        <img src="{% static 'img/latest-product/product--19.jpeg' %}" alt="" style="height: 100px;width: 100px;">
+                                    </div>
+                                    <div class="latest-product__item__text">
+                                        <h6 style="color: #A95922;">Crab Pool Security</h6>
+                                        <span>$30.00</span>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="latest-prdouct__slider__item">
+                                <a href="#" class="latest-product__item">
+                                    <div class="latest-product__item__pic">
+                                        <img src="{% static 'img/latest-product/product--15.jpeg' %}" alt="" style="height: 100px;width: 100px;">
+                                    </div>
+                                    <div class="latest-product__item__text">
+                                        <h6 style="color: #A95922;">Crab Pool Security</h6>
+                                        <span>$30.00</span>
+                                    </div>
+                                </a>
+                                <a href="#" class="latest-product__item">
+                                    <div class="latest-product__item__pic">
+                                        <img src="{% static 'img/latest-product/product--16.jpeg' %}" alt="" style="height: 100px;width: 100px;">
+                                    </div>
+                                    <div class="latest-product__item__text">
+                                        <h6 style="color: #A95922;">Crab Pool Security</h6>
+                                        <span>$30.00</span>
+                                    </div>
+                                </a>
+                                <a href="#" class="latest-product__item">
+                                    <div class="latest-product__item__pic">
+                                        <img src="{% static 'img/latest-product/product--17.jpeg' %}" alt="" style="height: 100px;width: 100px;">
+                                    </div>
+                                    <div class="latest-product__item__text">
+                                        <h6 style="color: #A95922;">Crab Pool Security</h6>
+                                        <span>$30.00</span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="latest-product__text">
+                        <h4 style="color: #A95922;">Review Products</h4>
+                        <div class="latest-product__slider owl-carousel">
+                            <div class="latest-prdouct__slider__item">
+                                <a href="#" class="latest-product__item">
+                                    <div class="latest-product__item__pic">
+                                        <img src="{% static 'img/latest-product/product--11.jpg' %}" alt="" style="height: 100px;width: 100px;">
+                                    </div>
+                                    <div class="latest-product__item__text">
+                                        <h6 style="color: #A95922;">Crab Pool Security</h6>
+                                        <span>$30.00</span>
+                                    </div>
+                                </a>
+                                <a href="#" class="latest-product__item">
+                                    <div class="latest-product__item__pic">
+                                        <img src="{% static 'img/latest-product/product--12.jpeg' %}" alt="" style="height: 100px;width: 100px;">
+                                    </div>
+                                    <div class="latest-product__item__text">
+                                        <h6 style="color: #A95922;">Crab Pool Security</h6>
+                                        <span>$30.00</span>
+                                    </div>
+                                </a>
+                                <a href="#" class="latest-product__item">
+                                    <div class="latest-product__item__pic">
+                                        <img src="{% static 'img/latest-product/product--19.jpeg' %}" alt="" style="height: 100px;width: 100px;">
+                                    </div>
+                                    <div class="latest-product__item__text">
+                                        <h6 style="color: #A95922;">Crab Pool Security</h6>
+                                        <span>$30.00</span>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="latest-prdouct__slider__item">
+                                <a href="#" class="latest-product__item">
+                                    <div class="latest-product__item__pic">
+                                        <img src="{% static 'img/latest-product/product--15.jpeg' %}" alt="" style="height: 100px;width: 100px;">
+                                    </div>
+                                    <div class="latest-product__item__text">
+                                        <h6 style="color: #A95922;">Crab Pool Security</h6>
+                                        <span>$30.00</span>
+                                    </div>
+                                </a>
+                                <a href="#" class="latest-product__item">
+                                    <div class="latest-product__item__pic">
+                                        <img src="{% static 'img/latest-product/product--16.jpeg' %}" alt="" style="height: 100px;width: 100px;">
+                                    </div>
+                                    <div class="latest-product__item__text">
+                                        <h6 style="color: #A95922;">Crab Pool Security</h6>
+                                        <span>$30.00</span>
+                                    </div>
+                                </a>
+                                <a href="#" class="latest-product__item">
+                                    <div class="latest-product__item__pic">
+                                        <img src="{% static 'img/latest-product/product--17.jpeg' %}" alt="" style="height: 100px;width: 100px;">
+                                    </div>
+                                    <div class="latest-product__item__text">
+                                        <h6 style="color: #A95922;">Crab Pool Security</h6>
+                                        <span>$30.00</span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Latest Product Section End -->
+
+    <!-- Blog Section Begin -->
+    <section class="from-blog spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title from-blog__title">
+                        <h2 style="color: #A95922;">From The Blog</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-6">
+                    <div class="blog__item">
+                        <div class="blog__item__pic">
+                            <img src="{% static 'img/blog/1.webp' %}" alt="" style="height: 300px;">
+                        </div>
+                        <div class="blog__item__text">
+                            <ul>
+                                <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
+                                <li><i class="fa fa-comment-o"></i> 5</li>
+                            </ul>
+                            <h5><a href="#" style="color: #A95922;">The Evolution of Digital Art: From Pixels to Paint</a></h5>
+                            <p>Explore how digital tools and platforms have transformed the art world, blending traditional techniques with cutting-edge technology. This topic delves into the rise of digital artists and their impact on the contemporary art scene.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-6">
+                    <div class="blog__item">
+                        <div class="blog__item__pic">
+                            <img src="{% static 'img/blog/2.webp' %}" alt="" style="height: 300px;">
+                        </div>
+                        <div class="blog__item__text">
+                            <ul>
+                                <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
+                                <li><i class="fa fa-comment-o"></i> 5</li>
+                            </ul>
+                            <h5><a href="#" style="color: #A95922;">"Abstract Expressionism: Unlocking the Emotion Behind the Brushstrokes"</a></h5>
+                            <p>Dive into the origins of Abstract Expressionism, examining how artists convey deep emotions through color, form, and texture rather than recognizable images. This topic explores the psychology behind chaotic yet deliberate artistic expressions.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-6">
+                    <div class="blog__item">
+                        <div class="blog__item__pic">
+                            <img src="{% static 'img/blog/2.jpg' %}" alt="" style="height: 300px;">
+                        </div>
+                        <div class="blog__item__text">
+                            <ul>
+                                <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
+                                <li><i class="fa fa-comment-o"></i> 5</li>
+                            </ul>
+                            <h5><a href="#" style="color: #A95922;">"Art in the Age of Social Media: Hashtags, Trends, and the Democratization of Creativity"</a></h5>
+                            <p>Investigate how social media platforms have influenced the creation and dissemination of art, enabling global recognition for emerging artists. This topic considers both the opportunities and challenges presented by online art communities.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Blog Section End -->
+    <script>
+        var swiper = new Swiper(".mySwiper", {
+            loop: true,
+            autoplay: {
+                delay: 3000, // Auto-slide every 3 seconds
+                disableOnInteraction: false
+            },
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },
+        });
+    </script>
+    
+{% endblock %}

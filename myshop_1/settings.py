@@ -12,6 +12,10 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
+import dotenv
+dotenv.load_dotenv()
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -31,9 +35,16 @@ ALLOWED_HOSTS = ['*','aartcraftei.onrender.com']
 # Application definition
 
 INSTALLED_APPS = [
+    'admin_interface',
+    'colorfield',
+    'chartjs',
     "django.contrib.admin",
+    'crispy_forms',
+    'crispy_bootstrap4',  # Required for Bootstrap 4
+    'django_social_share',
     "django.contrib.auth",
     "django.contrib.contenttypes",
+    'mathfilters',
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
@@ -45,10 +56,12 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'django_user_agents.middleware.UserAgentMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
 ]
 
 ROOT_URLCONF = 'myshop_1.urls'
@@ -146,5 +159,18 @@ STATICFILES_DIRS = (
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
+
+
+# Define the template pack to use
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+#STMP configuration
+
+EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST='smtp.mail.yahoo.com'
+EMAIL_PORT=587
+EMAIL_USE_TLS=True
+EMAIL_HOST_USER='pearlmartbusinesses@yahoo.com'
+EMAIL_HOST_PASSWORD='jlxmlemwkciomuea'
+
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

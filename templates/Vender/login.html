@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load cart %}
+{% load custom_filter %}
+{% load crispy_forms_tags %}
+{% block content %}
+<section class="categories">
+    <div class="container">
+        <form action="/login" method="post">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <div class="single-input-item">
+                <button class="check-btn sqr-btn" type="submit" >Log In</button>
+            </div>
+            <div>
+                <a href="/signup">Or Register<a/>
+            </div>
+        </form>
+    </div>
+</br>
+</br>
+</br>
+</section>
+{% endblock %}
