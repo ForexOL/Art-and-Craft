@@ -23,6 +23,8 @@ class Product(models.Model):
     shop_name =models.CharField(max_length=100,default='Pearlmart',blank=True)
     dates= models.DateTimeField(default=timezone.now)
     average_rating = models.FloatField(default=0.0)
+    is_top_rated = models.BooleanField(default=False)
+    is_featured = models.BooleanField(default=False)
 
     def update_rating(self):
         reviews = self.reviews.all()

@@ -148,17 +148,19 @@
         </div>
         <div class="container" >
             <div class="row">
+                {% for brand in brands %}
                 <div class="col-12 col-md-3 col-lg-3 mb-4">
-                    {% for brand in brands_display %}
+                    <h2 style="color: white">{{ brand.name }}</h2>
                     <div class="grid-box">
-                        <h2>{{ brand.name }}</h2>
-                        {% for category in brand.categories.all %}
+                        
+                    {% for category in brand.categories.all %}
+                       
                         <div class="featured__item__pic set-bg content" data-setbg="{{ category.image.id }}" >{{ category.name }}</div>
                         {% endfor %}
                     </div>
-                    {% endfor %}
+                    
                 </div>
-            
+                {% endfor %}
             </div>
         </div>
     </section>
@@ -334,7 +336,7 @@
                         <h4 style="color: #A95922;">Latest Products</h4>
                 
                         <div class="latest-product__slider owl-carousel">
-                            {% for product_chunk in chunked_products %}  {# Loop through the chunks of 3 products each #}
+                            {% for product_chunk in chunked_products1 %}  {# Loop through the chunks of 3 products each #}
                                 <div class="latest-prdouct__slider__item">
                                     {% for product in product_chunk %}  {# Loop through each product in the chunk #}
                                         <a href="#" class="latest-product__item">
@@ -357,7 +359,7 @@
                         <h4 style="color: #A95922;">Top Rated Products</h4>
                 
                         <div class="latest-product__slider owl-carousel">
-                            {% for product_chunk in chunked_products %}  {# Loop through the chunks of 3 products each #}
+                            {% for product_chunk in chunked_products2 %}  {# Loop through the chunks of 3 products each #}
                                 <div class="latest-prdouct__slider__item">
                                     {% for product in product_chunk %}  {# Loop through each product in the chunk #}
                                         <a href="#" class="latest-product__item">
@@ -380,7 +382,7 @@
                         <h4 style="color: #A95922;">Top Reviewed Products</h4>
                 
                         <div class="latest-product__slider owl-carousel">
-                            {% for product_chunk in chunked_products %}  {# Loop through the chunks of 3 products each #}
+                            {% for product_chunk in chunked_products3 %}  {# Loop through the chunks of 3 products each #}
                                 <div class="latest-prdouct__slider__item">
                                     {% for product in product_chunk %}  {# Loop through each product in the chunk #}
                                         <a href="#" class="latest-product__item">

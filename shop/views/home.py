@@ -157,7 +157,7 @@ def homepage(request):
 
     top_rated=list(Product.objects.filter(is_top_rated=True).order_by('-dates')[:12])
     latest_products=Product.objects.filter(is_featured=True).order_by('-dates')[:12]
-    top_reviewed= list(Product.objects.filter(is_best_selling=True).order_by('-dates')[:12])
+    top_reviewed= list(Product.objects.filter(is_featured=True).order_by('-dates')[:12])
 
     top_rated=random.sample(top_rated, len(top_rated))
     #latest_products=random.sample(latest_products, len(latest_products))
@@ -177,10 +177,14 @@ def homepage(request):
     news=Post.objects.filter(is_news=True).order_by('-date_posted')[:3]
     brands_display = Major_Categories.objects.prefetch_related('categories')  # Optimize query
         
-    chunked_products = [latest_products[i:i + 3] for i in range(0, len(latest_products), 3)]
+    chunked_products1 = [latest_products[i:i + 3] for i in range(0, len(latest_products), 3)]
+    
+    chunked_products2 = [top_rated[i:i + 3] for i in range(0, len(top_rated), 3)]
+    
+    chunked_products3 = [latest_products[i:i + 3] for i in range(0, len(latest_products), 3)]
     
     context = {
-        "chunked_products": chunked_products,'homepage':'homepage','latest_products':latest_products,'top_reviewed':top_reviewed,'productes':productes,'products':products,'brands':brands,'categories':categories ,'top_rated':top_rated,}
+        "chunked_products1": chunked_products1,"chunked_products2": chunked_products2,"chunked_products3": chunked_products3,'homepage':'homepage','latest_products':latest_products,'top_reviewed':top_reviewed,'productes':productes,'products':products,'brands':brands,'categories':categories ,'top_rated':top_rated,}
 
     return render(request, 'index.html', context)
 
