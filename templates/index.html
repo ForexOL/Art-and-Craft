@@ -26,7 +26,7 @@
                             <i class="fa fa-bars"></i>
                             <span>All departments</span>
                         </div>
-                        <ul>
+                        <ul  class=" collapse">
                             {% for category in categories %}
                             <li><a href="/?category={{category.id}}">{{ category.name }}</a></li>
                             {% endfor %}
@@ -38,7 +38,7 @@
                     </div>
                 </div>
                 <div class="col-lg-9">
-                    <div class="hero__search">
+                    <div class="hero__search  d-none d-md-block hide-on-mobile">
                         <div class="hero__search__form">
                             <form action="#">
                                 <div class="hero__search__categories">
@@ -103,31 +103,14 @@
         <div class="container">
             <div class="row">
                 <div class="categories__slider owl-carousel">
+                    {% for category in categories %}
                     <div class="col-lg-3">
-                        <div class="categories__item set-bg" data-setbg="{% static 'img/categories/product--7.jpeg' %}">
-                            <h5><a href="#" style="background-color: #A95922; color:white;">Fresh Fruit</a></h5>
+                        <div class="categories__item set-bg" data-setbg="{{ category.image.url}}" onclick="window.location.href='/?category={{category.id}}';" 
+                        style="cursor: pointer;">
+                            <h5><a href="/?category={{category.id}}" style="background-color: #A95922; color:white;">{{ category.name }}</a></h5>
                         </div>
                     </div>
-                    <div class="col-lg-3">
-                        <div class="categories__item set-bg" data-setbg="{% static 'img/categories/product--9.jpeg' %}">
-                            <h5><a href="#" style="background-color: #A95922; color:white;">Dried Fruit</a></h5>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="categories__item set-bg" data-setbg="{% static 'img/categories/product--10.jpeg' %}">
-                            <h5><a href="#" style="background-color: #A95922; color:white;">Vegetables</a></h5>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="categories__item set-bg" data-setbg="{% static 'img/categories/product--14.jpeg' %}" >
-                            <h5><a href="#" style="background-color: #A95922; color:white;">drink fruits</a></h5>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="categories__item set-bg" data-setbg="{% static 'img/categories/product--21.jpg' %}">
-                            <h5><a href="#" style="background-color: #A95922; color:white;">drink fruits</a></h5>
-                        </div>
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>
@@ -151,11 +134,9 @@
                 {% for brand in brands %}
                 <div class="col-12 col-md-3 col-lg-3 mb-4">
                     <h2 style="color: white">{{ brand.name }}</h2>
-                    <div class="grid-box">
-                        
-                    {% for category in brand.categories.all %}
-                       
-                        <div class="featured__item__pic set-bg content" data-setbg="{{ category.image.id }}" >{{ category.name }}</div>
+                    <div class="grid-box"> 
+                        {% for category in brand.categories.all %}
+                            <a href="/?category={{category.id}}"><div class="featured__item__pic set-bg content" data-setbg="{{ category.image.url}}" >{{ category.name }}</div></a>
                         {% endfor %}
                     </div>
                     

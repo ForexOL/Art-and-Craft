@@ -9,6 +9,7 @@ from django.contrib.auth import authenticate, login, logout
 from .viewproduct import checkout1
 from django.contrib import messages
 from .forms import LoginForm
+
 def Login(request):
 
     cart = request.session.get('cart')
