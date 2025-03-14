@@ -46,7 +46,7 @@ Jinja2
 jsonfield
 kombu
 MarkupSafe
-Pillow==9.1.1
+Pillow
 prompt-toolkit
 python-dateutil
 python-memcached

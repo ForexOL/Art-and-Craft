@@ -1,4 +1,6 @@
 {% load static %}
+{% load cart %}
+{% load custom_filter %}
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -66,7 +68,7 @@
                 </li>
                   
             </ul>
-            <div class="header__cart__price">item: <span>$150.00</span></div>
+            <div class="header__cart__price">item: <span>${{products|total_cart_price:request.session.cart}}</span></div>
         </div>
         <div class="humberger__menu__widget">
             <div class="header__top__right__language">
@@ -85,13 +87,26 @@
         <nav class="humberger__menu__nav mobile-menu">
             <ul>
                 <li class="active"><a href="/">Home</a></li>
-                <li><a href="shop">Shop</a></li>
-                <li><a href="#">Pages</a>
+                <li><a href="#">Shop and Cart</a>
                     <ul class="header__menu__dropdown">
-                        <li><a href="product">Shop Details</a></li>
-                        <li><a href="cart">Shoping Cart</a></li>
-                        <li><a href="checkout">Check Out</a></li>
-                        <li><a href="">Blog Details</a></li>
+                        <li><a href="/store">Shop</a></li>
+                        <li><a href="/cart">Shopping Cart</a></li>
+                        <li><a href="/checkout">Check Out</a></li>
+                        <li><a href="">Payment Details</a></li>
+                    </ul>
+                </li>
+                <li><a>Arcrid Sellers</a>
+                    <ul class="header__menu__dropdown">
+                        <li><a href="/become_vender">Sell with Us</a></li>
+                        <li><a href="/Dashboard">Dashboard</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">Others</a>
+                    <ul class="header__menu__dropdown">
+                        <li><a href="/blog">Blog</a></li>
+                        <li><a href="/cart">About Us| Who we are</a></li>
+                        <li><a href="/checkout">Privacy Policy | Terms and Conditions</a></li>
+                        <li><a href=""></a></li>
                     </ul>
                 </li>
                 <li><a href="">Blog</a></li>
@@ -116,10 +131,21 @@
         </div>
         <div class="humberger__menu__contact">
             <ul>
-                <li><i class="fa fa-envelope"></i> admin@artcraft.org</li>
-                <li><a href='/become_vendor'>Sell On Arcrid</a></li>
+                <li><i class="fa fa-envelope"></i> lurvin@arcrid.com</li>
             </ul>
         </div>
+        <div class="humberger__menu__contact">
+            <div class="footer__widget">
+                <h6 style="color: #A95922;">Join Our Newsletter Now</h6>
+
+                <form action="#">
+                    <input type="text" placeholder="Enter your mail">
+                    <button type="submit" class="site-btn" style="background-color: #A95922;">Subscribe</button>
+                </form>
+            </div>
+        </div>
+        
+        
     </div>
     <!-- Humberger End -->
 
@@ -194,7 +220,7 @@
                     <nav class="header__menu">
                         <ul>
                             <li class="active"><a href="/">Home</a></li>
-                            <li><a href="/store">Shop</a></li>
+                            <li><a href="/store">Shop and Cart</a></li>
                             <li><a href="#">Pages</a>
                                 <ul class="header__menu__dropdown">
                                     <li><a href="product">Shop Details</a></li>
@@ -219,15 +245,58 @@
                 <div class="col-lg-3 d-none d-md-block">
                     <div class="header__cart">
                         <ul>
-                            <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                            <li>
-                                <a href="/cart">
-                                    <img src="{% static 'img/licensed-image_1_-removebg-preview.png' %}" alt="Custom Icon" width="24" height="24">
-                                    <span>{% if request.session.cart.keys|length == 0 %}0{% else %}{{request.session.cart.keys|length}}{% endif %}</span>
-                                </a>
-                            </li>
+                            <style>
+                                .icon-circle {
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: center;
+                                    width: 40px; /* Adjust size as needed */
+                                    height: 40px;
+                                    background-color: white;
+                                    border-radius: 50%;
+                                    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                                    position: relative;
+                                }
+                            
+                                .icon-circle img,
+                                .icon-circle i {
+                                    font-size: 20px;
+                                    color: #333; /* Adjust color as needed */
+                                }
+                            
+                                .icon-circle span {
+                                    position: absolute;
+                                    top: 5px;
+                                    right: 5px;
+                                    background-color: red;
+                                    color: white;
+                                    font-size: 12px;
+                                    width: 18px;
+                                    height: 18px;
+                                    border-radius: 50%;
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: center;
+                                }
+                            </style>
+                            
+                            <ul>
+                                <li>
+                                    <a href="#" class="icon-circle">
+                                        <i class="fa fa-heart"></i>
+                                        <span>1</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/cart" class="icon-circle">
+                                        <img src="{% static 'img/licensed-image_1_-removebg-preview.png' %}" alt="Custom Icon" width="24" height="24">
+                                        <span>{% if request.session.cart.keys|length == 0 %}0{% else %}{{request.session.cart.keys|length}}{% endif %}</span>
+                                    </a>
+                                </li>
+                            </ul>
+                            
                         </ul>
-                        <div class="header__cart__price">item: <span>$150.00</span></div>
+                        <div class="header__cart__price">item: <span>${{products|total_cart_price:request.session.cart}}</span></div>
                     </div>
                 </div>
                 
@@ -328,7 +397,7 @@
             <div class="col-lg-12">
                 <div class="footer__copyright">
                     <div class="footer__copyright__text"><p>
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | Made with<i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://lecz.ltd" target="_blank">LECZ(U) LTD</a>
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | Made with<i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://lecz.ltd" target="_blank">ARCRID</a>
 </p></div>
                     <div class="footer__copyright__payment"><img src="{% static 'img/payment-item.png' %}" alt=""></div>
                 </div>
@@ -358,15 +427,32 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
         </a>
     {% endif %}
 
-    <a href="/cart">
-        <i class="fa fa-shopping-cart"></i>
+    <a href="/cart" style="position: relative;">
+        <i class="fa fa-shopping-cart">
+            <span class="cart-count">
+                {% if request.session.cart.keys|length == 0 %}0{% else %}{{request.session.cart.keys|length}}{% endif %}
+            </span>
+        </i>
         <span>Cart</span>
     </a>
+    
     <a class="humberger__open_bottom_nav" style>
         <i class="fa fa-bars"></i>
         <span>Menu</span>
     </a>
 </div>
+<style>
+    .cart-count {
+        position: absolute;
+        top: -2px; /* Adjust this value as necessary */
+        /*right: -1px;  Adjust this value as necessary */
+        background-color: #ff0000; /* Red background for visibility */
+        color: white; /* White text color */
+        font-size: 12px; /* Adjust font size as needed */
+        padding: 1px 2px;
+        border-radius: 50%;
+    }
+</style>    
 <!-- Footer Section End -->
 <script>
     document.addEventListener("DOMContentLoaded", function () {
