@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+    <!-- Hero Section Begin -->
+    <section class="hero hero-normal">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="hero__categories">
+                        <div class="hero__categories__all">
+                            <i class="fa fa-bars"></i>
+                            <span>Categories</span>
+                        </div>
+                        <ul>
+                            {% for brand in brands %}
+                            <li><a href="/?brand={{brand.id}}">{{ brand.name }}</a></li>
+                            {% endfor %}
+                            {% for category in categories %}
+                            <li><a href="/?category={{category.id}}">{{ category.name }}</a></li>
+                            {% endfor %}
+                            
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-9  d-none d-md-block" >
+                    <div class="hero__search">
+                        <div class="hero__search__form">
+                            <form action="#">
+                                <input type="text" placeholder="What do yo u need?">
+                                <button type="submit" class="site-btn">SEARCH</button>
+                            </form>
+                        </div>
+                        <div class="hero__search__phone">
+                            <div class="hero__search__phone__icon">
+                                <i class="fa fa-phone"></i>
+                            </div>
+                            <div class="hero__search__phone__text">
+                                <h5>+256781782288</h5>
+                                <span>support 24/7 time</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Hero Section End -->
+
+    <!-- Breadcrumb Section Begin -->
+    <section class="breadcrumb-section set-bg" data-setbg="{% static 'img/33.jpg' %}">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="breadcrumb__text">
+                        <h2>Checkout</h2>
+                        <div class="breadcrumb__option">
+                            <a href="/">Home</a>
+                            <span>Checkout</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+
+    <style>
+
+        .about-container {
+            max-width: 900px;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            margin: 50px auto;
+            text-align: center;
+        }
+        .about-container h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .about-container img {
+            max-width: 100%;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        .about-container p, .about-container ul {
+            text-align: left;
+        }
+        .highlight {
+            font-weight: bold;
+            color: #d9534f;
+        }
+    </style>
+
+    <div class="container mt-4">
+        <div class="about-container">
+            <h2>HELLO, WE'RE ARCRID</h2>
+            <p>Arcrid is the home of African art, craft, and interior design - the place to buy handmade gifts and original artwork, sold by the artists and designers who have created them and their affiliated shops. Made with love, every purchase from Arcrid supports a genuine craftsperson.</p>
+            <img src="artistic_picture.jpg" alt="Artistic Representation">
+            
+            <h2>WHAT WE DO</h2>
+            <ul>
+                <li><span class="highlight">Empower Artisans:</span> Arcrid provides a platform for artists and designers to sell their work without restrictions. Everyone is welcome as long as their work is original and handmade.</li>
+                <li><span class="highlight">Serving Customers:</span> We enable global access to art, craft, and interior design products through convenient and affordable online services.</li>
+            </ul>
+            <img src="artistic_picture2.jpg" alt="Craft Representation">
+            
+            <h2>WHY WE DO ARCRID?</h2>
+            <ul>
+                <li><span class="highlight">Art & Craft Skills:</span> We appreciate the creativity and talent behind handmade work.</li>
+                <li><span class="highlight">Strength in Numbers:</span> Artists can reach wider audiences without costly galleries.</li>
+                <li><span class="highlight">Cottage Industries:</span> Small-scale production supports creativity and local economies.</li>
+                <li><span class="highlight">Meritocracy:</span> Any skilled artisan can showcase their work.</li>
+                <li><span class="highlight">Connectivity:</span> Art enhances moods and environments, making spaces feel welcoming.</li>
+            </ul>
+            <img src="artistic_picture3.jpg" alt="African Art">
+            
+            <h2>ABOUT OUR FOUNDER</h2>
+            <p>Arcrid was founded in 2025 by <span class="highlight">Lurvin Elisha Atwiine</span>, inspired by a love of art, craft, and interior design. Seeing the creativity of African craft communities and the potential of online shopping, Lurvin built Arcrid as a place where artists can showcase and sell their work.</p>
+            <img src="artistic_picture4.jpg" alt="Founder Inspiration">
+            
+            <blockquote class="blockquote mt-4">
+                <p>Join the Arcrid craft community and open your own shop today, or explore the wonders of African art, craft, and interior design at <a href="https://arcrid.com">arcrid.com</a> - Africa’s biggest online craft fair!</p>
+            </blockquote>
+        </div>
+    </div>
+{% endblock %}

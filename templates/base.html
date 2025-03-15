@@ -10,7 +10,9 @@
     <meta name="keywords" content="Art and Craft">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Art and Craft</title>
+    <!-- For PNG format -->
+    <link rel="icon" href="{% static 'img/44.png' %}" type="image/png">
+    <title>Art, Craft and Design</title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
@@ -80,9 +82,6 @@
                     <li><a href="#">English</a></li>
                 </ul>
             </div>
-            <div class="header__top__right__auth">
-                <a href="#"><i class="fa fa-user"></i> Login</a>
-            </div>
         </div>
         <nav class="humberger__menu__nav mobile-menu">
             <ul>
@@ -104,9 +103,11 @@
                 <li><a href="#">Others</a>
                     <ul class="header__menu__dropdown">
                         <li><a href="/blog">Blog</a></li>
-                        <li><a href="/cart">About Us| Who we are</a></li>
-                        <li><a href="/checkout">Privacy Policy | Terms and Conditions</a></li>
-                        <li><a href=""></a></li>
+                        <li><a href="/about_us">About Us| Who we are</a></li>
+                        <li><a href="/privacy-policy">Privacy Policy</a></li>
+                        <li><a href="/terms-and-conditions">Terms and Conditions</a></li>
+                        <li><a href="/delivery-information">Delivery Information</a></li>
+                        <li><a href="/return-policy">Return Policy</a></li>
                     </ul>
                 </li>
                 <li><a href="">Blog</a></li>
@@ -396,13 +397,18 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="footer__copyright">
-                    <div class="footer__copyright__text"><p>
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | Made with<i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://lecz.ltd" target="_blank">ARCRID</a>
-</p></div>
-                    <div class="footer__copyright__payment"><img src="{% static 'img/payment-item.png' %}" alt=""></div>
+                    <div class="footer__copyright__text">
+                        <p>
+                            Copyright &copy; 2025 All rights reserved | Made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="/" target="_blank">ARCRID</a>
+                        </p>
+                    </div>
+                    <div class="footer__copyright__payment">
+                        <img src="{% static 'img/payment-item.png' %}" alt="Payment Methods">
+                    </div>
                 </div>
             </div>
         </div>
+        
     </div>
 </footer>
 <style>

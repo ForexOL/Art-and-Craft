@@ -29,7 +29,7 @@ SECRET_KEY = 'django-insecure-iw6ul@79b_x=m(_%2ou*0%a6pxg=q*29h&pf4k&!y7&_ekeef#
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*','aartcraftei.onrender.com']
+ALLOWED_HOSTS = ['aartcraftei.onrender.com','138.68.191.30','arcrid.store','www.arcrid.store']
 
 
 # Application definition
@@ -103,11 +103,22 @@ WSGI_APPLICATION = 'myshop_1.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-
+'''
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
+'''
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'mydatabase',
+        'USER': 'myuser',
+        'PASSWORD': '1234$VictoriaLurvin',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 

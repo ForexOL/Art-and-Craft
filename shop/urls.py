@@ -115,6 +115,5 @@ urlpatterns = [
     path('privacy-policy', views.privacy_policy, name='privacy_policy'),
     path('terms-and-conditions', views.terms_and_conditions, name='terms_and_conditions'),
     path('delivery-information', views.delivery_information, name='delivery_information'),
-    path('who-we-are', views.who_we_are, name='who_we_are'),
-    path('secure-shopping-and-payments', views.secure_shopping_and_payments, name='secure_shopping_and_payments'),
+    path('return-policy', views.return_policy, name='return_policy'),
 ]

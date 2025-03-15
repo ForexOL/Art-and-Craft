@@ -30,26 +30,26 @@ from django.contrib.admin.views.decorators import staff_member_required
 
 
 def about_us(request):
-    return render(request, 'about_us.html')
+    return render(request, 'about-us.html')
 
 
 def privacy_policy(request):
-    return render(request, 'myapp/privacy_policy.html')
+    return render(request, 'privacy_policy.html')
 
 def terms_and_conditions(request):
-    return render(request, 'myapp/terms_and_conditions.html')
+    return render(request, 'terms_and_conditions.html')
 
 def delivery_information(request):
-    return render(request, 'myapp/delivery_information.html')
+    return render(request, 'delivery_info.html')
 
-def who_we_are(request):
-    return render(request, 'myapp/who_we_are.html')
+def return_policy(request):
+    return render(request, 'return_policy.html')
 
 def secure_shopping_and_payments(request):
-    return render(request, 'myapp/secure_shopping_and_payments.html')
+    return render(request, 'secure_shopping_and_payments.html')
 
 def our_services(request):
-    return render(request, 'myapp/our_services.html')
+    return render(request, 'our_services.html')
 
 
 def group_check(user):
