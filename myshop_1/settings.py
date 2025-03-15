@@ -115,13 +115,14 @@ DATABASES = {
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'ungiw',  # Your database name
-        'USER': 'ungiw_user',  # Your username
-        'PASSWORD': 'your_password',  # Your password
+        'NAME': 'django',
+        'USER': 'django',
+        'PASSWORD': 'ce65a7570e179a0df4d7b4e4f5412d57',
         'HOST': 'localhost',
-        'PORT': '5432',
+        'PORT': '',
     }
 }
+
 
 
 
