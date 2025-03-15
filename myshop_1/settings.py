@@ -113,12 +113,12 @@ DATABASES = {
 """
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'mydatabase_arcrid',
-        'USER': 'myuser_arcrid',
-        'PASSWORD': '1234$VictoriaLurvin',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'ungiw',  # Your database name
+        'USER': 'ungiw_user',  # Your username
+        'PASSWORD': 'your_password',  # Your password
         'HOST': 'localhost',
-        'PORT': '',
+        'PORT': '5432',
     }
 }
 
