@@ -111,9 +111,10 @@ DATABASES = {
     }
 }
 """
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'ungiw',  # Your database name
         'USER': 'ungiw_user',  # Your username
         'PASSWORD': 'your_password',  # Your password
