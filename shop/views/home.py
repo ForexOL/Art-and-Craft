@@ -75,7 +75,7 @@ def store(request):
     if categoryID:
         products = Product.get_all_products_by_categoryid(categoryID)
     elif brandID:
-        products = Product.get_all_products_by_brandid(brandID)
+        products = Product.objects.filter(category__brand_id=brandID)#Product.get_all_products_by_brandid(brandID)
     else:
         products = Product.objects.all().order_by('?')  # Random order
 
