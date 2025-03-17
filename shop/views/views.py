@@ -613,6 +613,10 @@ def vendor_add_product(request):
             discounted_price=(((int(discount_percentage)/100)*price)+price)
             feed_back.del_price=discounted_price
             feed_back.price=price
+            category = Sub_Category.objects.get(name=form.cleaned_data['category'])  # Replace with actual category name
+            brand = category.brand  # Get the associated brand
+            print(brand.name)
+            feed_back.brand=brand
             feed_back.shop=request.user.id
             feed_back.discount_percentage=discount_percentage
             Shop_name=Vendor.objects.get(vendor=request.user)
