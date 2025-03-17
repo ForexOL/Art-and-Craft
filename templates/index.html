@@ -25,9 +25,6 @@
                             <span>Categories</span>
                         </div>
                         <ul  class=" collapse">
-                            {% for category in categories %}
-                            <li><a href="/store?category={{category.id}}">{{ category.name }}</a></li>
-                            {% endfor %}
                             {% for brand in brands %}
                             <li><a href="/store?brand={{brand.id}}">{{ brand.name }}</a></li>
                             {% endfor %}
