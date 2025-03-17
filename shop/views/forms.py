@@ -83,9 +83,8 @@ class PostForm(BaseForm):
 class AddVendor_UpdateForm(BaseForm):
     class Meta:
         model = Vendor
-        fields=('photo','phone','alternative_Phone','location','shop_name')
-    photo= forms.ImageField(label='Edit Profile Photo')
-
+        fields=('phone','alternative_Phone','location','shop_name')
+ 
 class AddVendorForm(BaseForm):
     class Meta:
         required_fields = ['photo','phone','alternative_Phone','location','shop_name']
@@ -102,7 +101,7 @@ class AddVendorForm(BaseForm):
 class AddProductForm(BaseForm):
 	class Meta:
 		model=Product
-		fields=('name','stock','brand',  'selling_price','image','description','category')
+		fields=('name','stock','brand',  'selling_price','image','image2','image3','image4','description','category')
 	name = forms.CharField(required=True)
 	stock = forms.IntegerField(required=True)
 	selling_price=forms.IntegerField(required=True)
@@ -116,10 +115,10 @@ class ProductUpdateForm(BaseForm):
 class PaymentForm(ModelForm):
 	class Meta:
 		model=Payment
-		fields=('mtn_name','mtn','airtel_name', 'airtel','wave_name','wave')
+		fields=('mtn_name','mtn','airtel_name', 'airtel','Visa','visa_number')
 	mtn_name= forms.CharField(label='MTN Account Registration Name',required=False)
 	airtel_name= forms.CharField(label='Airtel Account Registration Name',required=False)
-	wave_name= forms.CharField(label='Wave Account Registration Name',required=False)
+	Visa= forms.CharField(label='Enter your card number',required=False)
 
 class AddBrandForm(ModelForm):
 	class Meta:
@@ -139,8 +138,9 @@ class AuctionForm(forms.ModelForm):
 		model=Auction
 		fields=('bid_price',)
 	bid_price= forms.IntegerField(label='Place your Bid',required=True)
-
+'''
 class PaymentForm(forms.ModelForm):
 	class Meta:
 		model=Order
 		fields=('payment_method',)
+'''

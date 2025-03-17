@@ -17,6 +17,8 @@ from django.views.generic import (
     DeleteView
 )
 from django.http import HttpResponse
+import json
+from django.http import HttpResponse
 from django.core.mail import send_mail
 from django.shortcuts import render
 from myshop_1 import settings
@@ -185,9 +187,12 @@ def become_vendor1(request):
     else:
         productes = Product.get_products_by_id(list(request.session.get('cart').keys()))
     try:
-        user = Vendor.objects.get(vendor=request.user.id)
-    except:
-        user=None
+        user = Vendor.objects.get(vendor=request.user)
+    except Exception as e:
+        raise e
+        #user=None
+
+    # end try
     if user is None:
         context={'Become_Vendor':'Become_Vendor','brands':brands,'categories':categories,'productes':productes}
         messages.success(request, f'Sell On Our Site for free,Up to End of July,for those who register Before the month of April Ends')
@@ -205,9 +210,10 @@ def become_vendor(request):
     productes = Product.get_products_by_id(list(cart.keys())) if cart else {}
 
     try:
-        user_vendor = Vendor.objects.get(vendor=request.user.id)
+        user_vendor = Vendor.objects.get(vendor=request.user)
         return redirect('Dashboard')  # Redirect if already a vendor
-    except Vendor.DoesNotExist:
+    except Exception as e:
+        #raise e
         user_vendor = None
 
     if request.method == 'POST':
@@ -273,11 +279,12 @@ def Dashboard(request):
     user=request.user.id
     username=request.user.username
     try:
-        payment=Payment.objects.get(vendor_name=request.user.id)
-    except:
+        payment = Payment.objects.filter(key=request.user.id).first()
+    except Exception as e:
+        raise e
         payment=None
     try:
-        vendor=Vendor.objects.get(vendor=request.user.id)
+        vendor=Vendor.objects.get(vendor=request.user)
     except:
         vendor=None
     try:
@@ -298,14 +305,18 @@ def Payment_update(request):
         productes = Product.get_products_by_id(list(request.session.get('cart').keys()))
     try:
         payment = Payment.objects.get(key=request.user.id)
-    except:
+    except Exception as e:
+        raise e
         messages.success(request, f'You Have no payment option registered, Please register on this page')
         return redirect('payment')
     if request.method == 'POST':
         form = PaymentForm(request.POST, instance=payment)
         if form.is_valid():
             # update the existing `Band` in the database
-            form.save()
+            new_vendor = form.save(commit=False)
+            new_vendor.vendor_name= request.user.username  # Assign the logged-in user
+            new_vendor.save()
+
             # redirect to the detail page of the `Band` we just updated
             return redirect('Dashboard')
     else:
@@ -329,16 +340,16 @@ def Product_update(request, id):
         form = ProductUpdateForm(request.POST, instance=product)
         if form.is_valid():
             feed_back=form.save(commit=False)
-            l =[10,13,18,15,60,45,34,43,24,26,19,31,47,51,50,12,8,37,27]
-            ld=random.sample(l, len(l))
-            discount_percentage=ld[2]
-            price=(((6/100)*form.cleaned_data['selling_price'])+form.cleaned_data['selling_price'])
+
+            discount_percentage=20
+            price=(((40/100)*form.cleaned_data['selling_price'])+form.cleaned_data['selling_price'])
             discounted_price=(((int(discount_percentage)/100)*price)+price)
             feed_back.del_price=discounted_price
             feed_back.price=price
             feed_back.shop=request.user.id
+            feed_back.image=form.cleaned_data['image']
             feed_back.discount_percentage=discount_percentage
-            Shop_name=Vendor.objects.get(vendor=request.user.id)
+            Shop_name=Vendor.objects.get(vendor=request.user)
             feed_back.shop_name=Shop_name.shop_name
             # update the existing `Band` in the database
             form.save()
@@ -346,34 +357,36 @@ def Product_update(request, id):
             return redirect('productboard')
     else:
         form = ProductUpdateForm(instance=product)
-        context={'form': form,'products':'products','productes':productes,'product':product}
+        context={'form': form,'products':productes,'productes':productes,'product':product}
 
-    return render(request,'add1.html',context)
+    return render(request,'Vender/add1.html',context)
 
 @login_required
 @user_passes_test(group_check)
 def Vendor_update_get(request):
-    vendor= Vendor.objects.get(vendor=request.user.id)
+    vendor= Vendor.objects.get(vendor=request.user)
     form = AddVendor_UpdateForm(instance=vendor)
     context={'form': form,'vendor':'vendor','name':'Vendor','names':'Vendor_update'}
-    return render(request,'Change.html',context)
+    return render(request,'Vender/Change.html',context)
 
 @login_required
 @user_passes_test(group_check)
 def Vendor_update(request):
     
-    vendor= Vendor.objects.get(vendor=request.user.id)
+    vendor= Vendor.objects.get(vendor=request.user)
     if request.method == 'POST':
-        form = AddVendor_UpdateForm(request.POST, instance=vendor)
+        form = AddVendor_UpdateForm(request.POST,instance=vendor)
         if form.is_valid():
             # update the existing `Band` in the database
             form.save()
             # redirect to the detail page of the `Band` we just updated
             return redirect('Dashboard')
+        else:
+            return HttpResponse(json.dumps({"errors": form.errors}), content_type="application/json", status=400)
     form = AddVendor_UpdateForm(instance=vendor)
     context={'form': form,'vendor':'vendor','name':'Vendor','names':'Vendor_update'}
     messages.success(request, f'unsuccessful')
-    return render(request,'Change.html',context)
+    return render(request,'Vender/Change.html',context)
 
 
 @user_passes_test(group_check)
@@ -545,7 +558,7 @@ def payment(request):
             # update the existing `Band` in the database
             feedback=form.save(commit=False)
             feedback.key=request.user.id
-            vendor_name=Vendor.objects.get(vendor=request.user.id)
+            vendor_name=Vendor.objects.get(vendor=request.user)
             feedback.vendor_name=vendor_name.shop_name
             feedback.save()
             # redirect to the detail page of the `Band` we just updated
@@ -593,10 +606,9 @@ def vendor_add_product(request):
 
         if form.is_valid():
             feed_back=form.save(commit=False)
-            l =[10,13,18,15,60,45,34,43,24,26,19,31,47,51,50,12,8,37,27]
-            ld=random.sample(l, len(l))
-            discount_percentage=ld[2]
-            price=(((10/100)*form.cleaned_data['selling_price'])+form.cleaned_data['selling_price'])
+
+            discount_percentage=40
+            price=(((40/100)*form.cleaned_data['selling_price'])+form.cleaned_data['selling_price'])
             price=round(price, -2)
             discounted_price=(((int(discount_percentage)/100)*price)+price)
             feed_back.del_price=discounted_price

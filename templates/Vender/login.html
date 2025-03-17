@@ -11,10 +11,10 @@
             {% csrf_token %}
             {{ form|crispy }}
             <div class="single-input-item">
-                <button class="check-btn sqr-btn" type="submit" >Log In</button>
+                <button class="btn btn-primary" type="submit" >Log In</button>
             </div>
             <div>
-                <a href="/signup">Or Register<a/>
+                <a class="btn btn-info"href="/signup">Or Register<a/>
             </div>
         </form>
     </div>

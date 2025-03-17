@@ -17,7 +17,7 @@ class Auction(models.Model):
     start_price= models.IntegerField(default=0)
     bid_price= models.IntegerField(default=0)
 class Vendor(models.Model):
-    photo=models.ImageField(upload_to='media/profile', default='')
+    photo=models.ImageField(upload_to='media/profile', default='',blank=True, null=True)
     phone=models.CharField(default='1',blank=True,max_length=13)
     location=models.CharField(default='',blank=True, max_length=100)
     alternative_Phone=models.CharField(default='1',blank=True,max_length=13)
@@ -32,9 +32,9 @@ class Payment(models.Model):
     mtn=models.CharField(default='Empty',blank=True,max_length=10)
     airtel_name= models.CharField(max_length=100,default='None',blank=True)
     airtel=models.CharField(default='Empty',blank=True,max_length=10)
-    wave_name= models.CharField(max_length=100,default='None',blank=True)
-    wave=models.CharField(default='Empty',blank=True,max_length=10)
-    vendor_name=models.CharField(max_length=100,default='None',blank=True)
+    Visa= models.CharField(max_length=100,default='None',blank=True)
+    visa_number=models.CharField(default='Empty',blank=True,max_length=10)
+    vendor_name=models.CharField(max_length=100,default='None',blank=False)
     dates = models.DateTimeField(default=datetime.datetime.today)
 
     def __str__(self):

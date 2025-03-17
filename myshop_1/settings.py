@@ -125,7 +125,6 @@ DATABASES = {
 
 
 
-
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 
@@ -178,6 +177,8 @@ STATICFILES_DIRS = (
 # Define the template pack to use
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 #STMP configuration
+LOGIN_URL = '/login'
+LOGOUT_REDIRECT_URL = '/login'
 
 EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST='smtp.mail.yahoo.com'
