@@ -125,7 +125,7 @@
                     <h2 style="color: white">{{ brand.name }}</h2>
                     <div class="grid-box"> 
                         {% for category in brand.categories.all %}
-                            <a href="/?category={{category.id}}"><div class="featured__item__pic set-bg content" data-setbg="{{ category.image.url}}" >{{ category.name }}</div></a>
+                            <a href="/?category={{category.id}}"><div class="featured__item__pic set-bg content" data-setbg="{{ category.image.url}}" ></div></a>
                         {% endfor %}
                     </div>
                     
