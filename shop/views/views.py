@@ -114,7 +114,7 @@ def  Contact(request):
     else:
         messages.success(request, f'Ooops Due to a possible Error in Our system, Your message was not recived, Please Try again!!!.')
         context={'productes':productes,'brands':brands,'categories':categories}
-        return render(request,'contactus.html',context)
+        return render(request,'contact.html',context)
 
 def  Contact_Us1(request):
     brands = Major_Categories.get_all_brand()
