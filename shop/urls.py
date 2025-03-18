@@ -49,6 +49,7 @@ urlpatterns = [
     path('remove_to_homepage',remove_to_homepage,name='remove_to_homepage'),
     path('remove_to_orders',remove_to_orders,name='remove_to_orders'),
     path('become_vendor',become_vendor,name='become_vendor'),
+    #path('become_vendor/',become_vendor,name='become_vendor'),
     path('become_vendor1',become_vendor1,name='become_vendor1'),
     path('login',Login, name='login'),
     path('Dashboard',Dashboard, name='Dashboard'),
