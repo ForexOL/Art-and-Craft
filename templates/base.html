@@ -339,9 +339,48 @@
     <!-- Header Section End -->
 {% block content %}
 {% endblock %}
-</br>
-</br>
-</br>
+    <!-- Featured Section Begin -->
+    <section class="featured spad"  style="background-color:#2f231b; max-height: 300px">
+        <div class="container">
+            <div class="row"  >
+                <div class="col-lg-6">
+                    <div class="section-title">
+                        <h2 style="color: white;">Real-Time Currency Converter</h2>
+                        </br>
+                        <p>Select your target currency (base: UGX):</p>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="section-title">
+                        <select id="currencySelect" onchange="convertPrices(this.value)">
+                            <option value="USD">USD</option>
+                            <option value="EUR">EUR</option>
+                            <option value="JPY">JPY</option>
+                            <option value="GBP">GBP</option>
+                            <option value="AUD">AUD</option>
+                            <option value="CAD">CAD</option>
+                            <option value="CHF">CHF</option>
+                            <option value="CNY">CNY</option>
+                            <option value="HKD">HKD</option>
+                            <option value="NZD">NZD</option>
+                            <option value="SEK">SEK</option>
+                            <option value="KRW">KRW</option>
+                            <option value="SGD">SGD</option>
+                            <option value="NOK">NOK</option>
+                            <option value="MXN">MXN</option>
+                            <option value="INR">INR</option>
+                            <option value="RUB">RUB</option>
+                            <option value="ZAR">ZAR</option>
+                            <option value="TRY">TRY</option>
+                            <option value="BRL">BRL</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+
 <!-- Footer Section Begin -->
 <footer class="footer spad d-none d-md-block">
     <div class="container">
@@ -458,6 +497,7 @@
         padding: 1px 2px;
         border-radius: 50%;
     }
+    
 </style>    
 <!-- Footer Section End -->
 <script>
@@ -485,6 +525,44 @@
     });
 
 </script>
+<script>
+    // Store the currently selected currency
+    window.currentCurrency = null;
+
+    // Fetch exchange rates for a given base currency (here, UGX)
+    async function fetchExchangeRates(baseCurrency) {
+      try {
+        const response = await fetch(`https://api.exchangerate-api.com/v4/latest/${baseCurrency}`);
+        const data = await response.json();
+        return data.rates;
+      } catch (error) {
+        console.error("Error fetching exchange rates:", error);
+        return null;
+      }
+    }
+
+    // Convert all price tags from UGX to the selected target currency
+    async function convertPrices(targetCurrency) {
+      window.currentCurrency = targetCurrency;
+      const rates = await fetchExchangeRates("UGX");
+      if (rates && rates[targetCurrency]) {
+        document.querySelectorAll('.converted-price').forEach(el => {
+          const ugxPrice = parseFloat(el.getAttribute('data-price-ugx'));
+          const converted = (ugxPrice * rates[targetCurrency]).toFixed(2);
+          el.innerText = `${converted} ${targetCurrency}`;
+        });
+      } else {
+        console.error("Error fetching conversion rate for " + targetCurrency);
+      }
+    }
+
+    // Refresh the conversion every 30 seconds if a currency has been selected
+    setInterval(() => {
+      if (window.currentCurrency) {
+        convertPrices(window.currentCurrency);
+      }
+    }, 30000);
+  </script>
 <!-- FontAwesome CDN for icons (if not already included) -->
 
 <!-- Js Plugins -->
