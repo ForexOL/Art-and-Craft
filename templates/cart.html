@@ -145,8 +145,8 @@
                     <div class="shoping__checkout">
                         <h5>Cart Total</h5>
                         <ul>
-                            <li>Subtotal <span  class="converted-price" data-price-ugx="{{ products|total_cart_price:request.session.cart }}">${{products|total_cart_price:request.session.cart}}</span></li>
-                            <li>Total <span  class="converted-price" data-price-ugx="{{ products|total_cart_price_grand:request.session.cart }}">${{products|total_cart_price_grand:request.session.cart}}</span></li>
+                            <li>Subtotal <span  class="converted-price" data-price-ugx="{{ products|total_cart_price:request.session.cart }}">{{products|total_cart_price:request.session.cart}}/=</span></li>
+                            <li>Total <span  class="converted-price" data-price-ugx="{{ products|total_cart_price_grand:request.session.cart }}">{{products|total_cart_price_grand:request.session.cart}}/=</span></li>
                         </ul>
                         <a href="{% url 'checkout1' %}" class="primary-btn">PROCEED TO CHECKOUT</a>
                     </div>

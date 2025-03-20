@@ -182,8 +182,8 @@
                                     <li>{{product.name}}<span>{{product.price}}</span></li>
                                     {% endfor %}
                                 </ul>
-                                <div class="checkout__order__subtotal">Subtotal <span  class="converted-price" data-price-ugx="{{ products|total_cart_price:request.session.cart }}">${{products|total_cart_price:request.session.cart}}</span></div>
-                                <div class="checkout__order__total">Total <span  class="converted-price" data-price-ugx="{{ products|total_cart_price_grand:request.session.cart }}">${{products|total_cart_price_grand:request.session.cart}}</span></div>
+                                <div class="checkout__order__subtotal">Subtotal <span  class="converted-price" data-price-ugx="{{ products|total_cart_price:request.session.cart }}">{{products|total_cart_price:request.session.cart}}/=</span></div>
+                                <div class="checkout__order__total">Total <span  class="converted-price" data-price-ugx="{{ products|total_cart_price_grand:request.session.cart }}">{{products|total_cart_price_grand:request.session.cart}}/=</span></div>
                                 <div class="checkout__input__checkbox">
                                     <label for="acc-or">
                                         Create an account?
