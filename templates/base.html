@@ -123,7 +123,7 @@
                     <ul class="header__menu__dropdown">
                         <li><a href="/store">Shop</a></li>
                         <li><a href="/cart">Shopping Cart</a></li>
-                        <li><a href="/checkout">Check Out</a></li>
+                        <li><a href="{% url 'checkout1' %}">Check Out</a></li>
                         <li><a href="">Payment Details</a></li>
                     </ul>
                 </li>
@@ -261,7 +261,7 @@
                                         <a href="/cart" style="color: white;">Shopping Cart</a>
                                     </li>
                                     <li>
-                                        <a href="/checkout" style="color: white;">Check Out</a>
+                                        <a href="{% url 'checkout1' %}" style="color: white;">Check Out</a>
                                     </li>
                                     <li>
                                         <a href="" style="color: white;">Payment Details</a>
