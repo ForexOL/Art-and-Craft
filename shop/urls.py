@@ -68,7 +68,7 @@ urlpatterns = [
     path('post/<int:pk>/delete', PostDeleteView.as_view(), name='post_delete'),
     path("about_us", views.about_us, name="about_us"),
     path('post/<int:pk>/comment', add_comment, name='add_comment'),
-    #path('', Index.as_view(), name='homepage'),
+    path('add_remove_cart', Index.as_view(), name='add_remove_cart'),
     path('store', store , name='store'),
     path('', homepage , name='home'),
     

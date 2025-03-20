@@ -11,6 +11,7 @@ from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 import random
+from .forms import *
 # Create your views here.
 class Index(View):
 
@@ -18,6 +19,21 @@ class Index(View):
         product = request.POST.get('product')
         remove = request.POST.get('remove')
         cart = request.session.get('cart')
+        form=ViewCartForm()
+        
+        if request.method=='POST':
+            if "quantity" in request.POST:  # Check if the request contains review data
+                form = ViewCartForm(request.POST)
+                if form.is_valid():
+                    print(form.cleaned_data.get('quantity'))
+                    if cart:
+                        cart[product]  = form.cleaned_data.get('quantity')
+                    else:
+                        cart = {}
+                        cart[product]  = form.cleaned_data.get('quantity')
+                    return redirect('details', product)
+        
+        print('we passed here')
         if cart:
             quantity = cart.get(product)
             if quantity:
@@ -31,12 +47,13 @@ class Index(View):
 
             else:
                 cart[product] = 1
+                print('added 1')
         else:
             cart = {}
             cart[product] = 1
 
         request.session['cart'] = cart
-        return redirect('homepage')
+        return redirect('home')
 
 
 

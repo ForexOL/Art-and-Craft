@@ -121,13 +121,13 @@
                         </div>
                         <div class="product__details__price">{{product.price}}</div>
 
-                        <form action="" method="POST" class="btn-block">
+                        <form action="/add_remove_cart" method="POST" class="btn-block">
                             {% csrf_token %}
                             {{ form|crispy }}
                             
                             <input hidden type="text" name="product" value="{{ product.id }}">
                             
-                            <a href="#" class="primary-btn" onclick="this.closest('form').submit(); return false;">ADD TO CART</a>
+                            <a href="/add_remove_cart" class="primary-btn" onclick="this.closest('form').submit(); return false;">ADD TO CART</a>
                             <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
                         </form>
                         </br>
@@ -250,13 +250,13 @@
                                     <ul class="product__item__pic__hover">
                                         <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                         <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                        <form action="/#" method="POST" class="buy-btn">
+                                        <form action="/add_remove_cart" method="POST" class="buy-btn">
                                             {% csrf_token %}
                                             <input hidden type="text" name='product' value='{{ product.id }}'>
                                             <li>
-                                                <a href="#" onclick="this.closest('form').submit(); return false;">
+                                                <button type="submit" onclick="this.closest('form').submit(); return false;">
                                                     <i class="fa fa-shopping-cart"></i>
-                                                </a>
+                                                </button>
                                             </li>
                                         </form>
                                         

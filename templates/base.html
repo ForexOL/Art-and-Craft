@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <!-- For PNG format -->
-    <link rel="icon" href="{% static 'img/44.png' %}" type="image/png">
+    <link rel="icon" href="{% static 'img/45.png' %}" type="image/png">
     <title>Art, Craft and Design</title>
 
     <!-- Google Font -->
@@ -26,6 +26,22 @@
     <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}" type="text/css">
     <link rel="stylesheet" href="{% static 'css/slicknav.min.css' %}" type="text/css">
     <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
+    <style>
+        .cart-count {
+            position: absolute;
+            top: -2px; /* Adjust this value as necessary */
+            /*right: -1px;  Adjust this value as necessary */
+            background-color: #ff0000; /* Red background for visibility */
+            color: white; /* White text color */
+            font-size: 12px; /* Adjust font size as needed */
+            padding: 1px 2px;
+            border-radius: 50%;
+        }
+
+    
+        
+    </style> 
+
     <!-- Swiper CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css">
     <!-- Swiper JS -->
@@ -132,7 +148,7 @@
         </div>
         <div class="humberger__menu__contact">
             <ul>
-                <li><i class="fa fa-envelope"></i> lurvin@arcrid.com</li>
+                <li><i class="fa fa-envelope"></i> lurvinelishaatwiine@gmail.com</li>
             </ul>
         </div>
         <div class="humberger__menu__contact">
@@ -159,7 +175,7 @@
                     <div class="col-lg-6 col-md-6">
                         <div class="header__top__left">
                             <ul>
-                                <li><i class="fa fa-envelope"></i>lurvin@arcrid.com?</li>
+                                <li><i class="fa fa-envelope"></i>lurvinelishaatwiine@gmail.com?</li>
                                 <li><a href='/become_vendor'>Sell On Arcrid</a></li>
                             </ul>
                         </div>
@@ -339,6 +355,8 @@
     <!-- Header Section End -->
 {% block content %}
 {% endblock %}
+
+<!-- Featured Section Begin -->
     <!-- Featured Section Begin -->
     <section class="featured spad"  style="background-color:#2f231b; max-height: 300px">
         <div class="container">
@@ -379,8 +397,7 @@
             </div>
         </div>
     </section>
-    
-
+  
 <!-- Footer Section Begin -->
 <footer class="footer spad d-none d-md-block">
     <div class="container">
@@ -486,19 +503,7 @@
         <span>Menu</span>
     </a>
 </div>
-<style>
-    .cart-count {
-        position: absolute;
-        top: -2px; /* Adjust this value as necessary */
-        /*right: -1px;  Adjust this value as necessary */
-        background-color: #ff0000; /* Red background for visibility */
-        color: white; /* White text color */
-        font-size: 12px; /* Adjust font size as needed */
-        padding: 1px 2px;
-        border-radius: 50%;
-    }
-    
-</style>    
+   
 <!-- Footer Section End -->
 <script>
     document.addEventListener("DOMContentLoaded", function () {

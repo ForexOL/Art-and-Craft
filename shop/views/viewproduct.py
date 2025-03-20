@@ -63,11 +63,18 @@ def details(request, id):
                 return redirect("details", product_id=product.id)
 
         elif "quantity" in request.POST:  # Check if the request contains cart data
+            
             product = request.POST.get('product')
+            '''
             cart = request.session.get('cart')
             quantitey = cart.get(product)
+            '''
             form=ViewCartForm(request.POST)
+            print('Cart reached')
             if form.is_valid():
+                print('Form valid')
+                print(form.cleaned_data.get('quantity'))
+                print(cart[product])
                 cart[product] = form.cleaned_data.get('quantity')
             
 
@@ -79,10 +86,7 @@ def details(request, id):
     k=random.randint(1, 25)
     G=random.randint(1, 20)
 
-    context={'k':k,'G':G, "reviews": reviews, "form_r": form_r,'related_products': related_products,'product':product,'form':form,'productes':productes,'brands':brands,'categories':categories}
-    cart = request.session.get('cart')
-
-    
+    context={'k':k,'G':G, "reviews": reviews, "form_r": form_r,'related_products': related_products,'product':product,'form':form,'productes':productes,'brands':brands,'categories':categories}    
     
 
     return render(request , 'shop-details.html',context)
@@ -92,13 +96,14 @@ def checkout1(request):
     cart = request.session.get('cart')
 
     
-
-
+    
     if not cart:
         request.session['cart'] = {}
         productes={}
+        products={}
     else:
         productes = Product.get_products_by_id(list(request.session.get('cart').keys()))
+        products = Product.get_products_by_id(list(request.session.get('cart').keys()))
     categories =Sub_Category.get_all_categories()
     categoryID = request.GET.get('category')
     brands = Major_Categories.get_all_brand()
@@ -116,8 +121,8 @@ def checkout1(request):
 
         print(page_number)
         product_list = paginator.get_page(page_number)
-        return render(request , 'index.html',{'product_list' : product_list,'categories':categories,'brands':brands,'productes':productes})
-    return render(request , 'checkout.html',{'form':form,'checkout':'checkout','categories':categories,'brands':brands,'productes':productes})
+        return render(request , 'index.html',{'product_list' : product_list,'categories':categories,'brands':brands,'products':products,'productes' : productes,})
+    return render(request , 'checkout.html',{'form':form,'checkout':'checkout','categories':categories,'brands':brands,'products':products,'productes' : productes,})
 
 def remove_to_cart(request):
     product = request.POST.get('product')

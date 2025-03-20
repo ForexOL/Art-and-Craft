@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
+{% load cart %}
+{% load custom_filter %}
 {% load static %}
     <!-- Hero Section Begin -->
     <section class="hero hero-normal">
@@ -176,12 +178,12 @@
                                 <h4>Your Order</h4>
                                 <div class="checkout__order__products">Products <span>Total</span></div>
                                 <ul>
-                                    <li>Mother with child <span>$75.99</span></li>
-                                    <li>Wounded King <span>$151.99</span></li>
-                                    <li>Native Prince<span>$53.99</span></li>
+                                    {% for product in productes %}
+                                    <li>{{product.name}}<span>{{product.price}}</span></li>
+                                    {% endfor %}
                                 </ul>
-                                <div class="checkout__order__subtotal">Subtotal <span>$750.99</span></div>
-                                <div class="checkout__order__total">Total <span>$750.99</span></div>
+                                <div class="checkout__order__subtotal">Subtotal <span  class="converted-price" data-price-ugx="{{ products|total_cart_price:request.session.cart }}">${{products|total_cart_price:request.session.cart}}</span></div>
+                                <div class="checkout__order__total">Total <span  class="converted-price" data-price-ugx="{{ products|total_cart_price_grand:request.session.cart }}">${{products|total_cart_price_grand:request.session.cart}}</span></div>
                                 <div class="checkout__input__checkbox">
                                     <label for="acc-or">
                                         Create an account?
