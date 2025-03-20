@@ -113,13 +113,13 @@
                                         <h5>{{product.name}}</h5>
                                     </td>
                                     <td class="shoping__cart__price converted-price" data-price-ugx="{{ product.price }}">
-                                        ${{ product.price }}
+                                        {{ product.price }}/=
                                     </td>
                                     <td class="shoping__cart__quantity">
                                         {{ product|cart_quantity:request.session.cart }}
                                     </td>
                                     <td class="shoping__cart__total converted-price" data-price-ugx="{{ product|price_total:request.session.cart }}">
-                                        ${{ product|price_total:request.session.cart }}
+                                        {{ product|price_total:request.session.cart }}/=
                                     </td>
                                     
                                     <td class="shoping__cart__item__close">

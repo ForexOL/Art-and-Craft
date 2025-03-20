@@ -179,7 +179,7 @@
                                 <div class="checkout__order__products">Products <span>Total</span></div>
                                 <ul>
                                     {% for product in productes %}
-                                    <li>{{product.name}}<span>{{product.price}}</span></li>
+                                    <li>{{product.name}}<span class="converted-price" data-price-ugx="{{product.price}}" >{{product.price}}/=</span></li>
                                     {% endfor %}
                                 </ul>
                                 <div class="checkout__order__subtotal">Subtotal <span  class="converted-price" data-price-ugx="{{ products|total_cart_price:request.session.cart }}">{{products|total_cart_price:request.session.cart}}/=</span></div>
