@@ -117,4 +117,8 @@ urlpatterns = [
     path('terms-and-conditions', views.terms_and_conditions, name='terms_and_conditions'),
     path('delivery-information', views.delivery_information, name='delivery_information'),
     path('return-policy', views.return_policy, name='return_policy'),
+
+    #likes
+    path('liked_products', product_list, name='product_list'),
+    path('toggle_like/<int:product_id>/', toggle_like, name='toggle_like'),
 ]

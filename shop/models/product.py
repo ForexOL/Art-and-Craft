@@ -88,3 +88,11 @@ class Review(models.Model):
     rating = models.IntegerField(choices=[(i, i) for i in range(1, 6)])  # 1 to 5 stars
     comment = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
+
+
+class Like(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+
+    class Meta:
+        unique_together = ('user', 'product')  # Prevent duplicate likes

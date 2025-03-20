@@ -27,7 +27,7 @@ from django.contrib.auth.decorators import user_passes_test
 import random
 from .login import Login
 from django.contrib.auth.models import Group
-from shop.models.product import Product
+from shop.models.product import *
 from django.contrib.admin.views.decorators import staff_member_required
 
 
@@ -965,3 +965,45 @@ def daily_accounting(request):
 
 
 
+
+from django.shortcuts import render, get_object_or_404
+from django.http import JsonResponse
+
+
+
+
+
+def product_list(request):
+    """Display only the products that the user has liked."""
+    user = request.user
+    # Retrieve Like objects related to the current user, with their associated products.
+    likes = Like.objects.filter(user=user).select_related('product')
+    # Create a list of product objects that the user has liked.
+    liked_products = [like.product for like in likes]
+    return render(request, 'products_liked.html', {'liked_products': liked_products})
+
+
+
+
+def toggle_like(request, product_id):
+    """Handle AJAX request for liking/unliking a product."""
+    if request.method == "POST":
+        user = request.user
+        product = get_object_or_404(Product, id=product_id)
+
+        print(f"User: {user}, Product ID: {product_id}")  # Debug user and product info
+
+        like = Like.objects.filter(user=user, product=product).first()
+        print(f"Existing Like Object: {like}")  # Debug if like exists
+
+        if like:
+            like.delete()  # Unlike the product
+            print(f"Like removed for product {product_id} by user {user}")  # Debug deletion
+            return JsonResponse({"liked": False})
+        else:
+            Like.objects.create(user=user, product=product)  # Like the product
+            print(f"Like added for product {product_id} by user {user}")  # Debug creation
+            return JsonResponse({"liked": True})
+
+    print("Invalid request method")  # Debug unexpected request types
+    return JsonResponse({"error": "Invalid request"}, status=400)

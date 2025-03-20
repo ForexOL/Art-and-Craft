@@ -17,7 +17,8 @@
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
-
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <!-- Css Styles -->
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" type="text/css">
     <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}" type="text/css">
@@ -38,8 +39,23 @@
             padding: 1px 2px;
             border-radius: 50%;
         }
-
-    
+        .product {
+            padding: 10px;
+            border: 1px solid #ddd;
+            margin: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .like-btn {
+            font-size: 24px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            transition: 0.3s;
+        }
+        .liked i { color: red; }  /* Liked state */
+        .not-liked i { color: blue; } /* Not liked state */
         
     </style> 
 
@@ -87,7 +103,7 @@
                 </li>
                   
             </ul>
-            <div class="header__cart__price">item: <span>{{products|total_cart_price:request.session.cart}}/=</span></div>
+            <div class="header__cart__price">item: <span>UGX{{products|total_cart_price:request.session.cart}}</span></div>
         </div>
         <div class="humberger__menu__widget">
             <div class="header__top__right__language">
@@ -111,11 +127,7 @@
                         <li><a href="">Payment Details</a></li>
                     </ul>
                 </li>
-                <li><a>Arcrid Sellers</a>
-                    <ul class="header__menu__dropdown">
-                        <li><a href="/become_vendor">Sell with Us</a></li>
-                        <li><a href="/Dashboard">Dashboard</a></li>
-                    </ul>
+                <li><a href="/Dashboard">Arcrid Sellers(Dashboard)</a>
                 </li>
                 <li><a href="#">Others</a>
                     <ul class="header__menu__dropdown">
@@ -127,7 +139,6 @@
                         <li><a href="/return-policy">Return Policy</a></li>
                     </ul>
                 </li>
-                <li><a href="">Blog</a></li>
                 <li><a href="contact">Contact</a></li>
                 {% if user.is_authenticated %}
                     <li><a href="/logout">Logout</a></li>
@@ -236,28 +247,74 @@
                 </div>
                 <div class="col-lg-6">
                     <nav class="header__menu">
-                        <ul>
-                            <li class="active"><a href="/">Home</a></li>
-                            <li><a href="/store">Shop and Cart</a></li>
-                            <li><a href="#">Pages</a>
-                                <ul class="header__menu__dropdown">
-                                    <li><a href="product">Shop Details</a></li>
-                                    <li><a href="/cart">Shoping Cart</a></li>
-                                    <li><a href="/checkout">Check Out</a></li>
-                                    <li><a href="">Blog Details</a></li>
+                        <ul style="color: white;">
+                            <li class="active">
+                                <a href="/" style="color: white;">Home</a>
+                            </li>
+                            <li>
+                                <a href="#" style="color: white;">Shop and Cart</a>
+                                <ul class="header__menu__dropdown" style="color: white;">
+                                    <li>
+                                        <a href="/store" style="color: white;">Shop</a>
+                                    </li>
+                                    <li>
+                                        <a href="/cart" style="color: white;">Shopping Cart</a>
+                                    </li>
+                                    <li>
+                                        <a href="/checkout" style="color: white;">Check Out</a>
+                                    </li>
+                                    <li>
+                                        <a href="" style="color: white;">Payment Details</a>
+                                    </li>
                                 </ul>
                             </li>
-                            <li><a href="">Blog</a></li>
-                            <li><a href="contact">Contact</a></li>
+                            <li>
+                                <a href="/Dashboard" style="color: white;">Sellers(Dashboard)</a>
+                            </li>
+                            <li>
+                                <a href="#" style="color: white;">Others</a>
+                                <ul class="header__menu__dropdown" style="color: white;">
+                                    <li>
+                                        <a href="/blog" style="color: white;">Blog</a>
+                                    </li>
+                                    <li>
+                                        <a href="/about_us" style="color: white;">About Us | Who we are</a>
+                                    </li>
+                                    <li>
+                                        <a href="/privacy-policy" style="color: white;">Privacy Policy</a>
+                                    </li>
+                                    <li>
+                                        <a href="/terms-and-conditions" style="color: white;">Terms and Conditions</a>
+                                    </li>
+                                    <li>
+                                        <a href="/delivery-information" style="color: white;">Delivery Information</a>
+                                    </li>
+                                    <li>
+                                        <a href="/return-policy" style="color: white;">Return Policy</a>
+                                    </li>
+                                    <li>
+                                        <a href="contact" style="color: white;">Contact</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            
                             {% if user.is_authenticated %}
-                                <li><a href="/logout">Logout</a></li>
+                                <li>
+                                    <a href="/logout" style="color: white;">Logout</a>
+                                </li>
                             {% else %}
-                                <li><a href="/signup">Signup</a></li>
-                                <li><a href="/login">Login</a></li>
+                                <li>
+                                    <a href="/signup" style="color: white;">Signup</a>
+                                </li>
+                                <li>
+                                    <a href="/login" style="color: white;">Login</a>
+                                </li>
                             {% endif %}
-                            <li><a href="/become_vendor">Sell with Us</a></li>
-
+                            <li>
+                                <a href="/become_vendor" style="color: white;">Sell with Us</a>
+                            </li>
                         </ul>
+                        
                     </nav>
                 </div>
                 <div class="col-lg-3 d-none d-md-block">
@@ -300,7 +357,7 @@
                             
                             <ul>
                                 <li>
-                                    <a href="#" class="icon-circle">
+                                    <a href="/liked_products" class="icon-circle">
                                         <i class="fa fa-heart"></i>
                                         <span>1</span>
                                     </a>
@@ -314,7 +371,7 @@
                             </ul>
                             
                         </ul>
-                        <div class="header__cart__price">item: <span>{{products|total_cart_price:request.session.cart}}/=</span></div>
+                        <div class="header__cart__price">item: <span>UGX{{products|total_cart_price:request.session.cart}}</span></div>
                     </div>
                 </div>
                 
@@ -348,9 +405,7 @@
                 </div>
             </div>
         </div>
-        
-        
-        </div>
+
     </header>
 </br>
     <!-- Header Section End -->
@@ -568,6 +623,29 @@
         convertPrices(window.currentCurrency);
       }
     }, 30000);
+
+    $(document).ready(function() {
+        $(".like-btn").click(function(e) {
+            e.preventDefault();  // Prevent default link behavior
+            let button = $(this);
+            let productId = button.data("product-id");
+
+            $.ajax({
+                url: `/toggle_like/${productId}/`,
+                type: "POST",
+                data: {
+                    csrfmiddlewaretoken: "{{ csrf_token }}",
+                },
+                success: function(response) {
+                    if (response.liked) {
+                        button.removeClass("not-liked").addClass("liked");
+                    } else {
+                        button.removeClass("liked").addClass("not-liked");
+                    }
+                }
+            });
+        });
+    });
   </script>
 <!-- FontAwesome CDN for icons (if not already included) -->
 
