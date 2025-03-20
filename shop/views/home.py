@@ -27,7 +27,7 @@ class Index(View):
                 if form.is_valid():
                     print(form.cleaned_data.get('quantity'))
                     if cart:
-                        cart[product]  = form.cleaned_data.get('quantity')
+                        cart[product]  += form.cleaned_data.get('quantity')
                     else:
                         cart = {}
                         cart[product]  = form.cleaned_data.get('quantity')
