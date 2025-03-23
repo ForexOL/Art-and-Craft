@@ -11,6 +11,7 @@ from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 import random
+import requests
 from .forms import *
 # Create your views here.
 class Index(View):
