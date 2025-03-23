@@ -148,12 +148,8 @@ def search(request):
         return render(request,'index2.html', context)
 
 def get_client_ip(request):
-    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
-    if x_forwarded_for:
-        ip = x_forwarded_for.split(',')[0]  # Get the first IP if multiple exist
-    else:
-        ip = request.META.get('REMOTE_ADDR')  # Direct IP if no proxy is used
-    return ip
+    response = requests.get("https://api64.ipify.org?format=json")
+    return response.json().get("ip", "Not Found")
 
 def my_view(request):
     
