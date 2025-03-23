@@ -147,11 +147,24 @@ def search(request):
 
         return render(request,'index2.html', context)
 
-        
+def get_client_ip(request):
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[0]  # Get the first IP if multiple exist
+    else:
+        ip = request.META.get('REMOTE_ADDR')  # Direct IP if no proxy is used
+    return ip
+
+def my_view(request):
+    
+    return HttpResponse(f"Your IP: {user_ip}")
+
 
 def homepage(request):
     cart = request.session.get('cart')
     items=Item.objects.all()
+    user_ip = get_client_ip(request)
+    print(f"User IP: {user_ip}")
 
     for item in items:
         item['description_words'] = item['description'].split()
@@ -206,7 +219,7 @@ def homepage(request):
     chunked_products3 = [latest_products[i:i + 3] for i in range(0, len(latest_products), 3)]
     
     context = {
-        'items': items,"chunked_products1": chunked_products1,"chunked_products2": chunked_products2,"chunked_products3": chunked_products3,'homepage':'homepage','latest_products':latest_products,'top_reviewed':top_reviewed,'productes':productes,'products':products,'brands':brands,'categories':categories ,'top_rated':top_rated,}
+        'IP':user_ip,'items': items,"chunked_products1": chunked_products1,"chunked_products2": chunked_products2,"chunked_products3": chunked_products3,'homepage':'homepage','latest_products':latest_products,'top_reviewed':top_reviewed,'productes':productes,'products':products,'brands':brands,'categories':categories ,'top_rated':top_rated,}
 
     return render(request, 'index.html', context)
 
