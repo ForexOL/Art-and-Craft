@@ -8,10 +8,10 @@ import datetime
 class Order(models.Model):
     customer = models.ForeignKey(User,
                                  on_delete=models.CASCADE)
-    total_price = models.IntegerField(default=1)
+    total_price = models.IntegerField(default=0)
     status = models.BooleanField(default=False)
     ordering_code=models.CharField(max_length=60,default='')
-    address=models.CharField(max_length=60,default='')
+    address=models.CharField(max_length=100,default='')
     phone=models.CharField(max_length=60,default='')
     dates = models.DateTimeField(auto_now_add=True)
 
