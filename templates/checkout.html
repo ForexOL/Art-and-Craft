@@ -2,6 +2,7 @@
 {% block content %}
 {% load cart %}
 {% load custom_filter %}
+{% load crispy_forms_tags %}
 {% load static %}
     <!-- Hero Section Begin -->
     <section class="hero hero-normal">
@@ -95,6 +96,37 @@
             </div>
             <div class="checkout__form">
                 <h4>Billing Details</h4>
+                <form action="/check-out" method="POST">
+                    {% csrf_token %}
+                    <div class="single-input-item" class="bold" class="bold">
+                        <label for="street-address_2" class="required pt-20">Delivery address</label>
+                        <input type="text" name="address" id="" class="form-control" placeholder="Exact Place To deliver Your Order" aria-describedby="helpId" required >
+                    </div>
+
+                    <div class="single-input-item">
+                        <label for="com-name_2" for="street-address_2" class="bold" class="required pt-20">Phone(For communication)</label>
+                        <input type="number" name="phone" id="" class="form-control" placeholder="Eg.077777777" aria-describedby="helpId" required >
+                    </div>
+
+                    
+                    <div class="single-input-item">
+                        <label for="email_2" class="bold">Email Address(Optional)</label>
+                        <input type="email" name="email" id="email_2" placeholder="Email Address"  />
+                    </div>
+                    <div class="single-input-item">
+                    
+                </div>
+                    <div class="container">
+                    <div class="payment-method-name ">
+                        <div class="payment-method-details" data-method="cash">
+                        </div>
+                    </div>
+                     <button type="submit" name="cash" class="check-btn sqr-btn">Next</button>
+                     
+                 </div>
+             </div>
+                 </form>
+                <!---
                 <form action="#">
                     <div class="row">
                         <div class="col-lg-8 col-md-6">
@@ -226,7 +258,8 @@
                             </div>
                         </div>
                     </div>
-                </form>
+                </form>---->
+
             </div>
         </div>
     </section>

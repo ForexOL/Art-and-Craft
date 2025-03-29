@@ -14,6 +14,7 @@ from django.conf.urls import (
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("shop.urls")),  # Include shop routes
+    path('/payments/', include('django_pesapalv3.urls')),  # Pesapal v3 endpoints
     re_path(r'^media/(?P<path>.*)$', serve,{'document_root': settings.MEDIA_ROOT}),
 ]
 #if settings.DEBUG:

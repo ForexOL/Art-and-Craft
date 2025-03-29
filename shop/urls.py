@@ -13,7 +13,7 @@ from .views.checkout import checkout,payment_response
 from .views.orders import orders,delete
 from .middlewares.auth import  auth_middleware
 from django.contrib.auth import views as auth_views
-
+from .views.payments import *
 from shop.graph import *
 
 
@@ -121,4 +121,5 @@ urlpatterns = [
     #likes
     path('liked_products', product_list, name='product_list'),
     path('toggle_like/<int:product_id>/', toggle_like, name='toggle_like'),
+    path('automated', PaymentView.as_view(), name='payment'),
 ]

@@ -138,9 +138,9 @@ class AdminAsset(admin.ModelAdmin):
          extra_context['graph'] = 'graph'
          return super(AdminAsset, self).changelist_view(request, extra_context=extra_context)
     
-
+ 
 class AdminOrder_record(admin.ModelAdmin):
-    list_display = ['customer','product','price','quantity','address','phone','dates','status','ordering_code']
+    list_display = ['order','name','price','quantity']
     ordering=('-dates',)
     change_list_template = "../templates/change_list.html"
     def changelist_view(self, request, extra_context=None):
@@ -197,7 +197,7 @@ class AdminCategory(admin.ModelAdmin):
     list_display = ['name']
 
 class AdminOrder(admin.ModelAdmin):
-    list_display = ['customer','product','price','quantity','address','phone','dates','status','is_accounted','ordering_code']
+    list_display = ['customer','address','phone','dates','status','ordering_code']
     ordering=('-dates',)
     list_editable = ('status',)
     change_list_template = "../templates/change_list.html"

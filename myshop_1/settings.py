@@ -45,9 +45,14 @@ INSTALLED_APPS = [
     "django.contrib.auth",
     "django.contrib.contenttypes",
     'mathfilters',
-    "django.contrib.sessions",
-    "django.contrib.messages",
-    "django.contrib.staticfiles",
+
+    'django.contrib.sites',  # Add this line
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    # Third-party apps
+    'django_pesapal',
+    'django_pesapalv3',  # Using v3 API
     "shop",  # Add shop app
 ]
 
@@ -103,7 +108,10 @@ WSGI_APPLICATION = 'myshop_1.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
+
+
 """
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -191,3 +199,20 @@ EMAIL_HOST_PASSWORD='jlxmlemwkciomuea'
 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+
+
+# Pesapal configuration settings
+PESAPAL_DEMO = False
+PESAPAL_CONSUMER_KEY = '257jgSzKthLnBlt2WhssEZnnM0WV79oW'  # Fill in with your consumer key
+PESAPAL_CONSUMER_SECRET = 'ISId4sl64k88Q7XAOWVsRzLfnTw='  # Fill in with your consumer secret
+
+PESAPAL_OAUTH_CALLBACK_URL = 'transaction_completed'
+PESAPAL_OAUTH_SIGNATURE_METHOD = 'SignatureMethod_HMAC_SHA1'
+PESAPAL_TRANSACTION_DEFAULT_REDIRECT_URL = '/'  # or your desired URL name, e.g., 'app_name:url_name'
+PESAPAL_TRANSACTION_FAILED_REDIRECT_URL = ''
+PESAPAL_REDIRECT_WITH_REFERENCE = True
+PESAPAL_TRANSACTION_MODEL = 'django_pesapal.Transaction'
+PESAPAL_IPN_URL = 'django_pesapalv3:transaction_ipn'
+PESAPAL_CALLBACK_URL = 'django_pesapalv3:transaction_completed'

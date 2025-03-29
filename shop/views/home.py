@@ -21,18 +21,25 @@ class Index(View):
         remove = request.POST.get('remove')
         cart = request.session.get('cart')
         form=ViewCartForm()
-        
+         
         if request.method=='POST':
             if "quantity" in request.POST:  # Check if the request contains review data
                 form = ViewCartForm(request.POST)
+                print('we got the form')
                 if form.is_valid():
+                    print('form valid')
                     print(form.cleaned_data.get('quantity'))
                     if cart:
                         cart[product]  += form.cleaned_data.get('quantity')
+                        print('What happened')
                     else:
                         cart = {}
+                        print('did something happen')
                         cart[product]  = form.cleaned_data.get('quantity')
                     return redirect('details', product)
+                else:
+                    print("Form errors:", form.errors)
+
         
         print('we passed here')
         if cart:

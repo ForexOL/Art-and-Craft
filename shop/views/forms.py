@@ -16,15 +16,14 @@ from django import forms
 class OrderForm(ModelForm):
 	class Meta:
 		model=Order
-		fields=('address','phone')
+		fields='__all__'
 
-class ViewCartForm(forms.ModelForm):
-	class Meta:
-		model=Order
-		fields=('quantity','id',)
-	def __init__(self, *args, **kwargs,):
-		super().__init__(*args, **kwargs)
-		self.fields['quantity']=forms.IntegerField(max_value=1000, min_value=1)
+from django import forms
+
+class ViewCartForm(forms.Form):
+    quantity = forms.IntegerField(min_value=1, required=True)
+    #order_id = forms.IntegerField(widget=forms.HiddenInput())
+
 
 '''
 def __init__(self, min_value=None, *args, **kwargs):

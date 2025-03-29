@@ -4,6 +4,7 @@ from django.urls import reverse
 from django.conf import settings
 import datetime
 from .product import Product
+from .orders import *
 from django.contrib.auth.models import User
 
 
@@ -160,21 +161,12 @@ class Asset (models.Model):
         return self.reason
 
 class Order_record(models.Model):
-    product = models.CharField(max_length=100)
-    customer = models.CharField(max_length=100)
-    quantity = models.IntegerField(default=1)
-    price = models.IntegerField()
-    selling_price =models.IntegerField(default=0)
-    address = models.CharField(max_length=50, default='', blank=True)
-    phone = models.CharField(max_length=50, default='', blank=True)
-    dates = models.DateField(default=datetime.datetime.today)
-    email  = models.EmailField(max_length=70,blank=True,unique=False)
-    status = models.BooleanField(default=False)
-    ordering_code=models.CharField(max_length=60,default='')
-    shop_name = models.CharField(max_length=60,default='')
-    payment_method = models.ForeignKey(Method,
-                                 on_delete=models.CASCADE)
-    payment_verified = models.BooleanField(default=False)
+    order = models.ForeignKey(Order, related_name='ordered_products', on_delete=models.CASCADE, default=1)
+    name = models.CharField(max_length=255,default='')
+    quantity = models.PositiveIntegerField(default=1)
+    price = models.DecimalField(max_digits=10, decimal_places=2,default=0)
+    dates = models.DateTimeField(auto_now_add=True)
     def __str__(self):
-        return self.customer
+        return f"{self.product_name} (x{self.quantity})"
+
 
