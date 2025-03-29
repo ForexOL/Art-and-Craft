@@ -151,7 +151,7 @@ class AdminOrder_record(admin.ModelAdmin):
         extra_context['info'] = 'Number of Products Ordered Per Day'
         # Aggregate new subscribers per day
         chart_data = (
-            Order_record.objects.annotate(date=TruncDay("date_created"))
+            Order_record.objects.annotate(date=TruncDay("dates"))
             .values("date")
             .annotate(y=Count("id"))
             .order_by("-date")
