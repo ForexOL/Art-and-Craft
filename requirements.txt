@@ -10,7 +10,7 @@ channels
 python-decouple
 cloudinary
 crispy-bootstrap5
-
+django_pesapal
 
 amqp
 asgiref
