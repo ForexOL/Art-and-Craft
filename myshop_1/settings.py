@@ -110,7 +110,7 @@ WSGI_APPLICATION = 'myshop_1.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 
-"""
+
 
 DATABASES = {
     'default': {
@@ -130,7 +130,7 @@ DATABASES = {
         'PORT': '',
     }
 }
-
+"""
 USE_X_FORWARDED_HOST = True
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
