@@ -42,7 +42,21 @@ def terms_and_conditions(request):
     return render(request, 'terms_and_conditions.html')
 
 def delivery_information(request):
-    return render(request, 'delivery_info.html')
+    user = request.user
+    # Retrieve Like objects related to the current user, with their associated products.
+    likes = Like.objects.filter(user=user).select_related('product')
+    # Create a list of product objects that the user has liked.
+    liked_products = [like.product.id for like in likes]
+    categories = Sub_Category.get_all_categories()
+    brands = Major_Categories.get_all_brand()
+    context = {
+        
+        'liked_products':liked_products,
+        'brands': brands,
+        'categories': categories,
+        
+    }
+    return render(request, 'delivery_info.html',context)
 
 def return_policy(request):
     return render(request, 'return_policy.html')
@@ -972,7 +986,7 @@ from django.http import JsonResponse
 
 
 
-
+@login_required(login_url='login')
 def product_list(request):
     """Display only the products that the user has liked."""
     user = request.user

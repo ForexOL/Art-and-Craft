@@ -77,8 +77,9 @@
                                 
                                         <ul class="product__item__pic__hover">
                                             <li> 
-                                        <a class="like-btn {% if product.id in liked_products %}not-liked{% else %}liked{% endif %}" 
+                                        <a class="like-btn {% if product.id in liked_products %}liked{% else %}not-liked{% endif %}" 
                                         data-product-id="{{ product.id }}">
+
                                             <i class="fa fa-heart"></i>
                                         </a>
                                     </li>

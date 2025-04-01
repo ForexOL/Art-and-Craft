@@ -40,10 +40,13 @@
                 <div class="col-lg-9">
                     <div class="hero__search  d-none d-md-block hide-on-mobile">
                         <div class="hero__search__form">
-                            <form action="#">
-                                <input type="text" placeholder="What do yo u need?">
-                                <button type="submit" class="site-btn" style="background-color: #2f231b;">SEARCH</button>
-                            </form>
+                            <form class="d-flex" action="{% url 'search' %}" method="POST">
+                            {% csrf_token %}
+                            <input type="text" class="form-control" placeholder="What do you need?" style="max-width: 100%;">
+                            <button type="submit" class="btn text-white ms-2" style="background-color: #2f231b;">
+                                <i class="fa fa-search"></i> <!-- Font Awesome Search Icon -->
+                            </button>
+                        </form>
                         </div>
                         <div class="hero__search__phone  d-none d-md-block">
                             <div class="hero__search__phone__icon">

@@ -95,6 +95,7 @@
                             <thead>
                                 <tr>
                                     <th class="shoping__product">Products</th>
+                                    <th>Name</th>
                                     <th>Price</th>
                                     <th>Quantity</th>
                                     <th>Total</th>
@@ -109,7 +110,10 @@
                                 {% for product in productes %}
                                 <tr>
                                     <td class="shoping__cart__item">
-                                        <img src="{{product.image.url}}" alt="" style="height:100px;width: 100px;">
+                                        <a href="{% url 'details' product.id %}">
+                                        <img src="{{product.image.url}}" alt="" style="height:100px;width: 100px;"></a>
+                                    </td>
+                                    <td class="shoping__cart__price">
                                         <h5>{{product.name}}</h5>
                                     </td>
                                     <td class="shoping__cart__price converted-price" data-price-ugx="{{ product.price }}">
@@ -123,7 +127,16 @@
                                     </td>
                                     
                                     <td class="shoping__cart__item__close">
-                                        <span class="icon_close"></span>
+                                        {% if product|is_in_cart:request.session.cart %}
+                                        <form action="/remove_to_cart" class="col-2 " method="post">
+                                            {% csrf_token %}
+                                            <input hidden type="text" name='product' value='{{product.id}}'>
+                                            <input hidden type="text" name='remove' value='True'>
+                                            
+                                            <input type="submit" value="Remove" class="fa fa-trash  btn btn-danger btn-xs">
+
+                                        </form>
+                                        {% endif %}
                                     </td>
                                 </tr>
                                 {% endfor %}
@@ -155,4 +168,6 @@
         </div>
     </section>
     <!-- Shoping Cart Section End -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
 {% endblock %}

@@ -1,47 +1,50 @@
 {% extends 'base.html' %}
 {% block content %}
 {% load static %}
-    <!-- Hero Section Begin -->
-    <section class="hero hero-normal">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3">
-                    <div class="hero__categories">
-                        <div class="hero__categories__all">
-                            <i class="fa fa-bars"></i>
-                            <span>Categories</span>
-                        </div>
-                        <ul>
-                            {% for brand in brands %}
-                            <li><a href="/?brand={{brand.id}}">{{ brand.name }}</a></li>
-                            {% endfor %}
-                            
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-9  d-none d-md-block" >
-                    <div class="hero__search">
-                        <div class="hero__search__form">
-                            <form action="#">
-                                <input type="text" placeholder="What do yo u need?">
-                                <button type="submit" class="site-btn">SEARCH</button>
-                            </form>
-                        </div>
-                        <div class="hero__search__phone">
-                            <div class="hero__search__phone__icon">
-                                <i class="fa fa-phone"></i>
+        <!-- Hero Section Begin -->
+        <section class="hero hero-normal">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3">
+                        <div class="hero__categories">
+                            <div class="hero__categories__all">
+                                <i class="fa fa-bars"></i>
+                                <span>Categories</span>
                             </div>
-                            <div class="hero__search__phone__text">
-                                <h5>+256781782288</h5>
-                                <span>support 24/7 time</span>
+                            <ul>
+                                {% for brand in brands %}
+                                <li><a href="/?brand={{brand.id}}">{{ brand.name }}</a></li>
+                                {% endfor %}
+                                
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-9  d-none d-md-block" >
+                        <div class="hero__search">
+                            <div class="hero__search__form">
+                                <form class="d-flex" action="{% url 'search' %}" method="POST">
+                            {% csrf_token %}
+                            <input type="text" class="form-control" placeholder="What do you need?" style="max-width: 100%;">
+                            <button type="submit" class="btn text-white ms-2" style="background-color: #2f231b;">
+                                <i class="fa fa-search"></i> <!-- Font Awesome Search Icon -->
+                            </button>
+                        </form>>
+                            </div>
+                            <div class="hero__search__phone">
+                                <div class="hero__search__phone__icon">
+                                    <i class="fa fa-phone"></i>
+                                </div>
+                                <div class="hero__search__phone__text">
+                                    <h5>+256781782288</h5>
+                                    <span>support 24/7 time</span>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-    <!-- Hero Section End -->
+        </section>
+        <!-- Hero Section End -->
 
     <!-- Breadcrumb Section Begin -->
     <section class="breadcrumb-section set-bg" data-setbg="{% static 'img/33.jpg' %}">
@@ -93,12 +96,12 @@
                 <li class="list-group-item">23. Assignment</li>
                 <li class="list-group-item">24. Third party rights</li>
                 <li class="list-group-item">25. Law and jurisdiction</li>
-                <li class="list-group-item">26. Our company details and notices</li>
+                <li class="list-group-item">26. Arcrid details and notices</li>
             </ul>
 
             <section id="refunds" class="mt-4">
                 <h2>Introduction</h2>
-            1.1. ”Arcrid” is the trading name for the Arcrid SMC LIMITED. Arcrid companies operate e-commerce platforms consisting of a website and mobile application (“marketplace”), together with supporting IT, logistics and payment infrastructure, for the sale and purchase of consumer products and services (“products”) in allocated territories.
+            1.1. ”Arcrid” is the trading name for the Arcrid STORE. Arcrid companies operate e-commerce platforms consisting of a website and mobile application (“marketplace”), together with supporting IT, logistics and payment infrastructure, for the sale and purchase of consumer products and services (“products”) in allocated territories.
 
             1.2. These general terms and conditions shall apply to buyers and sellers on the marketplace and shall govern your use of the marketplace and related services.
 
@@ -108,9 +111,9 @@
 
             1.4.1. confirm that you have obtained the necessary authority to agree to these general terms and conditions;
 
-            1.4.2. bind both yourself and the person, company or other legal entity that operates that business or organizational project, to these general terms and conditions; and
+            1.4.2. bind both yourself and the person, Business or other legal entity that operates that business or organizational project, to these general terms and conditions; and
 
-            1.4.3. agree that "you" in these general terms and conditions shall reference both the individual user and the relevant person, company or legal entity unless the context requires otherwise.
+            1.4.3. agree that "you" in these general terms and conditions shall reference both the individual user and the relevant person, Business or legal entity unless the context requires otherwise.
 
             </section>
             <section id="refunds" class="mt-4">
@@ -503,7 +506,7 @@
 
             </section>
             <section id="refunds" class="mt-4">
-                <h2>26. Our company details and notices</h2>
+                <h2>26. Arcrid details and notices</h2>
 
             26.1. You can contact us by using the contact details listed on our website and application.
 

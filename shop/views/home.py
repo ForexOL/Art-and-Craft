@@ -117,8 +117,16 @@ def store(request):
 
     # Vendor presence check
     vendor_present_here = request.user.is_authenticated and Vendor.objects.filter(vendor=request.user.id).exists()
-
+    user = request.user
+    # Retrieve Like objects related to the current user, with their associated products.
+    likes = Like.objects.filter(user=user).select_related('product')
+    # Create a list of product objects that the user has liked.
+    liked_products = [like.product.id for like in likes]
+    categories = Sub_Category.get_all_categories()
+    brands = Major_Categories.get_all_brand()
     context = {
+        
+        'liked_products':liked_products,
         'page_obj': page_obj,  # Pass paginated products
         'vendor_present_here': vendor_present_here,
         'store': 'store',
@@ -227,9 +235,15 @@ def homepage(request):
     chunked_products2 = [top_rated[i:i + 3] for i in range(0, len(top_rated), 3)]
     
     chunked_products3 = [latest_products[i:i + 3] for i in range(0, len(latest_products), 3)]
-    
+    user = request.user
+    # Retrieve Like objects related to the current user, with their associated products.
+    likes = Like.objects.filter(user=user).select_related('product')
+    # Create a list of product objects that the user has liked.
+    liked_products = [like.product.id for like in likes]
+
     context = {
-        'IP':user_ip,'items': items,"chunked_products1": chunked_products1,"chunked_products2": chunked_products2,"chunked_products3": chunked_products3,'homepage':'homepage','latest_products':latest_products,'top_reviewed':top_reviewed,'productes':productes,'products':products,'brands':brands,'categories':categories ,'top_rated':top_rated,}
+        
+        'liked_products':liked_products,'IP':user_ip,'items': items,"chunked_products1": chunked_products1,"chunked_products2": chunked_products2,"chunked_products3": chunked_products3,'homepage':'homepage','latest_products':latest_products,'top_reviewed':top_reviewed,'productes':productes,'products':products,'brands':brands,'categories':categories ,'top_rated':top_rated,}
 
     return render(request, 'index.html', context)
 

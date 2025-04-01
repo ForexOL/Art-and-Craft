@@ -87,7 +87,7 @@
         </div>
         <div class="humberger__menu__cart">
             <ul>
-                <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
+                <li><a href="#"><i class="fa fa-heart"></i> <span>{{ liked_products|length }}</span></a></li>
                 <!--
                 <li>
                                 <a href="#">
@@ -363,7 +363,7 @@
                                 <li>
                                     <a href="/liked_products" class="icon-circle">
                                         <i class="fa fa-heart"></i>
-                                        <span>1</span>
+                                        <span>{{ liked_products|length }}</span>
                                     </a>
                                 </li>
                                 <li>
@@ -399,7 +399,8 @@
                 <!-- Search Bar -->
                 <div class="col-8 col-md-6">
                     <div class="hero__search">
-                        <form action="#" class="d-flex">
+                        <form class="d-flex" action="{% url 'search' %}" method="POST">
+                            {% csrf_token %}
                             <input type="text" class="form-control" placeholder="What do you need?" style="max-width: 100%;">
                             <button type="submit" class="btn text-white ms-2" style="background-color: #2f231b;">
                                 <i class="fa fa-search"></i> <!-- Font Awesome Search Icon -->
@@ -479,7 +480,7 @@
                     <h6 style="color: #A95922;">Useful Links</h6>
                     <ul>
                         <li>
-                            <a href="/about_us" style="color: white;">About Us | Who we are</a>
+                            <a href="/about_us" >About Us | Who we are</a>
                         </li>
                         <!--<li><a href="/secure-payments">Secure Shopping and Payments</a></li>-->
                         <li><a href="/delivery-information">Delivery infomation</a></li>
@@ -593,64 +594,71 @@
 </script>
 <script>
     // Store the currently selected currency
-    window.currentCurrency = null;
+window.currentCurrency = null;
 
-    // Fetch exchange rates for a given base currency (here, UGX)
-    async function fetchExchangeRates(baseCurrency) {
-      try {
+// Fetch exchange rates for a given base currency (here, UGX)
+async function fetchExchangeRates(baseCurrency) {
+    try {
         const response = await fetch(`https://api.exchangerate-api.com/v4/latest/${baseCurrency}`);
         const data = await response.json();
         return data.rates;
-      } catch (error) {
+    } catch (error) {
         console.error("Error fetching exchange rates:", error);
         return null;
-      }
+    }
     }
 
     // Convert all price tags from UGX to the selected target currency
     async function convertPrices(targetCurrency) {
-      window.currentCurrency = targetCurrency;
-      const rates = await fetchExchangeRates("UGX");
-      if (rates && rates[targetCurrency]) {
+    window.currentCurrency = targetCurrency;
+    const rates = await fetchExchangeRates("UGX");
+    if (rates && rates[targetCurrency]) {
         document.querySelectorAll('.converted-price').forEach(el => {
-          const ugxPrice = parseFloat(el.getAttribute('data-price-ugx'));
-          const converted = (ugxPrice * rates[targetCurrency]).toFixed(2);
-          el.innerText = `${converted} ${targetCurrency}`;
+        const ugxPrice = parseFloat(el.getAttribute('data-price-ugx'));
+        let converted = ugxPrice * rates[targetCurrency];
+        // Check if conversion results in NaN, and set to 0 if it does
+        if (isNaN(converted)) {
+            converted = 0;
+        } else {
+            converted = converted.toFixed(2);
+        }
+        el.innerText = `${converted} ${targetCurrency}`;
         });
-      } else {
+    } else {
         console.error("Error fetching conversion rate for " + targetCurrency);
-      }
+    }
     }
 
     // Refresh the conversion every 30 seconds if a currency has been selected
     setInterval(() => {
-      if (window.currentCurrency) {
+    if (window.currentCurrency) {
         convertPrices(window.currentCurrency);
-      }
+    }
     }, 30000);
 
     $(document).ready(function() {
-        $(".like-btn").click(function(e) {
-            e.preventDefault();  // Prevent default link behavior
-            let button = $(this);
-            let productId = button.data("product-id");
+    $(".like-btn").click(function(e) {
+        e.preventDefault();  // Prevent default link behavior
+        let button = $(this);
+        let productId = button.data("product-id");
 
-            $.ajax({
-                url: `/toggle_like/${productId}/`,
-                type: "POST",
-                data: {
-                    csrfmiddlewaretoken: "{{ csrf_token }}",
-                },
-                success: function(response) {
-                    if (response.liked) {
-                        button.removeClass("not-liked").addClass("liked");
-                    } else {
-                        button.removeClass("liked").addClass("not-liked");
-                    }
-                }
-            });
+        $.ajax({
+        url: `/toggle_like/${productId}/`,
+        type: "POST",
+        data: {
+            csrfmiddlewaretoken: "{{ csrf_token }}",
+        },
+        success: function(response) {
+            if (response.liked) {
+            button.removeClass("not-liked").addClass("liked");
+            } else {
+            button.removeClass("liked").addClass("not-liked");
+            }
+        }
         });
     });
+    });
+
   </script>
 <!-- FontAwesome CDN for icons (if not already included) -->
 
