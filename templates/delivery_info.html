@@ -24,7 +24,7 @@
                             <div class="hero__search__form">
                                 <form class="d-flex" action="{% url 'search' %}" method="POST">
                             {% csrf_token %}
-                            <input type="text" class="form-control" placeholder="What do you need?" style="max-width: 100%;">
+                            <input type="text" class="form-control" placeholder="What do you need?" style="max-width: 100%;" name="searched">
                             <button type="submit" class="btn text-white ms-2" style="background-color: #2f231b;">
                                 <i class="fa fa-search"></i> <!-- Font Awesome Search Icon -->
                             </button>
