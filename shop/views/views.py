@@ -42,11 +42,14 @@ def terms_and_conditions(request):
     return render(request, 'terms_and_conditions.html')
 
 def delivery_information(request):
-    user = request.user
-    # Retrieve Like objects related to the current user, with their associated products.
-    likes = Like.objects.filter(user=user).select_related('product')
-    # Create a list of product objects that the user has liked.
-    liked_products = [like.product.id for like in likes]
+    if request.user.is_authenticated:
+        user = request.user
+        # Retrieve Like objects related to the current user, with their associated products.
+        likes = Like.objects.filter(user=user).select_related('product')
+        # Create a list of product objects that the user has liked.
+        liked_products = [like.product.id for like in likes]
+    else:
+        liked_products=[]
     categories = Sub_Category.get_all_categories()
     brands = Major_Categories.get_all_brand()
     context = {
