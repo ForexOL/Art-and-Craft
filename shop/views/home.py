@@ -167,7 +167,7 @@ def search(request):
             page_obj={}
         context={'page_obj':page_obj,'vendor_present_here':vendor_present_here,'store':'store','productes':productes,'searched':searched,'brands':brands,'categories':categories}
 
-        return render(request,'index2.html', context)
+        return render(request,'shop-grid.html', context)
 
 def get_client_ip(request):
     response = requests.get("https://api64.ipify.org?format=json")
