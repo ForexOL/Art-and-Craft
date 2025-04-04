@@ -173,8 +173,13 @@ def search(request):
         return render(request,'shop-grid.html', context)
 
 def get_client_ip(request):
-    response = requests.get("https://api64.ipify.org?format=json")
-    return response.json().get("ip", "Not Found")
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        # Handle multiple IPs in headers
+        ip = x_forwarded_for.split(',')[0].strip()
+    else:
+        ip = request.META.get('REMOTE_ADDR')
+    return ip
 
 def my_view(request):
     

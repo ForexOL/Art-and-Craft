@@ -14,6 +14,7 @@ from pathlib import Path
 import os
 import dotenv
 dotenv.load_dotenv()
+SITE_ID = 1  # or the correct ID for your site
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -110,7 +111,7 @@ WSGI_APPLICATION = 'myshop_1.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 
-"""
+
 
 DATABASES = {
     'default': {
@@ -131,7 +132,7 @@ DATABASES = {
     }
 }
 
-
+"""
 
 USE_X_FORWARDED_HOST = True
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')

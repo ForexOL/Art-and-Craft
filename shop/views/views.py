@@ -785,8 +785,8 @@ def permission_denied(request, exception):
     return response
 
 class PostListView(ListView):
-    model = Post
-    template_name = 'blog/index.html'
+    model = Post 
+    template_name = 'blog.html'
     context_object_name = 'posts'
     paginate_by = 20
 
@@ -801,7 +801,7 @@ class PostListView(ListView):
                 Q(content__icontains=keyword) | Q(title__icontains=keyword))
         else:
             object_list = self.model.objects.all()
-        return object_list
+        return object_list or []
 
 
 class UserPostListView(ListView):
