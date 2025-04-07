@@ -122,4 +122,5 @@ urlpatterns = [
     path('liked_products', product_list, name='product_list'),
     path('toggle_like/<int:product_id>/', toggle_like, name='toggle_like'),
     path('automated', PaymentView.as_view(), name='payment'),
+    path('billing_terms',billing_terms,name='billing_terms'),
 ]

@@ -64,6 +64,9 @@ def delivery_information(request):
 def return_policy(request):
     return render(request, 'return_policy.html')
 
+def billing_terms(request):
+    return render(request, 'billing_terms.html')
+
 def secure_shopping_and_payments(request):
     return render(request, 'secure_shopping_and_payments.html')
 
@@ -817,7 +820,7 @@ class UserPostListView(ListView):
 
 class PostDetailView(DetailView):
     model = Post 
-    template_name = 'blog/post_detail.html'
+    template_name = 'post_detail.html'
     context_object_name='posts'
 
 

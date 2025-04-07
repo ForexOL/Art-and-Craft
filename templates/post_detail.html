@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+    <!-- Hero Section Begin -->
+    <section class="hero hero-normal">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="hero__categories  d-none d-md-block  hide-on-mobile" >
+                        <div class="hero__categories__all" style="background-color: #2f231b;">
+                            <i class="fa fa-bars"></i>
+                            <span>Categories</span>
+                        </div>
+                        <ul>
+                            
+                            {% for brand in brands %}
+                            <li><a href="/store?brand={{brand.id}}">{{ brand.name }}</a></li>
+                            {% endfor %}
+                        </ul>
+                        
+                    </div>
+                    <div class="hero__categories  d-lg-none" >
+                        <div class="hero__categories__all" style="background-color: #2f231b;">
+                            <i class="fa fa-bars"></i>
+                            <span>Categories</span>
+                        </div>
+                        <ul  class=" collapse">
+                            {% for brand in brands %}
+                            <li><a href="/store?brand={{brand.id}}">{{ brand.name }}</a></li>
+                            {% endfor %}
+                        </ul>
+                        
+                    </div>
+                </div>
+                <div class="col-lg-9">
+                    <div class="hero__search">
+
+                        <div class="hero__search__phone  hide-on-mobile">
+                            <div class="hero__search__phone__icon">
+                                <i class="fa fa-phone"></i>
+                            </div>
+                            <div class="hero__search__phone__text">
+                                <h5>+256781782288</h5>
+                                <span>support 24/7 time</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Hero Section End -->
+
+
+    <!-- Blog Details Hero Begin -->
+    <section class="blog-details-hero set-bg" data-setbg="{% static 'img/33.jpg' %}">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="blog__details__hero__text">
+                        <h2>{{object.title}}</h2>
+                        <ul>
+                            <li>{{ object.author }}</li>
+                            <li>{{ object.date_posted|date:"F d, Y" }}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Blog Details Hero End -->
+
+    <!-- Blog Details Section Begin -->
+    <section class="blog-details spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-7 order-md-1 order-1">
+                    <div class="blog__details__text">
+                        <img src="{{ object.image.url }}" alt="">
+                        <p>{{ object.content|safe|linebreaks }}</p>
+                    </div>
+                    <div class="blog__details__content">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="shoping__cart__btns">
+                                    <a href="/blog" class="primary-btn">Back to Blog</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Blog Details Section End -->
+
+    
+{% endblock %}

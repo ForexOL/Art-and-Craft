@@ -4,264 +4,179 @@
 {% load custom_filter %}
 {% load crispy_forms_tags %}
 {% load static %}
-    <!-- Hero Section Begin -->
-    <section class="hero hero-normal">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3">
-                    <div class="hero__categories  d-none d-md-block  hide-on-mobile" >
-                        <div class="hero__categories__all" style="background-color: #2f231b;">
-                            <i class="fa fa-bars"></i>
-                            <span>Categories</span>
-                        </div>
-                        <ul>
-                            {% for category in categories %}
-                            <li><a href="/?category={{category.id}}">{{ category.name }}</a></li>
-                            {% endfor %}
-                            {% for brand in brands %}
-                            <li><a href="/?brand={{brand.id}}">{{ brand.name }}</a></li>
-                            {% endfor %}
-                        </ul>
-                        
+
+<!-- Hero Section Begin -->
+<section class="hero hero-normal">
+    <div class="container">
+        <div class="row">
+            <!-- Categories Sidebar -->
+            <div class="col-lg-3">
+                <div class="hero__categories d-none d-md-block hide-on-mobile">
+                    <div class="hero__categories__all" style="background-color: #2f231b;">
+                        <i class="fa fa-bars"></i>
+                        <span>Categories</span>
                     </div>
-                    <div class="hero__categories  d-lg-none" >
-                        <div class="hero__categories__all" style="background-color: #2f231b;">
-                            <i class="fa fa-bars"></i>
-                            <span>Categories</span>
-                        </div>
-                        <ul>
-                            {% for category in categories %}
-                            <li><a href="/?category={{category.id}}">{{ category.name }}</a></li>
-                            {% endfor %}
-                            {% for brand in brands %}
-                            <li><a href="/?brand={{brand.id}}">{{ brand.name }}</a></li>
-                            {% endfor %}
-                        </ul>
-                        
-                    </div>
+                    <ul>
+                        {% for category in categories %}
+                        <li><a href="/?category={{ category.id }}">{{ category.name }}</a></li>
+                        {% endfor %}
+                        {% for brand in brands %}
+                        <li><a href="/?brand={{ brand.id }}">{{ brand.name }}</a></li>
+                        {% endfor %}
+                    </ul>
                 </div>
-                <div class="col-lg-9  hide-on-mobile">
-                    <div class="hero__search">
-                        <div class="hero__search__form">
-                            <form action="#">
-                                <div class="hero__search__categories">
-                                    All Categories
-                                    <span class="arrow_carrot-down"></span>
-                                </div>
-                                <input type="text" placeholder="What do yo u need?">
-                                <button type="submit" class="site-btn" style="background-color: #2f231b;">SEARCH</button>
-                            </form>
+                <div class="hero__categories d-lg-none">
+                    <div class="hero__categories__all" style="background-color: #2f231b;">
+                        <i class="fa fa-bars"></i>
+                        <span>Categories</span>
+                    </div>
+                    <ul>
+                        {% for category in categories %}
+                        <li><a href="/?category={{ category.id }}">{{ category.name }}</a></li>
+                        {% endfor %}
+                        {% for brand in brands %}
+                        <li><a href="/?brand={{ brand.id }}">{{ brand.name }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <!-- Search and Phone -->
+            <div class="col-lg-9 hide-on-mobile">
+                <div class="hero__search">
+                    <div class="hero__search__form">
+                        <form action="#">
+                            <div class="hero__search__categories">
+                                All Categories
+                                <span class="arrow_carrot-down"></span>
+                            </div>
+                            <input type="text" placeholder="What do you need?">
+                            <button type="submit" class="site-btn" style="background-color: #2f231b;">SEARCH</button>
+                        </form>
+                    </div>
+                    <div class="hero__search__phone d-none d-md-block hide-on-mobile">
+                        <div class="hero__search__phone__icon">
+                            <i class="fa fa-phone"></i>
                         </div>
-                        <div class="hero__search__phone  d-none d-md-block  hide-on-mobile">
-                            <div class="hero__search__phone__icon">
-                                <i class="fa fa-phone"></i>
-                            </div>
-                            <div class="hero__search__phone__text">
-                                <h5>+256781782288</h5>
-                                <span>support 24/7 time</span>
-                            </div>
+                        <div class="hero__search__phone__text">
+                            <h5>+256781782288</h5>
+                            <span>support 24/7 time</span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
-    <!-- Hero Section End -->
-    <!-- Breadcrumb Section Begin -->
-    <section class="breadcrumb-section set-bg" data-setbg="{% static 'img/33.jpg' %}">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <div class="breadcrumb__text">
-                        <h2>Checkout</h2>
-                        <div class="breadcrumb__option">
-                            <a href="./index.html">Home</a>
-                            <span>Checkout</span>
-                        </div>
+    </div>
+</section>
+<!-- Hero Section End -->
+
+<!-- Breadcrumb Section Begin -->
+<section class="breadcrumb-section set-bg" data-setbg="{% static 'img/33.jpg' %}">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="breadcrumb__text">
+                    <h2>Checkout</h2>
+                    <div class="breadcrumb__option">
+                        <a href="./index.html">Home</a>
+                        <span>Checkout</span>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
-    <!-- Breadcrumb Section End -->
+    </div>
+</section>
+<!-- Breadcrumb Section End -->
 
-    <!-- Checkout Section Begin -->
-    <section class="checkout spad">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h6><span class="icon_tag_alt"></span> Have a coupon? <a href="#">Click here</a> to enter your code
-                    </h6>
-                </div>
+<!-- Checkout Section Begin -->
+<section class="checkout spad">
+    <div class="container">
+        <div class="row justify-content-center">
+            <!-- Coupon Code Message -->
+            <div class="col-lg-12">
+                <h6 class="mb-4">
+                    <span class="icon_tag_alt"></span>
+                    Have a coupon? <a href="#">Click here</a> to enter your code
+                </h6>
             </div>
-            <div class="checkout__form">
-                <h4>Billing Details</h4>
-                <form action="/check-out" method="POST">
-                    {% csrf_token %}
-                    <div class="single-input-item" class="bold" class="bold">
-                        <label for="street-address_2" class="required pt-20">Delivery address</label>
-                        <input type="text" name="address" id="" class="form-control" placeholder="Exact Place To deliver Your Order" aria-describedby="helpId" required >
-                    </div>
+            <!-- Checkout Form Card -->
+            <div class="col-lg-8">
+                <div class="card p-4 shadow-sm">
+                    <h4 class="mb-4">Billing Details</h4>
+                    <form action="/check-out" method="POST">
+                        {% csrf_token %}
+                        <!-- Personal Details -->
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="first-name" class="required">First Name</label>
+                                    <input type="text" name="first_name" id="first-name" class="form-control" placeholder="First Name" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="last-name" class="required">Last Name</label>
+                                    <input type="text" name="last_name" id="last-name" class="form-control" placeholder="Last Name" required>
+                                </div>
+                            </div>
+                        </div>
 
-                    <div class="single-input-item">
-                        <label for="com-name_2" for="street-address_2" class="bold" class="required pt-20">Phone(For communication)</label>
-                        <input type="number" name="phone" id="" class="form-control" placeholder="Eg.077777777" aria-describedby="helpId" required >
-                    </div>
+                        <!-- Delivery Address -->
+                        <div class="form-group mb-3">
+                            <label for="delivery-address" class="required">Delivery Address</label>
+                            <input type="text" name="address" id="delivery-address" class="form-control" placeholder="Exact Place To Deliver Your Order" required>
+                        </div>
 
-                    
-                    <div class="single-input-item">
-                        <label for="email_2" class="bold">Email Address(Optional)</label>
-                        <input type="email" name="email" id="email_2" placeholder="Email Address"  />
-                    </div>
-                    <div class="single-input-item">
-                    
+                        <!-- Contact Information -->
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="phone" class="required">Phone (For Communication)</label>
+                                    <input type="tel" name="phone" id="phone" class="form-control" placeholder="Eg. 077777777" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="email">Email Address (Optional)</label>
+                                    <input type="email" name="email" id="email" class="form-control" placeholder="Email Address">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Options: Save Details and Checkout Method -->
+                        <div class="form-group form-check mb-3">
+
+                            <label class="form-check-label" for="save-details">To Save your details for future orders</label>
+                        </div>
+
+                                                {% if user.is_authenticated %}
+                        <div class="alert alert-info mb-4">
+                            <strong>Welcome back {{ user.first_name }}!</strong> Your billing information will be saved, so you won't need to enter it again for future orders.
+                        </div>
+                        {% else %}
+                        <div class="alert alert-warning mb-4">
+                            <strong>Note:</strong> If you <a href="/login?next={{ request.path }}">log in</a> or <a href="/signup">sign up</a>, you’ll only need to enter your billing information once.
+                        </div>
+                        {% endif %}
+
+
+                        <!-- Billing Terms & Conditions -->
+                        <div class="form-group form-check mb-4">
+                            <input type="checkbox" name="terms" class="form-check-input" id="terms" required>
+                            <label class="form-check-label" for="terms">
+                                I have read and agree to the <a href="/billing_terms" target="_blank">Billing Terms & Conditions</a>
+                            </label>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="text-end">
+                            <button type="submit" class="btn btn-primary check-btn sqr-btn">Next</button>
+                        </div>
+                    </form>
                 </div>
-                    <div class="container">
-                    <div class="payment-method-name ">
-                        <div class="payment-method-details" data-method="cash">
-                        </div>
-                    </div>
-                     <button type="submit" name="cash" class="check-btn sqr-btn">Next</button>
-                     
-                 </div>
-             </div>
-                 </form>
-                <!---
-                <form action="#">
-                    <div class="row">
-                        <div class="col-lg-8 col-md-6">
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="checkout__input">
-                                        <p>Fist Name<span>*</span></p>
-                                        <input type="text">
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="checkout__input">
-                                        <p>Last Name<span>*</span></p>
-                                        <input type="text">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="checkout__input">
-                                <p>Country<span>*</span></p>
-                                <input type="text">
-                            </div>
-                            <div class="checkout__input">
-                                <p>Address<span>*</span></p>
-                                <input type="text" placeholder="Street Address" class="checkout__input__add">
-                                <input type="text" placeholder="Apartment, suite, unite ect (optinal)">
-                            </div>
-                            <div class="checkout__input">
-                                <p>Town/City<span>*</span></p>
-                                <input type="text">
-                            </div>
-                            <div class="checkout__input">
-                                <p>Country/State<span>*</span></p>
-                                <input type="text">
-                            </div>
-                            <div class="checkout__input">
-                                <p>Postcode / ZIP<span>*</span></p>
-                                <input type="text">
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="checkout__input">
-                                        <p>Phone<span>*</span></p>
-                                        <input type="text">
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="checkout__input">
-                                        <p>Email<span>*</span></p>
-                                        <input type="text">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="checkout__input__checkbox">
-                                <label for="acc">
-                                    Create an account?
-                                    <input type="checkbox" id="acc">
-                                    <span class="checkmark"></span>
-                                </label>
-                            </div>
-                            <p>Create an account by entering the information below. If you are a returning customer
-                                please login at the top of the page</p>
-                            <div class="checkout__input">
-                                <p>Account Password<span>*</span></p>
-                                <input type="text">
-                            </div>
-                            <div class="checkout__input__checkbox">
-                                <label for="diff-acc">
-                                    Ship to a different address?
-                                    <input type="checkbox" id="diff-acc">
-                                    <span class="checkmark"></span>
-                                </label>
-                            </div>
-                            <div class="checkout__input">
-                                <p>Order notes<span>*</span></p>
-                                <input type="text"
-                                    placeholder="Notes about your order, e.g. special notes for delivery.">
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6">
-                            <div class="checkout__order">
-                                <h4>Your Order</h4>
-                                <div class="checkout__order__products">Products <span>Total</span></div>
-                                <ul>
-                                    {% for product in productes %}
-                                    <li>{{product.name}}<span class="converted-price" data-price-ugx="{{product.price}}" >UGX{{product.price}}</span></li>
-                                    {% endfor %}
-                                </ul>
-                                <div class="checkout__order__subtotal">Subtotal <span  class="converted-price" data-price-ugx="{{ products|total_cart_price:request.session.cart }}">UGX{{products|total_cart_price:request.session.cart}}</span></div>
-                                <div class="checkout__order__total">Total <span  class="converted-price" data-price-ugx="{{ products|total_cart_price_grand:request.session.cart }}">UGX{{products|total_cart_price_grand:request.session.cart}}</span></div>
-                                <div class="checkout__input__checkbox">
-                                    <label for="acc-or">
-                                        Create an account?
-                                        <input type="checkbox" id="acc-or">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                </div>
-                                <p>We offer quick shipping and easy payments using Visa, and Paypal and Manual Methods.</p>
-                                <h2>Automated Methods</h2>
-                                <div class="checkout__input__checkbox">
-                                    <label for="payment">
-                                        Visa
-                                        <input type="checkbox" id="payment">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                </div>
-                                <div class="checkout__input__checkbox">
-                                    <label for="paypal">
-                                        Paypal
-                                        <input type="checkbox" id="paypal">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                </div>
-                                <h2>Manual Methods</h2>
-                                <div class="checkout__input__checkbox">
-                                    <label for="payment">
-                                        Mobile Money
-                                        <input type="checkbox" id="payment">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                </div>
-                                <div class="checkout__input__checkbox">
-                                    <label for="paypal">
-                                        Western Union
-                                        <input type="checkbox" id="paypal">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                </div>
-                                <button type="submit" class="site-btn">PLACE ORDER</button>
-                            </div>
-                        </div>
-                    </div>
-                </form>---->
-
             </div>
         </div>
-    </section>
-    <!-- Checkout Section End -->
+    </div>
+</section>
+<!-- Checkout Section End -->
+
 {% endblock %}
