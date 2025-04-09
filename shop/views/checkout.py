@@ -52,8 +52,8 @@ def checkout(request):
         context={'product_lists':product_lists,'categories':categories,'brands':brands}
         if request.method=='POST':
             total_price=total_price+3000
-            #order = Order.objects.create(customer=request.user,ordering_code=ordering_code,total_price=total_price)
-            '''
+            order = Order.objects.create(customer=request.user,ordering_code=ordering_code,total_price=total_price)
+            
             request.session['ordering_code'] = f'{ordering_code}'
             ordered_products = [
                 Order_record(
@@ -64,8 +64,8 @@ def checkout(request):
                 )
                 for prod in products
             ]
-            '''
-            #Order_record.objects.bulk_create(ordered_products)
+            
+            Order_record.objects.bulk_create(ordered_products)
 
             return redirect('payment')
         return render(request, 'success.html',context)

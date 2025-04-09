@@ -15,7 +15,7 @@ class PaymentView(PaymentRequestMixin, TemplateView):
         """
         ipn = self.get_default_ipn()
         ordering_code = str(self.request.session.get('ordering_code'))
-
+        print(ordering_code)
         #total_price=10000
         
         order = Order.objects.get(ordering_code=ordering_code)
