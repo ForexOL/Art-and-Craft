@@ -111,8 +111,8 @@ WSGI_APPLICATION = 'myshop_1.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 
-
 """
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -208,8 +208,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Pesapal configuration settings
 PESAPAL_DEMO = False
-PESAPAL_CONSUMER_KEY = '257jgSzKthLnBlt2WhssEZnnM0WV79oW'  # Fill in with your consumer key
-PESAPAL_CONSUMER_SECRET = 'ISId4sl64k88Q7XAOWVsRzLfnTw='  # Fill in with your consumer secret
+PESAPAL_CONSUMER_KEY = 'gkZB60sqV6SUpliHsJYfdgBoaSy9oaxC'#'257jgSzKthLnBlt2WhssEZnnM0WV79oW'  # Fill in with your consumer key
+PESAPAL_CONSUMER_SECRET = 'Y/IsRpA3xpWSL+DzAtI8X0iXTuY='#'ISId4sl64k88Q7XAOWVsRzLfnTw='  # Fill in with your consumer secret
 
 PESAPAL_OAUTH_CALLBACK_URL = 'transaction_completed'
 PESAPAL_OAUTH_SIGNATURE_METHOD = 'SignatureMethod_HMAC_SHA1'

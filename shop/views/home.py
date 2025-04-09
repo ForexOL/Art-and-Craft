@@ -235,7 +235,7 @@ def homepage(request):
     random.shuffle(list(products))'''
 
     latest=Post.objects.order_by('-date_posted')[:5]
-    news=Post.objects.filter(is_news=True).order_by('-date_posted')[:3]
+    news=Post.objects.all().order_by('-date_posted')[:3]
     brands_display = Major_Categories.objects.prefetch_related('categories')  # Optimize query
         
     chunked_products1 = [latest_products[i:i + 3] for i in range(0, len(latest_products), 3)]
@@ -254,7 +254,7 @@ def homepage(request):
 
     context = {
         
-        'liked_products':liked_products,'IP':user_ip,'items': items,"chunked_products1": chunked_products1,"chunked_products2": chunked_products2,"chunked_products3": chunked_products3,'homepage':'homepage','latest_products':latest_products,'top_reviewed':top_reviewed,'productes':productes,'products':products,'brands':brands,'categories':categories ,'top_rated':top_rated,}
+        'news':news,'liked_products':liked_products,'IP':user_ip,'items': items,"chunked_products1": chunked_products1,"chunked_products2": chunked_products2,"chunked_products3": chunked_products3,'homepage':'homepage','latest_products':latest_products,'top_reviewed':top_reviewed,'productes':productes,'products':products,'brands':brands,'categories':categories ,'top_rated':top_rated,}
 
     return render(request, 'index.html', context)
 

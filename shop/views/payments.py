@@ -17,15 +17,16 @@ class PaymentView(PaymentRequestMixin, TemplateView):
         ordering_code = str(self.request.session.get('ordering_code'))
 
         #total_price=10000
-
+        '''
         order = Order.objects.get(ordering_code=ordering_code)
         print(order.customer)
         print(ordering_code,type(order.total_price))
-        #number=1500#int(order.total_price)
+        '''
+        number=2000000#int(order.total_price)
         order_info = {
             "id": self.request.GET.get("id", uuid.uuid4().hex),  # Replace with a valid merchant id if needed.
             "currency": "UGX",
-            "amount":order.total_price,
+            "amount":number,
             "description": "Payment for X",
             "callback_url": self.build_url(
                 reverse("django_pesapalv3:transaction_completed")
