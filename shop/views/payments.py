@@ -29,7 +29,7 @@ class PaymentView(PaymentRequestMixin, TemplateView):
             "amount":number,
             "description": "Payment for X",
             "callback_url": self.build_url(
-                reverse("django_pesapalv3:transaction_completed")
+                reverse("pesapal_callback")
             ),
             "notification_id": ipn,
             "billing_address": {
@@ -47,3 +47,32 @@ class PaymentView(PaymentRequestMixin, TemplateView):
         context['iframe_src_url'] = self.get_pesapal_payment_iframe()
         return context
 
+from django.shortcuts import render, redirect, get_object_or_404
+from django.views.generic import ListView, TemplateView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse
+
+
+class OrderHistoryView(LoginRequiredMixin, ListView):
+    model = Order
+    template_name = 'order_history.html'
+    context_object_name = 'orders'
+    
+    def get_queryset(self):
+        # Display current user's orders, sorted with latest first.
+        return Order.objects.filter(customer=self.request.user).order_by('-dates')
+
+def pesapal_callback(request):
+    """
+    View to handle Pesapal callback.
+    We assume the Pesapal callback sends the ordering code as a GET parameter (or you can adjust as needed).
+    """
+    ordering_code = request.GET.get('id')  # adjust the parameter name as needed
+    if ordering_code:
+        order = get_object_or_404(Order, ordering_code=ordering_code)
+        # Update the order status if payment was successful.
+        # You might want to check additional parameters or IPN signals here.
+        order.status = True
+        order.save()
+    # Redirect to the order history page
+    return redirect(reverse('order_history'))

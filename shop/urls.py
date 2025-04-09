@@ -11,6 +11,7 @@ from .views.login import Login , Logout
 from .views.viewproduct import *
 from .views.checkout import checkout,payment_response
 from .views.orders import orders,delete
+from .views.payments import *
 from .middlewares.auth import  auth_middleware
 from django.contrib.auth import views as auth_views
 from .views.payments import *
@@ -123,4 +124,13 @@ urlpatterns = [
     path('toggle_like/<int:product_id>/', toggle_like, name='toggle_like'),
     path('automated', PaymentView.as_view(), name='payment'),
     path('billing_terms',billing_terms,name='billing_terms'),
+
+
+    path('orders/', OrderHistoryView.as_view(), name='order_history'),
+   # path('pesapal/payment/<str:ordering_code>/', views.get_pesapal_payment_iframe, name='pesapal_payment'),
+    path('pesapal/callback/', pesapal_callback, name='pesapal_callback'),
+    # Optionally add an order detail view:
+    #path('orders/<str:ordering_code>/', views.OrderDetailView.as_view(), name='order_detail'),
 ]
+
+
