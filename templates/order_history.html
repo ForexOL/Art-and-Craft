@@ -28,11 +28,11 @@
       <td>
         {% if not order.status %}
         <!-- This link could redirect the user to a view that generates the Pesapal iframe or redirection URL -->
-          <a ><!--href="{% url 'payment' ordering_code=order.ordering_code %}"-->
+          <a >
             Pay Now
           </a>
         {% else %}
-          <a><!-- href="{% url 'order_detail' ordering_code=order.ordering_code %}"-->
+          <a>
             View Details
           </a>
         {% endif %}
