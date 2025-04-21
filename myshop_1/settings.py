@@ -113,6 +113,7 @@ WSGI_APPLICATION = 'myshop_1.wsgi.application'
 
 
 
+"""
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -133,7 +134,6 @@ DATABASES = {
 }
 
 
-"""
 
 USE_X_FORWARDED_HOST = True
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
