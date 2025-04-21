@@ -732,27 +732,31 @@ def bad_request(request, exception):
         )
 
     response.status_code = 400
+    """
     send_mail('Error',
             f'400,bad_request error page. Attend to this immediately,here {request.user.email}',
             settings.EMAIL_HOST_USER,
             ['pearlmartbusinesses@gmail.com'],
             fail_silently = True,
             )
-
+    """
     return response
 
 # HTTP Error 500
 def server_error(request):
-	context = {}
-	response = render(request, "500.html", context=context)
-	response.status_code = 500
-	send_mail('Error',
-            f'500,server_error error page. Attend to this immediately, here {request.user.email}',
-            settings.EMAIL_HOST_USER,
-            ['pearlmartbusinesses@gmail.com'],
-            fail_silently = True,
-            )
-	return response
+    context = {}
+    response = render(request, "500.html", context=context)
+    response.status_code = 500
+    """
+    send_mail
+    ('Error',
+    f'500,server_error error page. Attend to this immediately, here {request.user.email}',
+    settings.EMAIL_HOST_USER,
+    ['pearlmartbusinesses@gmail.com'],
+    fail_silently = True,
+    )
+    """
+    return response
 
 # HTTP Error 404
 def page_not_found(request, exception):
@@ -762,13 +766,14 @@ def page_not_found(request, exception):
         )
     
     response.status_code = 404
+    """
     send_mail('Error',
             f'404,page_not_found error page. Attend to this immediately, here {request.user.email}',
             settings.EMAIL_HOST_USER,
             ['pearlmartbusinesses@gmail.com'],
             fail_silently = True,
             )
-
+    """
     return response
 
 # HTTP Error 403
@@ -779,12 +784,14 @@ def permission_denied(request, exception):
         )
 
     response.status_code = 403
+    """
     send_mail('Erro',
             f'403,permission_denied error page. Attend to this immediately, here {request.user.email}',
             settings.EMAIL_HOST_USER,
             ['pearlmartbusinesses@gmail.com'],
             fail_silently = True,
             )
+    """
     return response
 
 class PostListView(ListView):
@@ -1027,3 +1034,42 @@ def toggle_like(request, product_id):
 
     print("Invalid request method")  # Debug unexpected request types
     return JsonResponse({"error": "Invalid request"}, status=400)
+
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout
+from django.shortcuts import redirect
+from django.contrib.auth.models import User
+
+@login_required
+def delete_account(request):
+    user = request.user
+    logout(request)  # Logs the user out
+    user.delete()    # Permanently deletes the user from the DB
+    return render(request, 'account_deleted.html')
+#
+
+@login_required
+def deactivate_account(request):
+    user = request.user
+    user.is_active = False
+    user.save()
+    logout(request)
+    return render(request, 'account_deactivation.html')
+
+
+
+@login_required
+def confirm_account_action(request):
+    if request.method == 'POST':
+        action = request.POST.get('action')
+        user = request.user
+        if action == 'deactivate':
+            user.is_active = False
+            user.save()
+            logout(request)
+            return redirect('account_deactivated')
+        elif action == 'delete':
+            logout(request)
+            user.delete()
+            return redirect('account_deleted')
+    return render(request, 'confirm_account_action.html')

@@ -2,47 +2,75 @@
 
 {% block content %}
 <h2>Your Order History</h2>
-<table border="1" cellpadding="5" cellspacing="0">
-  <thead>
-    <tr>
-      <th>Order Code</th>
-      <th>Date</th>
-      <th>Total Price (UGX)</th>
-      <th>Payment Status</th>
-      <th>Action</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for order in orders %}
-    <tr>
-      <td>{{ order.ordering_code }}</td>
-      <td>{{ order.dates|date:"SHORT_DATE_FORMAT" }}</td>
-      <td>{{ order.total_price }}</td>
-      <td>
-        {% if order.status %}
-          <span style="color: green;">Paid</span>
-        {% else %}
-          <span style="color: red;">Pending</span>
-        {% endif %}
-      </td>
-      <td>
-        {% if not order.status %}
-        <!-- This link could redirect the user to a view that generates the Pesapal iframe or redirection URL -->
-          <a >
-            Pay Now
-          </a>
-        {% else %}
-          <a>
-            View Details
-          </a>
-        {% endif %}
-      </td>
-    </tr>
-    {% empty %}
+
+<!-- add this CSS somewhere in your <head> (or in your site CSS) -->
+<style>
+  /* make every column share the width and truncate overflow */
+  .table-responsive .table {
+    table-layout: fixed;
+    width: 100%;
+  }
+  .table-responsive .table th,
+  .table-responsive .table td {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+</style>
+
+<div class="table-responsive">
+  <table class="table table-sm table-striped table-bordered text-center">
+    <thead class="table-dark">
       <tr>
-        <td colspan="5">No orders found.</td>
+        <th style="width:10%">Order Code</th>
+        <th style="width:10%">Date</th>
+        <th style="width:10%">Total Price (UGX)</th>
+        <th style="width:10%">Payment Status</th>
+        <th style="width:10%">Confirmation</th>
+        <th style="width:10%">Reception</th>
+        <th style="width:10%">Quality Ctrl</th>
+        <th style="width:10%">Packaged</th>
+        <th style="width:10%">Transport</th>
+        <th style="width:10%">Delivered</th>
+        <th style="width:10%">Action</th>
       </tr>
-    {% endfor %}
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      {% for order in orders %}
+      <tr>
+        <td>{{ order.ordering_code }}</td>
+        <td>{{ order.dates|date:"SHORT_DATE_FORMAT" }}</td>
+        <td>{{ order.total_price }}</td>
+        <td>
+          {% if order.status %}
+            <span class="text-success">Paid</span>
+          {% else %}
+            <span class="text-danger">Pending</span>
+          {% endif %}
+        </td>
+        <td>{% if order.order_confirmation %}<span class="badge bg-success">✔</span>{% else %}<span class="badge bg-danger">✖</span>{% endif %}</td>
+        <td>{% if order.product_reception %}<span class="badge bg-success">✔</span>{% else %}<span class="badge bg-danger">✖</span>{% endif %}</td>
+        <td>{% if order.quality_control %}<span class="badge bg-success">✔</span>{% else %}<span class="badge bg-danger">✖</span>{% endif %}</td>
+        <td>{% if order.packaged %}<span class="badge bg-success">✔</span>{% else %}<span class="badge bg-danger">✖</span>{% endif %}</td>
+        <td>{% if order.under_transportation %}<span class="badge bg-success">✔</span>{% else %}<span class="badge bg-danger">✖</span>{% endif %}</td>
+        <td>{% if order.delivered %}<span class="badge bg-success">✔</span>{% else %}<span class="badge bg-danger">✖</span>{% endif %}</td>
+        <td>
+          {% if not order.status %}
+            <a href="" class="btn btn-sm btn-warning">Pay Now</a>
+          {% else %}
+            <a href="{% url 'order_detail' order.pk %}" class="btn btn-sm btn-primary">View</a>
+          {% endif %}
+        </td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="11" class="text-muted">No orders found.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+
+
 {% endblock %}

@@ -11,7 +11,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <!-- For PNG format --> 
-    <link rel="icon" href="{% static 'img/45.ico' %}" type="image/x-icon">
+    <link rel="icon" 
+      href="{% static 'img/45.png' %}" 
+      sizes="32x32" 
+      type="image/png">
+
 
     <title>Art Craft & iDesign</title>
 
@@ -103,16 +107,37 @@
                 </li>
                   
             </ul>
-            <div class="header__cart__price">item: <span  class="converted-price" data-price-ugx="{{ product.price }}" >UGX{{products|total_cart_price:request.session.cart}}</span></div>
+            <div class="header__cart__price">item: <span  class="converted-price" data-price-ugx="{{products|total_cart_price:request.session.cart}}<" >UGX{{products|total_cart_price:request.session.cart}}</span></div>
         </div>
         <div class="humberger__menu__widget">
             <div class="header__top__right__language">
-                <img src="{% static 'img/language.png' %}" alt="">
-                <div>English</div>
+                
+                <div>Real Time Currecy Converter</div>
                 <span class="arrow_carrot-down"></span>
-                <ul>
-                    
-                    <li><a href="#">English</a></li>
+                
+                <ul class="list-group list-group-flush mb-0" style="min-width: 300px;max-height: 500px; overflow-y: auto;">
+                <li class="list-group-item list-group-item-action p-1" style="cursor: pointer;" onclick="convertPrices('USD')">USD</li>
+                <li class="list-group-item list-group-item-action p-1" onclick="convertPrices('EUR')">EUR</li>
+                <li class="list-group-item list-group-item-action p-1" onclick="convertPrices('JPY')">JPY</li>
+                <li class="list-group-item list-group-item-action p-1" onclick="convertPrices('GBP')">GBP</li>
+                <li class="list-group-item list-group-item-action p-1" onclick="convertPrices('AUD')">AUD</li>
+                <li class="list-group-item list-group-item-action p-1" onclick="convertPrices('CAD')">CAD</li>
+                <li class="list-group-item list-group-item-action p-1" onclick="convertPrices('CHF')">CHF</li>
+                <li class="list-group-item list-group-item-action p-1" onclick="convertPrices('CNY')">CNY</li>
+                <li class="list-group-item list-group-item-action p-1" onclick="convertPrices('HKD')">HKD</li>
+                <li class="list-group-item list-group-item-action p-1" onclick="convertPrices('NZD')">NZD</li>
+                <li class="list-group-item list-group-item-action p-1" onclick="convertPrices('SEK')">SEK</li>
+                <li class="list-group-item list-group-item-action p-1" onclick="convertPrices('KRW')">KRW</li>
+                <li class="list-group-item list-group-item-action p-1" onclick="convertPrices('SGD')">SGD</li>
+                <li class="list-group-item list-group-item-action p-1" onclick="convertPrices('NOK')">NOK</li>
+                <li class="list-group-item list-group-item-action p-1" onclick="convertPrices('MXN')">MXN</li>
+                <li class="list-group-item list-group-item-action p-1" onclick="convertPrices('INR')">INR</li>
+                <li class="list-group-item list-group-item-action p-1" onclick="convertPrices('RUB')">RUB</li>
+                <li class="list-group-item list-group-item-action p-1" onclick="convertPrices('ZAR')">ZAR</li>
+                <li class="list-group-item list-group-item-action p-1" onclick="convertPrices('TRY')">TRY</li>
+                <li class="list-group-item list-group-item-action p-1" onclick="convertPrices('BRL')">BRL</li>
+                
+
                 </ul>
             </div>
         </div>
@@ -127,7 +152,7 @@
                         <li><a href="">Payment Options</a></li>
                     </ul>
                 </li>
-                <!--<li><a href="/Dashboard">Arcrid Sellers</a>-->
+                <li><a href="/Dashboard">Arcrid Sellers</a>
                 </li>
                 <li><a href="#">Other Pages</a>
                     <ul class="header__menu__dropdown">
@@ -144,13 +169,14 @@
                 </li>
                 <li><a href="/contact">Contact</a></li>
                 {% if user.is_authenticated %}
+                <li><a href="{%  url 'confirm_account_action' %}">Delete Account</a></li>
                     <li><a href="/logout">Logout</a></li>
                 {% else %}
                     <li><a href="/signup">Signup</a></li>
                     <li><a href="/login">Login</a></li>
                 {% endif %}
 
-                <!--<li><a href="/become_vendor">Sell with Us</a></li>-->
+                <li><a href="/become_vendor">Sell with Us</a></li>
             </ul>
         </nav>
         <div id="mobile-menu-wrap"></div>
@@ -191,7 +217,7 @@
                         <div class="header__top__left">
                             <ul>
                                 <li><i class="fa fa-envelope"></i>lurvinelishaatwiine@gmail.com?</li>
-                                <!---<li><a href='/become_vendor'>Sell On Arcrid</a></li>-->
+                                <li><a href='/become_vendor'>Sell On Arcrid</a></li>
                             </ul>
                         </div>
                     </div>
@@ -205,13 +231,33 @@
                                 <a href="https://www.instagram.com/arcr.id?igsh=OXQ0Y2k3ODJ0dTJp" target="_blank"><i class="fa fa-instagram"></i></a>
                             </div>
                             <div class="header__top__right__language">
-                                <img src="{% static 'img/language.png' %}" alt="">
-                                <div>English</div>
+                                
+                                <div>Real Time Currecy Converter</div>
                                 <span class="arrow_carrot-down"></span>
-                                <ul>
-                                    
-                                    <li><a href="#">English</a></li>
+                                
+                                <ul class="list-group list-group-flush mb-0" style="min-width: 300px;max-height: 500px; overflow-y: auto;">
+                                <li class="list-group-item list-group-item-action p-1" style="cursor: pointer;" onclick="convertPrices('USD')">USD</li>
+                                <li class="list-group-item list-group-item-action p-1" onclick="convertPrices('EUR')">EUR</li>
+                                <li class="list-group-item list-group-item-action p-1" onclick="convertPrices('JPY')">JPY</li>
+                                <li class="list-group-item list-group-item-action p-1" onclick="convertPrices('GBP')">GBP</li>
+                                <li class="list-group-item list-group-item-action p-1" onclick="convertPrices('AUD')">AUD</li>
+                                <li class="list-group-item list-group-item-action p-1" onclick="convertPrices('CAD')">CAD</li>
+                                <li class="list-group-item list-group-item-action p-1" onclick="convertPrices('CHF')">CHF</li>
+                                <li class="list-group-item list-group-item-action p-1" onclick="convertPrices('CNY')">CNY</li>
+                                <li class="list-group-item list-group-item-action p-1" onclick="convertPrices('HKD')">HKD</li>
+                                <li class="list-group-item list-group-item-action p-1" onclick="convertPrices('NZD')">NZD</li>
+                                <li class="list-group-item list-group-item-action p-1" onclick="convertPrices('SEK')">SEK</li>
+                                <li class="list-group-item list-group-item-action p-1" onclick="convertPrices('KRW')">KRW</li>
+                                <li class="list-group-item list-group-item-action p-1" onclick="convertPrices('SGD')">SGD</li>
+                                <li class="list-group-item list-group-item-action p-1" onclick="convertPrices('NOK')">NOK</li>
+                                <li class="list-group-item list-group-item-action p-1" onclick="convertPrices('MXN')">MXN</li>
+                                <li class="list-group-item list-group-item-action p-1" onclick="convertPrices('INR')">INR</li>
+                                <li class="list-group-item list-group-item-action p-1" onclick="convertPrices('RUB')">RUB</li>
+                                <li class="list-group-item list-group-item-action p-1" onclick="convertPrices('ZAR')">ZAR</li>
+                                <li class="list-group-item list-group-item-action p-1" onclick="convertPrices('TRY')">TRY</li>
+                                <li class="list-group-item list-group-item-action p-1" onclick="convertPrices('BRL')">BRL</li>
                                 </ul>
+                    
                             </div>
                             <div class="header__top__right__language">
                                 
@@ -220,6 +266,7 @@
                                 <ul>
                                     
                                     {% if user.is_authenticated %}
+                                    <li><a href="{%  url 'confirm_account_action' %}">Delete Account</a></li>
                                         <li><a href="/logout"><i class="fa fa-user"></i> Log Out</a></li>
                                     {% else %}
                                         <li><a href="/login"><i class="fa fa-user"></i> Login</a></li>
@@ -303,6 +350,7 @@
                             </li>
                             
                             {% if user.is_authenticated %}
+                            <li><a href="{%  url 'confirm_account_action' %}">Delete Account</a></li>
                                 <li>
                                     <a href="/logout" style="color: white;">Logout</a>
                                 </li>
@@ -314,9 +362,9 @@
                                     <a href="/login" style="color: white;">Login</a>
                                 </li>
                             {% endif %}
-                            <!--<li>
+                            <li>
                                 <a href="/become_vendor" style="color: white;">Sell with Us</a>
-                            </li>-->
+                            </li>
                         </ul>
                         
                     </nav>
@@ -375,7 +423,7 @@
                             </ul>
                             
                          </ul>
-                        <div class="header__cart__price">item: <span  class="converted-price" data-price-ugx="{{ product.price }}" style="color: white;">UGX{{products|total_cart_price:request.session.cart}}</span></div>
+                        <div class="header__cart__price">item: <span  class="converted-price" data-price-ugx="{{products|total_cart_price:request.session.cart}}<" style="color: white;">UGX{{products|total_cart_price:request.session.cart}}</span></div>
                     </div>
                 </div>
                 
@@ -418,7 +466,7 @@
 {% endblock %}
 
 <!-- Featured Section Begin -->
-    <!-- Featured Section Begin -->
+    <!-- 
     <section class="featured spad"  style="background-color:#2f231b; max-height: 300px">
         <div class="container">
             <div class="row"  >
@@ -458,7 +506,7 @@
             </div>
         </div>
     </section>
-  
+  Featured Section Begin -->
 <!-- Footer Section Begin -->
 <footer class="footer spad d-none d-md-block">
     <div class="container">

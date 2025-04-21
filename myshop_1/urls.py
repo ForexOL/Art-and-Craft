@@ -10,12 +10,20 @@ from django.conf.urls import (
                                 handler404,
                                 handler500)
 
+from django.contrib.sitemaps.views import sitemap
+from django.urls import path, include
+from shop.sitemaps import StaticViewSitemap#, ProductSitemap #
+
+
+sitemaps = {'static': StaticViewSitemap}
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("shop.urls")),  # Include shop routes
     path('/payments/', include('django_pesapalv3.urls')),  # Pesapal v3 endpoints
     re_path(r'^media/(?P<path>.*)$', serve,{'document_root': settings.MEDIA_ROOT}),
+    path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='sitemap'),
+
 ]
 #if settings.DEBUG:
 urlpatterns += static(settings.MEDIA_URL,

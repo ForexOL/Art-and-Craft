@@ -133,6 +133,7 @@ def store(request):
         'page_obj': page_obj,  # Pass paginated products
         'vendor_present_here': vendor_present_here,
         'store': 'store',
+        'products':productes,
         'k': categoryID or brandID,  # Preserve filter
         'brands': brands,
         'categories': categories,
@@ -168,7 +169,7 @@ def search(request):
             page_obj = paginator.get_page(page_number)'''
         except:
             page_obj={}
-        context={'page_obj':page_obj,'vendor_present_here':vendor_present_here,'store':'store','productes':productes,'searched':searched,'brands':brands,'categories':categories}
+        context={'page_obj':page_obj,'vendor_present_here':vendor_present_here,'store':'store','products':productes,'searched':searched,'brands':brands,'categories':categories}
 
         return render(request,'shop-grid.html', context)
 

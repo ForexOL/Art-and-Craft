@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
+{% load cart %}
+{% load custom_filter %}
 {% load static %}
     <!-- Hero Section Begin -->
     <section class="hero">
@@ -148,8 +150,8 @@
                         {% endfor %}">
                         <div class="featured__item">
                             <!-- Product image and hover icons -->
-                            <div class="featured__item__pic set-bg" data-setbg="{{ product.image.url }}"><!--onclick="window.location.href='{% url 'details' product.id %}';" 
-                            style="cursor: pointer;">-->
+                            <div class="featured__item__pic set-bg"  data-setbg="{{ product.image.url }}" onclick="window.location.href='{% url 'details' product.id %}';" 
+                            style="cursor: pointer;">
                                 <ul class="featured__item__pic__hover">
                                     <li> 
                                         <a class="like-btn {% if product.id in liked_products %}liked{% else %}not-liked{% endif %}" 
@@ -157,10 +159,10 @@
                                             <i class="fa fa-heart"></i>
                                         </a>
                                     </li>
-                                    <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                    <!--<li><a href="#"><i class="fa fa-retweet"></i></a></li>-->
                                     <!--<li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>-->
-                                    <li style="text-align: left;">
-                                        <form action="/add_remove_cart" method="POST">
+                                    <!--<li style="text-align: left;">
+                                        <form action="{% url 'add_remove_cart' %}" method="POST">
                                             {% csrf_token %}
                                             <input type="hidden" name="product" value="{{ product.id }}">
                                             <button  type="submit" data-toggle="tooltip" class="btn btn-primary"  data-placement="top" title="Add to cart" style="background-color: white;color:black;">
@@ -169,7 +171,7 @@
                                         </form>
                                     </li>
                                     
-                                    
+                                -->
                                     
                                 </ul>
                             </div>
@@ -292,7 +294,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="section-title from-blog__title">
-                        <h2 style="color: #A95922;">From The Blog</h2>
+                        <h2 style="color: #A95922;">Innovation, Testsimonials & Blog</h2>
                     </div>
                 </div>
             </div>

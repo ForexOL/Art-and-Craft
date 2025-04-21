@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="d-flex align-items-center justify-content-center min-vh-100">
+  <div class="text-center">
+    <h1 class="display-1 fw-bold text-danger">⚠️</h1>
+    <h2 class="mb-3">Confirm Account Action</h2>
+    <p class="lead mb-4">
+      Are you sure you want to proceed with one of the following account actions?<br>
+      <strong>Deactivating</strong> your account will temporarily disable access.<br>
+      <strong>Deleting</strong> your account is permanent and cannot be undone.
+    </p>
+    <form method="post">
+      {% csrf_token %}
+      <button type="submit" name="action" value="deactivate" class="btn btn-warning btn-lg me-2">
+        Deactivate Account
+      </button>
+      <button type="submit" name="action" value="delete" class="btn btn-danger btn-lg me-2">
+        Delete Account
+      </button>
+      <a href="{% url 'store' %}" class="btn btn-secondary btn-lg">Cancel</a>
+    </form>
+  </div>
+</div>
+{% endblock %}

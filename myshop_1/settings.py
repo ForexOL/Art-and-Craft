@@ -30,7 +30,7 @@ SECRET_KEY = 'django-insecure-iw6ul@79b_x=m(_%2ou*0%a6pxg=q*29h&pf4k&!y7&_ekeef#
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1','aartcraftei.onrender.com','138.68.191.30','arcrid.store','www.arcrid.store']
+ALLOWED_HOSTS = ['localhost','127.0.0.1','aartcraftei.onrender.com','138.68.191.30','arcrid.store','www.arcrid.store']
 
 
 # Application definition
@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sitemaps',  # enable the sitemap framework
     # Third-party apps
     'django_pesapal',
     'django_pesapalv3',  # Using v3 API
@@ -112,7 +113,6 @@ WSGI_APPLICATION = 'myshop_1.wsgi.application'
 
 
 
-"""
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -133,6 +133,7 @@ DATABASES = {
 }
 
 
+"""
 
 USE_X_FORWARDED_HOST = True
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
@@ -169,6 +170,12 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+
+SECURE_SSL_REDIRECT = True
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
 
 
 # Static files (CSS, JavaScript, Images)

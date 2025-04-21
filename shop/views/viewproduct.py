@@ -86,7 +86,7 @@ def details(request, id):
     k=random.randint(1, 25)
     G=random.randint(1, 20)
 
-    context={'k':k,'G':G, "reviews": reviews, "form_r": form_r,'related_products': related_products,'product':product,'form':form,'productes':productes,'brands':brands,'categories':categories}    
+    context={'k':k,'G':G, "reviews": reviews, "form_r": form_r,'related_products': related_products,'product':product,'form':form,'products':productes,'brands':brands,'categories':categories}    
     
 
     return render(request , 'shop-details.html',context)

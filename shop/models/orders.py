@@ -14,6 +14,13 @@ class Order(models.Model):
     address=models.CharField(max_length=100,default='')
     phone=models.CharField(max_length=60,default='')
     dates = models.DateTimeField(auto_now_add=True)
+    order_confirmation   = models.BooleanField(default=False)
+    product_reception    = models.BooleanField(default=False)
+    quality_control      = models.BooleanField(default=False)
+    packaged             = models.BooleanField(default=False)
+    under_transportation = models.BooleanField(default=False)
+    delivered            = models.BooleanField(default=False)
+
 
     def placeOrder(self):
         self.save()

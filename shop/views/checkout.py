@@ -66,7 +66,7 @@ def checkout(request):
             ]
             
             Order_record.objects.bulk_create(ordered_products)
-
+            request.session['cart'] = {}
             return redirect('payment')
         return render(request, 'success.html',context)
     else:

@@ -18,7 +18,6 @@ from .views.payments import *
 from shop.graph import *
 
 
-
 urlpatterns = [
     #Flutterwave
     path('callback', payment_response, name='payment_response'),
@@ -60,7 +59,7 @@ urlpatterns = [
     path('stopvending',stopvending, name='stopvending'),
     path('vendor_add_product',vendor_add_product, name='vendor_add_product'),
     path('accounts/login',Login),
-    path('blog', PostListView.as_view(), name='index'),
+    path('blog', PostListView.as_view(), name='blog'),
     path('vdetail/<int:id>',vdetail, name='vdetail'),
     path('user/<str:username>', UserPostListView.as_view(), name='user_posts'),
     path('post/<int:pk>', PostDetailView.as_view(), name='post_detail'),
@@ -131,6 +130,10 @@ urlpatterns = [
     path('pesapal/callback/', pesapal_callback, name='pesapal_callback'),
     # Optionally add an order detail view:
     #path('orders/<str:ordering_code>/', views.OrderDetailView.as_view(), name='order_detail'),
+    path('confirm_deletion', confirm_account_action, name='confirm_account_action'),
+    path('account/deactivated', deactivate_account, name='account_deactivated'),
+    path('account/deleted', delete_account, name='account_deleted'),
 ]
+
 
 
