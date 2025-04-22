@@ -32,7 +32,7 @@
 
 html,
 body {
-	height: 100%;
+	height: auto !important;
 	font-family: "Cairo", sans-serif;
 	-webkit-font-smoothing: antialiased;
 	font-smoothing: antialiased;
