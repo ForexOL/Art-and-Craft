@@ -112,8 +112,8 @@ WSGI_APPLICATION = 'myshop_1.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 
-
 """
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -121,6 +121,17 @@ DATABASES = {
     }
 }
 """
+
+
+USE_X_FORWARDED_HOST = True
+
+
+
+SECURE_SSL_REDIRECT = True
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+
 
 DATABASES = {
     'default': {
@@ -134,9 +145,6 @@ DATABASES = {
 }
 
 
-
-USE_X_FORWARDED_HOST = True
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 
 # Password validation
@@ -171,11 +179,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-
-SECURE_SSL_REDIRECT = True
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
 
 
 # Static files (CSS, JavaScript, Images)
