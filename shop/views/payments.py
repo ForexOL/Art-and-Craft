@@ -63,7 +63,7 @@ class OrderHistoryView(LoginRequiredMixin, ListView):
         return Order.objects.filter(customer=self.request.user).order_by('-dates')
 
 # payments/views.py
-
+'''
 import logging
 import uuid
 from django.http import HttpResponse, HttpResponseBadRequest
@@ -71,7 +71,6 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views import View
 from django.utils.decorators import method_decorator
 from django.urls import reverse
-from .models import Order
 from .pesapal import PesapalClient  # wherever you keep your Pesapal helper
 
 logger = logging.getLogger(__name__)
@@ -138,4 +137,3 @@ def pesapal_callback(request):
         order.save()
     # Redirect to the order history page
     return redirect(reverse('order_history'))
-'''
