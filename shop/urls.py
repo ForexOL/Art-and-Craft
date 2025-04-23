@@ -127,7 +127,11 @@ urlpatterns = [
 
     path('orders/', OrderHistoryView.as_view(), name='order_history'),
    # path('pesapal/payment/<str:ordering_code>/', views.get_pesapal_payment_iframe, name='pesapal_payment'),
-    path('pesapal/callback/', pesapal_callback, name='pesapal_callback'),
+    path(
+        "payments/pesapal/ipn/",
+        PesapalIPNView.as_view(),
+        name="pesapal_callback"
+    ),
     # Optionally add an order detail view:
     #path('orders/<str:ordering_code>/', views.OrderDetailView.as_view(), name='order_detail'),
     path('confirm_deletion', confirm_account_action, name='confirm_account_action'),

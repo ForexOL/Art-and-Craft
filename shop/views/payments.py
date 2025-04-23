@@ -24,7 +24,7 @@ class PaymentView(PaymentRequestMixin, TemplateView):
         
         number=int(order.total_price)
         order_info = {
-            "id": self.request.GET.get("id", uuid.uuid4().hex),  # Replace with a valid merchant id if needed.
+            "id": ordering_code,  # Replace with a valid merchant id if needed.
             "currency": "UGX",
             "amount":number,
             "description": "Payment for X",
@@ -62,6 +62,68 @@ class OrderHistoryView(LoginRequiredMixin, ListView):
         # Display current user's orders, sorted with latest first.
         return Order.objects.filter(customer=self.request.user).order_by('-dates')
 
+# payments/views.py
+
+import logging
+import uuid
+from django.http import HttpResponse, HttpResponseBadRequest
+from django.views.decorators.csrf import csrf_exempt
+from django.views import View
+from django.utils.decorators import method_decorator
+from django.urls import reverse
+from .models import Order
+from .pesapal import PesapalClient  # wherever you keep your Pesapal helper
+
+logger = logging.getLogger(__name__)
+
+@method_decorator(csrf_exempt, name="dispatch")
+class PesapalIPNView(View):
+    """
+    Handles PesaPal IPN callbacks.
+    Expects GET parameters:
+      - pesapal_merchant_reference
+      - pesapal_transaction_tracking_id
+      - pesapal_notification_type
+    """
+
+    def get(self, request, *args, **kwargs):
+        merchant_ref = request.GET.get("pesapal_merchant_reference")
+        tracking_id = request.GET.get("pesapal_transaction_tracking_id")
+        notification_type = request.GET.get("pesapal_notification_type")
+
+        if not (merchant_ref and tracking_id and notification_type):
+            logger.error("Missing IPN params: %s", request.GET.dict())
+            return HttpResponseBadRequest("Missing parameters")
+
+        # 1) Look up the order
+        try:
+            order = Order.objects.get(ordering_code=merchant_ref)
+        except Order.DoesNotExist:
+            logger.error("Order not found for merchant_reference=%s", merchant_ref)
+            return HttpResponseBadRequest("Invalid merchant reference")
+
+        # 2) Query PesaPal for the current transaction status
+        client = PesapalClient()  # your wrapper for signing & calling PesaPal APIs
+        status_response = client.get_transaction_status(
+            merchant_reference=merchant_ref,
+            tracking_id=tracking_id
+        )
+
+        # 3) Update your order
+        new_status = status_response.get("status")  # e.g. "COMPLETED", "PENDING", etc.
+        order.payment_status = new_status
+        order.pesapal_transaction_tracking_id = tracking_id
+        order.save(update_fields=["payment_status", "pesapal_transaction_tracking_id"])
+
+        logger.info(
+            "IPN updated order %s: status=%s",
+            merchant_ref,
+            new_status,
+        )
+
+        # 4) Always return HTTP 200 to let PesaPal know you’ve received the notification
+        return HttpResponse("OK")
+'''
 def pesapal_callback(request):
     """
     View to handle Pesapal callback.
@@ -76,3 +138,4 @@ def pesapal_callback(request):
         order.save()
     # Redirect to the order history page
     return redirect(reverse('order_history'))
+'''
