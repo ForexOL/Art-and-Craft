@@ -209,13 +209,13 @@ def become_vendor1(request):
     try:
         user = Vendor.objects.get(vendor=request.user)
     except Exception as e:
-        raise e
-        #user=None
+        user=None
 
     # end try
     if user is None:
-        context={'Become_Vendor':'Become_Vendor','brands':brands,'categories':categories,'productes':productes}
-        messages.success(request, f'Sell On Our Site for free,Up to End of July,for those who register Before the month of April Ends')
+        form = VendorForm()
+        context={'Become_Vendor':'Become_Vendor','brands':brands,'categories':categories,'productes':productes,'form': form}
+        #messages.success(request, f'Sell On Our Site for free,Up to End of July,for those who register Before the month of April Ends')
         return render(request,'Vender/become_vendor.html',context)
     else:
         return redirect('Dashboard')
