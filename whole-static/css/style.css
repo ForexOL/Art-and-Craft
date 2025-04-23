@@ -184,7 +184,7 @@ ol {
 }
 
 /* Preloder */
-/*
+
 #preloder {
 	position: fixed;
 	width: 100%;
@@ -206,7 +206,7 @@ ol {
     background-size: cover;
 }
 
-*/
+
 @keyframes loader {
 	0% {
 		-webkit-transform: rotate(0deg);
