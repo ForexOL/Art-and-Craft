@@ -24,7 +24,7 @@ class PaymentView(PaymentRequestMixin, TemplateView):
         
         number=int(order.total_price)
         order_info = {
-            "id":  self.request.GET.get("id", uuid.uuid4().hex),  # Replace with a valid merchant id if needed.
+            "id":  ordering_code,  # Replace with a valid merchant id if needed.#self.request.GET.get("id", uuid.uuid4().hex)
             "currency": "UGX",
             "amount":number,
             "description": "Payment for X",

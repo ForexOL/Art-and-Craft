@@ -124,6 +124,8 @@ urlpatterns = [
     path('automated', PaymentView.as_view(), name='payment'),
     path('billing_terms',billing_terms,name='billing_terms'),
 
+    path('pesapal/callback/', pesapal_callback, name='pesapal_callback'),
+
 
     path('orders/', OrderHistoryView.as_view(), name='order_history'),
     
