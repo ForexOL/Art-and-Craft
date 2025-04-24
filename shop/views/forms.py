@@ -100,7 +100,7 @@ class AddVendorForm(BaseForm):
 class AddProductForm(BaseForm):
 	class Meta:
 		model=Product
-		fields=('name','stock','selling_price','image','image2','image3','image4','description','category')
+		fields=('name','category','stock','selling_price','image','image2','image3','image4','description')
 	name = forms.CharField(required=True)
 	stock = forms.IntegerField(required=True)
 	selling_price=forms.IntegerField(required=True)
