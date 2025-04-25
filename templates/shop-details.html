@@ -269,44 +269,126 @@
                             </div>
                             <div class="tab-pane" id="tabs-2" role="tabpanel">
                                 <div class="product__details__tab__desc">
-                                    <h6>Products Infomation</h6>
-                                    <p>A graceful African sculpture capturing the joy of motherhood, depicting a mother dancing with her child in a fluid, rhythmic motion. The intertwined figures symbolize love, unity, and the deep cultural connection between generations</p>
+                                    <h6>Shipping Information</h6>
+                                    <p> After a successful payment, an Arcrid customer service personnel will contact you to avail product delivery/shipping information.</p>
                                 </div>
                             </div>
-                            <div class="tab-pane" id="tabs-3" role="tabpanel">
-                                <div class="product__details__tab__desc">
-                                    <h6>Products Review</h6>
-                                    <p>
-                                        <div class="product__details__rating">
-                                            {% for i in "12345" %}
-                                                {% if product.average_rating >= i|add:"0.5" %}
-                                                    <i class="fa fa-star"></i>
-                                                {% elif product.average_rating >= i %}
-                                                    <i class="fa fa-star-half-o"></i>
-                                                {% else %}
-                                                    <i class="fa fa-star-o"></i>
-                                                {% endif %}
-                                            {% endfor %}
-                                            <span>({{ reviews.count }} reviews)</span>
-                                        </div>
-                                        
-                                    </p>
-                                    <p>
-                                        <form method="post">
-                                        {% csrf_token %}
-                                        <label for="rating">Your Rating:</label>
-                                        <select name="rating" id="rating">
-                                            <option value="5">★★★★★</option>
-                                            <option value="4">★★★★☆</option>
-                                            <option value="3">★★★☆☆</option>
-                                            <option value="2">★★☆☆☆</option>
-                                            <option value="1">★☆☆☆☆</option>
-                                        </select>
-                                        <textarea name="comment" placeholder="Leave a review"></textarea>
-                                        <button type="submit">Submit</button>
-                                    </form></p>
-                                </div>
-                            </div>
+                            <!-- Reviews Tab -->
+<!-- Reviews Tab -->
+<div class="tab-pane fade" id="tabs-3" role="tabpanel" aria-labelledby="review-tab">
+    <div class="reviews-container p-4 bg-light rounded-3 shadow-lg">
+  
+      <!-- Heading -->
+      <h5 class="mb-4 fw-bold text-primary">Product Reviews</h5>
+  
+      <!-- Average Rating -->
+      <div class="d-flex align-items-center mb-4">
+        <div class="rating-stars me-2">
+          {% for i in "12345" %}
+            {% if product.average_rating >= i|add:"0.5" %}
+              <i class="fas fa-star yellow-star"></i>
+            {% elif product.average_rating >= i %}
+              <i class="fas fa-star-half-alt yellow-star"></i>
+            {% else %}
+              <i class="far fa-star"></i>
+            {% endif %}
+          {% endfor %}
+        </div>
+        <span class="fw-bold me-2">{{ product.average_rating|floatformat:1 }}/5</span>
+        <small class="text-secondary">({{ reviews.count }} reviews)</small>
+      </div>
+  
+      <!-- Reviews List -->
+      <ul class="list-unstyled mb-5">
+        {% for review in reviews %}
+          <li class="media d-flex mb-4 pb-3 border-bottom">
+            <img src="{% static 'img/circle-user-solid.svg' %}"
+                 alt="{{ review.user.username }}"
+                 class="me-3 rounded-circle review-avatar"
+                 width="56" height="56">
+            <div class="media-body flex-grow-1">
+              <div class="d-flex justify-content-between align-items-center mb-1">
+                <h6 class="mt-0 mb-0 text-dark">{{ review.user.username }}</h6>
+                <span class="small text-muted">{{ review.created_at|date:"M d, Y" }}</span>
+              </div>
+              <div class="d-flex align-items-center mb-2">
+                <div class="rating-stars">
+                    {% if review.rating == 5 %}
+                    <i class="fas fa-star" style="color: #f1c40f;"></i>
+                    <i class="fas fa-star" style="color: #f1c40f;"></i>
+                    <i class="fas fa-star" style="color: #f1c40f;"></i>
+                    <i class="fas fa-star" style="color: #f1c40f;"></i>
+                    <i class="fas fa-star" style="color: #f1c40f;"></i>
+                  {% elif review.rating == 4 %}
+                    <i class="fas fa-star" style="color: #f1c40f;"></i>
+                    <i class="fas fa-star" style="color: #f1c40f;"></i>
+                    <i class="fas fa-star" style="color: #f1c40f;"></i>
+                    <i class="fas fa-star" style="color: #f1c40f;"></i>
+                    <i class="far fa-star" style="color: #ddd;"></i>
+                  {% elif review.rating == 3 %}
+                    <i class="fas fa-star" style="color: #f1c40f;"></i>
+                    <i class="fas fa-star" style="color: #f1c40f;"></i>
+                    <i class="fas fa-star" style="color: #f1c40f;"></i>
+                    <i class="far fa-star" style="color: #ddd;"></i>
+                    <i class="far fa-star" style="color: #ddd;"></i>
+                  {% elif review.rating == 2 %}
+                    <i class="fas fa-star" style="color: #f1c40f;"></i>
+                    <i class="fas fa-star" style="color: #f1c40f;"></i>
+                    <i class="far fa-star" style="color: #ddd;"></i>
+                    <i class="far fa-star" style="color: #ddd;"></i>
+                    <i class="far fa-star" style="color: #ddd;"></i>
+                  {% elif review.rating == 1 %}
+                    <i class="fas fa-star" style="color: #f1c40f;"></i>
+                    <i class="far fa-star" style="color: #ddd;"></i>
+                    <i class="far fa-star" style="color: #ddd;"></i>
+                    <i class="far fa-star" style="color: #ddd;"></i>
+                    <i class="far fa-star" style="color: #ddd;"></i>
+                  {% else %}
+                    <i class="far fa-star" style="color: #ddd;"></i>
+                    <i class="far fa-star" style="color: #ddd;"></i>
+                    <i class="far fa-star" style="color: #ddd;"></i>
+                    <i class="far fa-star" style="color: #ddd;"></i>
+                    <i class="far fa-star" style="color: #ddd;"></i>
+                  {% endif %}
+                </div>
+                <span class="ms-2 small fw-bold">{{ review.rating }}/5</span>
+              </div>
+              <p class="mb-0 text-muted">{{ review.comment }}</p>
+            </div>
+          </li>
+        {% empty %}
+          <li class="text-center text-muted">No reviews yet — be the first!</li>
+        {% endfor %}
+      </ul>
+  
+      <!-- Review Form -->
+      <h6 class="fw-bold mb-3 text-primary">Leave Your Review</h6>
+      <form method="post" class="review-form">
+        {% csrf_token %}
+        <div class="row g-3 mb-3">
+          <div class="col-md-4">
+            <label for="rating" class="form-label text-secondary">Your Rating</label>
+            <select class="form-select" name="rating" id="rating">
+              <option value="5">★★★★★</option>
+              <option value="4">★★★★☆</option>
+              <option value="3">★★★☆☆</option>
+              <option value="2">★★☆☆☆</option>
+              <option value="1">★☆☆☆☆</option>
+            </select>
+          </div>
+          <div class="col-md-8">
+            <label for="comment" class="form-label text-secondary">Your Comment</label>
+            <textarea class="form-control" name="comment" id="comment"
+                      rows="3" placeholder="Share your thoughts…"></textarea>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary px-4">Submit Review</button>
+      </form>
+  
+    </div>
+  </div>
+  
+  
                         </div>
                     </div>
                 </div>
@@ -360,9 +442,9 @@
                                     </ul>
                                 </div>
                                 <div class="product__discount__item__text">
-                                    <span>Dried Fruit</span>
+
                                     <h5><a href="#" style="color: #A95922;">{{ product.name }}</a></h5>
-                                    <div class="product__item__price">{{ product.price }}<span>$36.00</span></div>
+                                    <div class="product__item__price">{{ product.price }}</div>
                                 </div>
                             </div>
                         </div>
@@ -411,6 +493,52 @@
             transform: translateY(-2px);
             opacity: 0.85;
           }
+          :root {
+            --primary-color: #2c3e50;    /* Deep blue-gray */
+            --accent-color: #e67e22;     /* Warm orange */
+            --star-color: #f1c40f;       /* Golden */
+            --bg-lightest: #fdfdfd;      /* Soft white */
+          }
+          
+          .reviews-container {
+            background: var(--bg-lightest);
+            border: 1px solid #e3e3e3;
+          }
+          
+          .review-avatar {
+            border: 2px solid var(--accent-color);
+          }
+          
+          .rating-stars .fas,
+          .rating-stars .fa-star-half-alt {
+            color: var(--star-color);
+            font-size: 1.1rem;
+          }
+          .rating-stars .far {
+            color: #ddd;
+          }
+          
+          h5.text-primary,
+          .review-form h6.text-primary {
+            color: var(--primary-color) !important;
+          }
+          
+          .review-form .btn-primary {
+            background-color: var(--accent-color);
+            border: none;
+          }
+          .review-form .btn-primary:hover {
+            background-color: darken(var(--accent-color), 10%);
+          }
+          
+          .form-label {
+            font-weight: 500;
+            color: #555;
+          }
+          .yellow-star {
+            color: #f1c40f !important;  /* golden yellow */
+          }
+          
           
     </style>
 

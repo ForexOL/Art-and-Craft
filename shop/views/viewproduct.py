@@ -33,7 +33,7 @@ def details(request, id):
     categories =Sub_Category.get_all_categories()
     cart = request.session.get('cart')
 
-    
+    product=Product.objects.get(id=id)
 
     if not cart:
         request.session['cart'] = {}
@@ -60,7 +60,7 @@ def details(request, id):
                 review.user = request.user
                 review.save()
                 product.update_rating()
-                return redirect("details", product_id=product.id)
+                return redirect("details", id=product.id)
 
         elif "quantity" in request.POST:  # Check if the request contains cart data
             
