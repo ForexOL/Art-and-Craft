@@ -308,11 +308,11 @@
                         </div>
                         <div class="blog__item__text">
                             <ul>
-                                <li><i class="fa fa-calendar-o"></i> {{ article.published_date|date:"F d, Y" }}</li>
+                                <li><i class="fa fa-calendar-o"></i> {{ article.date_posted|date:"F d, Y" }}</li>
                                 <li><i class="fa fa-comment-o"></i> {{ article.comment_count }}</li>
                             </ul>
                             <h5><a href="{{ article.get_absolute_url }}" style="color: #A95922;">{{ article.title }}</a></h5>
-                            <p>{{ article.content  }}</p>
+                            <p>{{ {{ article.content|safe|truncatewords:50 }} }}</p>
                         </div>
                     </div>
                 </div>
