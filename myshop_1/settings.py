@@ -113,7 +113,7 @@ WSGI_APPLICATION = 'myshop_1.wsgi.application'
 
 
 
-"""
+""" 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',

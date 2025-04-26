@@ -51,7 +51,7 @@ def checkout(request):
 
         context={'product_lists':product_lists,'categories':categories,'brands':brands}
         if request.method=='POST':
-            total_price=total_price+3000
+            total_price=total_price#+3000
             order = Order.objects.create(customer=request.user,ordering_code=ordering_code,total_price=total_price)
             
             request.session['ordering_code'] = f'{ordering_code}'
