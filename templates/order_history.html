@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 
 {% block content %}
+
+
 <h2>Your Order History</h2>
 
 <!-- add this CSS somewhere in your <head> (or in your site CSS) -->
@@ -16,8 +18,29 @@
     overflow: hidden;
     text-overflow: ellipsis;
   }
+  /* Orders table styling */
+  .orders-table th, .orders-table td {
+    vertical-align: middle;
+    white-space: nowrap;
+  }
+  .orders-table .btn-sm {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+  }
+  /* Card view for mobile */
+  .order-card {
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  }
+  .order-card .card-body p {
+    margin-bottom: 0.5rem;
+    font-size: 0.875rem;
+  }
+  .order-card .label {
+    font-weight: 600;
+  }
 </style>
-
+<!---
 <div class="table-responsive">
   <table class="table table-sm table-striped table-bordered text-center">
     <thead class="table-dark">
@@ -69,6 +92,81 @@
       {% endfor %}
     </tbody>
   </table>
+</div>
+-->
+
+  <!-- Orders: Card view on mobile -->
+  <div class="d-block d-md-none">
+    {% for order in orders %}
+      <div class="card order-card mb-3">
+        <div class="card-body">
+          <h5 class="card-title mb-2">Order {{ order.ordering_code }}</h5>
+          <p><span class="label">Date:</span> {{ order.dates|date:"SHORT_DATE_FORMAT" }}</p>
+          <p><span class="label">Total:</span> UGX {{ order.total_price }}</p>
+          <p><span class="label">Status:</span> {% if order.status %}<span class="text-success">Paid</span>{% else %}<span class="text-danger">Pending</span>{% endif %}</p>
+          <p>
+            {% if order.order_confirmation %}<span class="badge bg-success">Confirmed</span>{% else %}<span class="badge bg-danger">Not Confirmed</span>{% endif %}
+            {% if order.product_reception %}<span class="badge bg-success ms-1">Received</span>{% else %}<span class="badge bg-danger ms-1">Not Received</span>{% endif %}
+          </p>
+          <p>
+            {% if order.quality_control %}<span class="badge bg-success">QC Pass</span>{% else %}<span class="badge bg-danger">QC Fail</span>{% endif %}
+            {% if order.packaged %}<span class="badge bg-success ms-1">Packaged</span>{% else %}<span class="badge bg-danger ms-1">Not Packaged</span>{% endif %}
+          </p>
+          <p>
+            {% if order.under_transportation %}<span class="badge bg-success">In Transit</span>{% else %}<span class="badge bg-danger">Not in Transit</span>{% endif %}
+            {% if order.delivered %}<span class="badge bg-success ms-1">Delivered</span>{% else %}<span class="badge bg-danger ms-1">Not Delivered</span>{% endif %}
+          </p>
+          <a href="{% if not order.status %}#{% else %}{% url 'order_detail' order.pk %}{% endif %}" class="btn btn-sm {% if not order.status %}btn-warning{% else %}btn-primary{% endif %}">
+            {% if not order.status %}Pay Now{% else %}View Details{% endif %}
+          </a>
+        </div>
+      </div>
+    {% empty %}
+      <p class="text-muted text-center">No orders found.</p>
+    {% endfor %}
+  </div>
+
+  <!-- Orders: Table view on md+ -->
+  <div class="table-responsive d-none d-md-block">
+    <table class="table table-sm table-striped table-bordered text-center orders-table">
+      <thead class="table-dark">
+        <tr>
+          <th>Order Code</th>
+          <th>Date</th>
+          <th>Total (UGX)</th>
+          <th>Status</th>
+          <th>Confirm</th>
+          <th>Reception</th>
+          <th>QC</th>
+          <th>Packaged</th>
+          <th>Transit</th>
+          <th>Delivered</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for order in orders %}
+        <tr>
+          <td>{{ order.ordering_code }}</td>
+          <td>{{ order.dates|date:"SHORT_DATE_FORMAT" }}</td>
+          <td>{{ order.total_price }}</td>
+          <td>{% if order.status %}<span class="text-success">Paid</span>{% else %}<span class="text-danger">Pending</span>{% endif %}</td>
+          <td>{% if order.order_confirmation %}<span class="badge bg-success">✔</span>{% else %}<span class="badge bg-danger">✖</span>{% endif %}</td>
+          <td>{% if order.product_reception %}<span class="badge bg-success">✔</span>{% else %}<span class="badge bg-danger">✖</span>{% endif %}</td>
+          <td>{% if order.quality_control %}<span class="badge bg-success">✔</span>{% else %}<span class="badge bg-danger">✖</span>{% endif %}</td>
+          <td>{% if order.packaged %}<span class="badge bg-success">✔</span>{% else %}<span class="badge bg-danger">✖</span>{% endif %}</td>
+          <td>{% if order.under_transportation %}<span class="badge bg-success">✔</span>{% else %}<span class="badge bg-danger">✖</span>{% endif %}</td>
+          <td>{% if order.delivered %}<span class="badge bg-success">✔</span>{% else %}<span class="badge bg-danger">✖</span>{% endif %}</td>
+          <td>
+            <a href="{% if not order.status %}#{% else %}{% url 'order_detail' order.pk %}{% endif %}" class="btn btn-sm {% if not order.status %}btn-warning{% else %}btn-primary{% endif %}">
+              {% if not order.status %}Pay Now{% else %}View Details{% endif %}
+            </a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
 </div>
 
 

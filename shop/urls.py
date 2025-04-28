@@ -103,7 +103,7 @@ urlpatterns = [
 
     
     path('check-out', checkout , name='checkout'),
-    path('orders', orders, name='orders'),
+    #path('orders', orders, name='orders'),
     path('<int:id>/delete', delete , name='delete'),
     path('reset_password',auth_views.PasswordResetView.as_view(template_name='Change-password.html',
             success_url = '/reset_password_sent'),name="reset_password"),

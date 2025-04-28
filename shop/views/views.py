@@ -1073,3 +1073,5 @@ def confirm_account_action(request):
             user.delete()
             return redirect('account_deleted')
     return render(request, 'confirm_account_action.html')
+
+

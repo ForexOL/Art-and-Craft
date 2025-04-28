@@ -220,6 +220,7 @@ def homepage(request):
     top_rated=list(Product.objects.filter(is_top_rated=True).order_by('-dates')[:12])
     latest_products=Product.objects.filter(is_featured=True).order_by('-dates')[:12]
     top_reviewed= list(Product.objects.filter(is_featured=True).order_by('-dates')[:12])
+    category_products=list(Product.objects.all().order_by('-dates')[:30])
 
     top_rated=random.sample(top_rated, len(top_rated))
     #latest_products=random.sample(latest_products, len(latest_products))
@@ -255,7 +256,7 @@ def homepage(request):
 
     context = {
         
-        'news':news,'liked_products':liked_products,'IP':user_ip,'items': items,"chunked_products1": chunked_products1,"chunked_products2": chunked_products2,"chunked_products3": chunked_products3,'homepage':'homepage','latest_products':latest_products,'top_reviewed':top_reviewed,'productes':productes,'products':products,'brands':brands,'categories':categories ,'top_rated':top_rated,}
+        'category_products':category_products,'news':news,'liked_products':liked_products,'IP':user_ip,'items': items,"chunked_products1": chunked_products1,"chunked_products2": chunked_products2,"chunked_products3": chunked_products3,'homepage':'homepage','latest_products':latest_products,'top_reviewed':top_reviewed,'productes':productes,'products':products,'brands':brands,'categories':categories ,'top_rated':top_rated,}
 
     return render(request, 'index.html', context)
 
