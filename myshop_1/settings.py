@@ -113,7 +113,7 @@ WSGI_APPLICATION = 'myshop_1.wsgi.application'
 
 
 
-""" 
+
 
 DATABASES = {
     'default': {
@@ -144,7 +144,7 @@ DATABASES = {
         'PORT': '',
     }
 }
-
+""" 
 
 
 # Password validation

@@ -8,6 +8,19 @@
 Updated HTML & CSS for responsive, rounded, modern-feel category images
 -->
 <style>
+    .latest-product__item__pic {
+        width: 120px;        /* fixed width */
+        height: 120px;       /* fixed height */
+        overflow: hidden;    /* crop any overflow */
+      }
+      
+      .latest-product__item__pic img {
+        width: 100%;         /* fill the container */
+        height: 100%;        /* fill the container */
+        object-fit: cover;   /* crop/scale to cover without distortion */
+        display: block;      /* remove inline-img whitespace */
+      }
+      
         /* Responsive aspect-ratio boxes with rounded corners and hover effect */
         .grid-box .featured__item__pic {
         position: relative;
@@ -289,68 +302,87 @@ Updated HTML & CSS for responsive, rounded, modern-feel category images
                         <h4 style="color: #A95922;">Latest Products</h4>
                 
                         <div class="latest-product__slider owl-carousel">
-                            {% for product_chunk in chunked_products1 %}  {# Loop through the chunks of 3 products each #}
-                                <div class="latest-prdouct__slider__item">
-                                    {% for product in product_chunk %}  {# Loop through each product in the chunk #}
-                                        <a href="#" class="latest-product__item">
-                                            <div class="latest-product__item__pic">
-                                                <a href="{% url 'details' product.id %}"><img src="{{ product.image.url }}" alt="" style="height: 100px;width: 100px;"></a>
-                                            </div>
-                                            <div class="latest-product__item__text">
-                                                <h6 style="color: #A95922">{{ product.name }}</h6>
-                                                <span class="converted-price" data-price-ugx="{{ product.price }}">{{ product.price }}</span>
-                                            </div>
-                                        </a>
-                                    {% endfor %}
+                            {% for product_chunk in chunked_products1 %}
+                            <div class="latest-product__slider__item d-flex flex-column">
+                              {% for product in product_chunk %}
+                              <a href="{% url 'details' product.id %}"
+                                 class="latest-product__item d-flex align-items-center mb-3">
+                                <div class="latest-product__item__pic">
+                                  <img src="{{ product.image.url }}"
+                                       alt="{{ product.name }}">
                                 </div>
+                                <div class="latest-product__item__text">
+                                  <h6 style="color: #A95922;">{{ product.name }}</h6>
+                                  <span class="converted-price"
+                                        data-price-ugx="{{ product.price }}">
+                                    {{ product.price }}
+                                  </span>
+                                </div>
+                              </a>
+                              {% endfor %}
+                            </div>
                             {% endfor %}
-                        </div>
+                          </div>
+                      
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6">
                     <div class="latest-product__text">
-                        <h4 style="color: #A95922;">Top Rated Products</h4>
-                
-                        <div class="latest-product__slider owl-carousel">
-                            {% for product_chunk in chunked_products2 %}  {# Loop through the chunks of 3 products each #}
-                                <div class="latest-prdouct__slider__item">
-                                    {% for product in product_chunk %}  {# Loop through each product in the chunk #}
-                                        <a href="#" class="latest-product__item">
-                                            <div class="latest-product__item__pic">
-                                                <a href="{% url 'details' product.id %}"><img src="{{ product.image.url }}" alt="" style="height: 100px;width: 100px;"></a>
-                                            </div>
-                                            <div class="latest-product__item__text">
-                                                <h6 style="color: #A95922">{{ product.name }}</h6>
-                                                <span class="converted-price" data-price-ugx="{{ product.price }}">{{ product.price }}</span>
-                                            </div>
-                                        </a>
-                                    {% endfor %}
-                                </div>
-                            {% endfor %}
+                      <h4 class="text-uppercase" style="color: #A95922;">Top Rated Products</h4>
+                  
+                      <div class="latest-product__slider owl-carousel">
+                        {% for product_chunk in chunked_products2 %}
+                        <div class="latest-product__slider__item d-flex flex-column">
+                          {% for product in product_chunk %}
+                          <a href="{% url 'details' product.id %}"
+                             class="latest-product__item d-flex align-items-center mb-3">
+                            <div class="latest-product__item__pic">
+                              <img src="{{ product.image.url }}"
+                                   alt="{{ product.name }}">
+                            </div>
+                            <div class="latest-product__item__text">
+                              <h6 style="color: #A95922;">{{ product.name }}</h6>
+                              <span class="converted-price"
+                                    data-price-ugx="{{ product.price }}">
+                                {{ product.price }}
+                              </span>
+                            </div>
+                          </a>
+                          {% endfor %}
                         </div>
+                        {% endfor %}
+                      </div>
+                  
                     </div>
-                </div>
+                  </div>
+                  
                 <div class="col-lg-4 col-md-6">
                     <div class="latest-product__text">
                         <h4 style="color: #A95922;">Top Reviewed Products</h4>
                 
                         <div class="latest-product__slider owl-carousel">
-                            {% for product_chunk in chunked_products3 %}  {# Loop through the chunks of 3 products each #}
-                                <div class="latest-prdouct__slider__item">
-                                    {% for product in product_chunk %}  {# Loop through each product in the chunk #}
-                                        <a href="#" class="latest-product__item">
-                                            <div class="latest-product__item__pic">
-                                                <a href="{% url 'details' product.id %}"><img src="{{ product.image.url }}" alt="" style="height: 100px;width: 100px;"></a>
-                                            </div>
-                                            <div class="latest-product__item__text">
-                                                <h6 style="color: #A95922"><a href="{% url 'details' product.id %}" style="color: #A95922">{{ product.name }}</a></h6>
-                                                <span class="converted-price" data-price-ugx="{{ product.price }}">{{ product.price }}</span>
-                                            </div>
-                                        </a>
-                                    {% endfor %}
+                            {% for product_chunk in chunked_products3 %}
+                            <div class="latest-product__slider__item d-flex flex-column">
+                              {% for product in product_chunk %}
+                              <a href="{% url 'details' product.id %}"
+                                 class="latest-product__item d-flex align-items-center mb-3">
+                                <div class="latest-product__item__pic">
+                                  <img src="{{ product.image.url }}"
+                                       alt="{{ product.name }}">
                                 </div>
+                                <div class="latest-product__item__text">
+                                  <h6 style="color: #A95922;">{{ product.name }}</h6>
+                                  <span class="converted-price"
+                                        data-price-ugx="{{ product.price }}">
+                                    {{ product.price }}
+                                  </span>
+                                </div>
+                              </a>
+                              {% endfor %}
+                            </div>
                             {% endfor %}
-                        </div>
+                          </div>
+                      
                     </div>
                 </div>
                 

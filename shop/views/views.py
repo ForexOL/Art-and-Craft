@@ -362,7 +362,7 @@ def Product_update(request, id):
             feed_back=form.save(commit=False)
 
             discount_percentage=20
-            price=(((40/100)*form.cleaned_data['selling_price'])+form.cleaned_data['selling_price'])
+            price=(((45/100)*form.cleaned_data['selling_price'])+form.cleaned_data['selling_price'])
             discounted_price=(((int(discount_percentage)/100)*price)+price)
             feed_back.del_price=discounted_price
             feed_back.price=price
@@ -628,7 +628,7 @@ def vendor_add_product(request):
             feed_back=form.save(commit=False)
 
             discount_percentage=40
-            price=(((40/100)*form.cleaned_data['selling_price'])+form.cleaned_data['selling_price'])
+            price=(((45/100)*form.cleaned_data['selling_price'])+form.cleaned_data['selling_price'])
             price=round(price, -2)
             discounted_price=(((int(discount_percentage)/100)*price)+price)
             feed_back.del_price=discounted_price

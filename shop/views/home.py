@@ -240,7 +240,7 @@ def homepage(request):
     news=Post.objects.all().order_by('-date_posted')[:3]
     brands_display = Major_Categories.objects.prefetch_related('categories')  # Optimize query
         
-    chunked_products1 = [latest_products[i:i + 3] for i in range(0, len(latest_products), 3)]
+    chunked_products1 =[latest_products[i:i + 3] for i in range(0, len(latest_products), 3)]
     
     chunked_products2 = [top_rated[i:i + 3] for i in range(0, len(top_rated), 3)]
     
