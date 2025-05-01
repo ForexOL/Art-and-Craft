@@ -113,7 +113,7 @@ WSGI_APPLICATION = 'myshop_1.wsgi.application'
 
 
 
-""" 
+"""
 
 DATABASES = {
     'default': {
@@ -145,7 +145,7 @@ DATABASES = {
     }
 }
 
-
+ 
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators

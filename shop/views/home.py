@@ -238,8 +238,22 @@ def homepage(request):
 
     latest=Post.objects.order_by('-date_posted')[:5]
     news=Post.objects.all().order_by('-date_posted')[:3]
-    brands_display = Major_Categories.objects.prefetch_related('categories')  # Optimize query
-        
+    '''
+    #brands_display = Major_Categories.objects.prefetch_related('categories')  # Optimize query
+    brands =  Major_Categories.objects.prefetch_related('categories').all()
+    for brand in brands:
+        for cat in brand.categories.all():
+            # collect all product image URLs under this category
+            urls = []
+            for prod in Product.objects.filter(category=cat):
+                for i in range(1, 2):  # or however many images per product
+                    img = getattr(prod, f'image{i}', None)
+                    if img and hasattr(img, 'url'):
+                        urls.append(img.url)
+            # attach to the category so the template can see it
+            cat.carousel_images = urls
+    '''
+   
     chunked_products1 =[latest_products[i:i + 3] for i in range(0, len(latest_products), 3)]
     
     chunked_products2 = [top_rated[i:i + 3] for i in range(0, len(top_rated), 3)]

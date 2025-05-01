@@ -7,6 +7,41 @@
 <!--
 Updated HTML & CSS for responsive, rounded, modern-feel category images
 -->
+
+  <style>
+    .carousel-container {
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      max-width: 500px;
+      margin: 1rem auto;
+      border-radius: 0.5rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+    .carousel-slides {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+      width: 100%;
+    }
+    .carousel-slides img {
+      width: 100%;
+      flex-shrink: 0;
+    }
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0,0,0,0.5);
+      border: none;
+      color: white;
+      padding: 0.5rem;
+      cursor: pointer;
+      border-radius: 50%;
+    }
+    .carousel-btn.prev { left: 0.5rem; }
+    .carousel-btn.next { right: 0.5rem; }
+    .carousel-btn:focus { outline: none; }
+  </style>
 <style>
     .latest-product__item__pic {
         width: 120px;        /* fixed width */
@@ -200,28 +235,31 @@ Updated HTML & CSS for responsive, rounded, modern-feel category images
                 </div>
             </div>
         </div>
-        <!-- In your template -->
 
-  
-  <div class="container">
-    <div class="row g-3">
-      {% for brand in brands %}
-      <div class="col-6 col-md-4 col-lg-3">
-        <h2 class="text-white fs-5 mb-2">{{ brand.name }}</h2>
-        <div class="grid-box">
-          {% for category in brand.categories.all %}
-          <a href="/?category={{ category.id }}" class="d-block mb-2">
-            <div class="featured__item__pic"
-                 style="background-image: url('{{ category.image.url }}');">
-            </div>
-          </a>
-          {% endfor %}
         </div>
-      </div>
-      {% endfor %}
-    </div>
-  </div>
-  
+        <div class="container">
+            <div class="row g-3">
+            {% for brand in brands %}
+            <div class="col-6 col-md-4 col-lg-3">
+
+                <h6 class="text-white mb-2">
+                    {{ brand.name }}
+                </h6>
+                
+                <div class="grid-box">
+                {% for category in brand.categories.all %}
+                <a href="/?category={{ category.id }}" class="d-block mb-2">
+                    <div class="featured__item__pic"
+                        style="background-image: url('{{ category.image.url }}');">
+                    </div>
+                </a>
+                {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+            </div>
+        </div>
+
   
         
     </section>
@@ -473,5 +511,47 @@ Updated HTML & CSS for responsive, rounded, modern-feel category images
         }
         
     </style>
-
+    
+      <script>
+        document.querySelectorAll('.carousel-container').forEach(container => {
+          const slides = container.querySelector('.carousel-slides');
+          const images = slides.querySelectorAll('img');
+          const prevBtn = container.querySelector('.carousel-btn.prev');
+          const nextBtn = container.querySelector('.carousel-btn.next');
+          let idx = 0, interval;
+    
+          function showSlide(i) {
+            idx = (i + images.length) % images.length;
+            slides.style.transform = `translateX(-${idx * 100}%)`;
+          }
+    
+          function next() { showSlide(idx + 1); }
+          function prev() { showSlide(idx - 1); }
+    
+          nextBtn.addEventListener('click', () => {
+            next();
+            resetInterval();
+          });
+          prevBtn.addEventListener('click', () => {
+            prev();
+            resetInterval();
+          });
+    
+          // auto-slide
+          function startInterval() {
+            interval = setInterval(next, 3000);
+          }
+          function resetInterval() {
+            clearInterval(interval);
+            startInterval();
+          }
+    
+          container.addEventListener('mouseenter', () => clearInterval(interval));
+          container.addEventListener('mouseleave', startInterval);
+    
+          // init
+          showSlide(0);
+          startInterval();
+        });
+      </script>
 {% endblock %}

@@ -105,10 +105,55 @@ class AddProductForm(BaseForm):
 	stock = forms.IntegerField(required=True)
 	selling_price=forms.IntegerField(required=True)
 	image=forms.ImageField(required=True)
+'''
 class ProductUpdateForm(BaseForm):
 	class Meta:
 		model=Product
-		fields=('name','stock','brand',  'selling_price','image','description','category')
+		fields=('name','stock','brand',  'selling_price','image','image2','image3','image4','description','category')
+'''
+from django import forms
+from django.forms import ClearableFileInput
+
+class ProductUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Product
+        fields = (
+            'name',
+            'stock',
+            'brand',
+            'selling_price',
+            'image', 'image2', 'image3', 'image4',
+            'description',
+            'category',
+        )
+        widgets = {
+            'image':     ClearableFileInput,  # adds a “clear” checkbox
+            'image2':    ClearableFileInput,
+            'image3':    ClearableFileInput,
+            'image4':    ClearableFileInput,
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # make each image field not required
+        for f in ('image','image2','image3','image4'):
+            self.fields[f].required = False
+
+    def save(self, commit=True):
+        # we want to leave existing files alone if nothing new was uploaded
+        product = super().save(commit=False)
+
+        # loop through each image field
+        for f in ('image','image2','image3','image4'):
+            new_file = self.cleaned_data.get(f)
+            # if the form field is empty and we're editing an existing instance,
+            # restore the original file rather than setting it to None
+            if not new_file and self.instance.pk:
+                setattr(product, f, getattr(self.instance, f))
+
+        if commit:
+            product.save()
+        return product
 
 
 class PaymentForm(ModelForm):
