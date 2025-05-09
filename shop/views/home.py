@@ -41,7 +41,8 @@ class Index(View):
                         print('did something happen')
                         cart[product]  = form.cleaned_data.get('quantity')
                     request.session['cart'] = cart
-                    return redirect('details', product)
+                    #return redirect('details', product)
+                    return redirect('lart')
                 else:
                     print("Form errors:", form.errors)
 
@@ -57,7 +58,7 @@ class Index(View):
                         cart[product]  = quantity-1
                 else:
                     cart[product]  = quantity+1
-
+  
             else:
                 cart[product] = 1
                 print('added 1')
@@ -67,7 +68,7 @@ class Index(View):
             cart[product] = 1
 
         request.session['cart'] = cart
-        return redirect('home')
+        return redirect('lart')
 
 
 

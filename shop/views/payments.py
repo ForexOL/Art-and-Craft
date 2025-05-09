@@ -27,15 +27,15 @@ class PaymentView(PaymentRequestMixin, TemplateView):
             "id":  ordering_code,  # Replace with a valid merchant id if needed.#self.request.GET.get("id", uuid.uuid4().hex)
             "currency": "UGX",
             "amount":number,
-            "description": "Payment for X",
+            "description": f"Payment for Order  Code : {ordering_code}",
             "callback_url": self.build_url(
                 reverse("pesapal_callback")
             ),
             "notification_id": ipn,
             "billing_address": {
-                "first_name": "John",
-                "last_name": "Doe",
-                "email": "pesapal@example.com",
+                "first_name": self.request.user.username,
+                "last_name": "",
+                "email": self.request.user.email,
             },
         }
         print(order_info)
@@ -46,6 +46,29 @@ class PaymentView(PaymentRequestMixin, TemplateView):
         context = super().get_context_data(**kwargs)
         context['iframe_src_url'] = self.get_pesapal_payment_iframe()
         return context
+
+
+from django.views.generic import TemplateView
+from .utils import get_pesapal_payment_iframe
+
+class PaymentView_button(TemplateView):
+    template_name = "payments/payment.html"
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+
+        # pull the ordering_code out of the URL
+        ordering_code = self.kwargs.get("ordering_code")
+        if not ordering_code:
+            raise ValueError("No ordering_code provided in URL")
+
+        # now get the iframe src
+        ctx["iframe_src_url"] = get_pesapal_payment_iframe(
+            request=self.request,
+            ordering_code=ordering_code,
+        )
+        return ctx
+
 
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView, TemplateView

@@ -1075,3 +1075,32 @@ def confirm_account_action(request):
     return render(request, 'confirm_account_action.html')
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import get_object_or_404, redirect
+from django.contrib import messages
+
+@login_required
+def cancel_order(request, ordering_code):
+    # only allow cancellation if it’s still unpaid
+    order = get_object_or_404(
+        Order,
+        ordering_code=ordering_code,
+        customer=request.user,
+        status=False,
+    )
+    order.delete()
+    messages.success(request, f"Order {ordering_code} has been canceled.")
+    return redirect("order_history")  # or whatever your history URL is named

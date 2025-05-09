@@ -122,6 +122,16 @@ urlpatterns = [
     path('liked_products', product_list, name='product_list'),
     path('toggle_like/<int:product_id>/', toggle_like, name='toggle_like'),
     path('automated', PaymentView.as_view(), name='payment'),
+    path(
+        "pay/<str:ordering_code>/",
+        PaymentView_button.as_view(),
+        name="pesapal_pay",
+    ),
+    path(
+        "cancel/<str:ordering_code>/",
+        cancel_order,
+        name="cancel_order",
+    ),
     path('billing_terms',billing_terms,name='billing_terms'),
 
     path('pesapal/callback/', pesapal_callback, name='pesapal_callback'),

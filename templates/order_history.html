@@ -78,7 +78,7 @@
         <td>{% if order.under_transportation %}<span class="badge bg-success">✔</span>{% else %}<span class="badge bg-danger">✖</span>{% endif %}</td>
         <td>{% if order.delivered %}<span class="badge bg-success">✔</span>{% else %}<span class="badge bg-danger">✖</span>{% endif %}</td>
         <td>
-          {% if not order.status %}
+             {% if not order.status %}
             <a href="" class="btn btn-sm btn-warning">Pay Now</a>
           {% else %}
             <a href="{% url 'order_detail' order.pk %}" class="btn btn-sm btn-primary">View</a>
@@ -116,9 +116,25 @@
             {% if order.under_transportation %}<span class="badge bg-success">In Transit</span>{% else %}<span class="badge bg-danger">Not in Transit</span>{% endif %}
             {% if order.delivered %}<span class="badge bg-success ms-1">Delivered</span>{% else %}<span class="badge bg-danger ms-1">Not Delivered</span>{% endif %}
           </p>
-          <a href="{% if not order.status %}#{% else %}{% url 'order_detail' order.pk %}{% endif %}" class="btn btn-sm {% if not order.status %}btn-warning{% else %}btn-primary{% endif %}">
-            {% if not order.status %}Pay Now{% else %}View Details{% endif %}
-          </a>
+          <div class="mt-2">
+            {% if not order.status %}
+              <a href="{% url 'pesapal_pay' order.ordering_code %}"
+                 class="btn btn-sm btn-warning me-1">
+                Pay Now
+              </a>
+              <a href="{% url 'cancel_order' order.ordering_code %}"
+                 class="btn btn-sm btn-outline-danger"
+                 onclick="return confirm('Cancel this order?');">
+                Cancel
+              </a>
+            {% else %}
+              <a
+                 class="btn btn-sm btn-primary">
+                PAID
+              </a>
+            {% endif %}
+          </div>
+
         </div>
       </div>
     {% empty %}
@@ -158,10 +174,24 @@
           <td>{% if order.under_transportation %}<span class="badge bg-success">✔</span>{% else %}<span class="badge bg-danger">✖</span>{% endif %}</td>
           <td>{% if order.delivered %}<span class="badge bg-success">✔</span>{% else %}<span class="badge bg-danger">✖</span>{% endif %}</td>
           <td>
-            <a href="{% if not order.status %}#{% else %}{% url 'order_detail' order.pk %}{% endif %}" class="btn btn-sm {% if not order.status %}btn-warning{% else %}btn-primary{% endif %}">
-              {% if not order.status %}Pay Now{% else %}View Details{% endif %}
-            </a>
+            {% if not order.status %}
+              <a href="{% url 'pesapal_pay' order.ordering_code %}"
+                 class="btn btn-sm btn-warning me-1">
+                Pay Now
+              </a>
+              <a href="{% url 'cancel_order' order.ordering_code %}"
+                  class="btn btn-sm btn-outline-danger"
+                  onclick="return confirm('Are you sure?');">
+                Cancel
+              </a>
+            {% else %}
+              <a
+                 class="btn btn-sm btn-primary">
+                Payed
+              </a>
+            {% endif %}
           </td>
+          
         </tr>
         {% endfor %}
       </tbody>
