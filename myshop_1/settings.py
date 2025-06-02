@@ -28,7 +28,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-iw6ul@79b_x=m(_%2ou*0%a6pxg=q*29h&pf4k&!y7&_ekeef#'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['localhost','127.0.0.1','aartcraftei.onrender.com','138.68.191.30','arcrid.store','www.arcrid.store']
 
@@ -115,7 +115,6 @@ WSGI_APPLICATION = 'myshop_1.wsgi.application'
 
 
 
-"""
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -146,6 +145,8 @@ DATABASES = {
     }
 }
 
+
+"""
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
