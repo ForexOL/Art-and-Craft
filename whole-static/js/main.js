@@ -16,7 +16,7 @@
     --------------------*/
     $(window).on('load', function () {
         $(".loader").fadeOut(4000);
-        $("#preloder").delay(100).fadeOut(100); // 5000ms = 5 seconds
+        $("#preloder").delay(100).fadeOut(1000); // 5000ms = 5 seconds
 
         /*------------------
             Gallery filter
