@@ -1091,6 +1091,8 @@ def confirm_account_action(request):
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect
 from django.contrib import messages
+def download_app(request):
+    return render(request, 'download_app.html')
 
 @login_required
 def cancel_order(request, ordering_code):
