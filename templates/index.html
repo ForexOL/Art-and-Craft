@@ -157,8 +157,8 @@ Updated HTML & CSS for responsive, rounded, modern-feel category images
                                     <div class="hero__text">
                                         <span>{{swipe.tile}}</span>
                                         <h2>
-                                            {{ swipe.description_words.0 }} {{ swipe.description_words.1 }}<br />
-                                            {% for word in swipe.description_words|slice:":2" %}
+                                            {{ swipe.description_words.0 }} {{ swipe.description.1 }}<br />
+                                            {% for word in swipe.description|slice:":2" %}
                                                 {{ word }} 
                                             {% endfor %}
                                             <br />

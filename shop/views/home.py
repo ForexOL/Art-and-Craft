@@ -193,10 +193,13 @@ def homepage(request):
     items=Item.objects.all()
     user_ip = get_client_ip(request)
     print(f"User IP: {user_ip}")
-
+    #print(item)
+    '''G
     for item in items:
-        item['description_words'] = item['description'].split()
+        print(item)
+        item['description_words'] = item.description.split()
 
+    '''
     if not cart:
         request.session['cart'] = {}
         productes={}

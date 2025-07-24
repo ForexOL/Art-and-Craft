@@ -8,6 +8,7 @@ from django.core.serializers.json import DjangoJSONEncoder
 from django.db.models import Count
 from django.db.models.functions import TruncDay
 import json
+from shop.models.banner import Item
 
 # Register your models here.
 
@@ -242,6 +243,7 @@ class AdminPayment(admin.ModelAdmin):
 
 # Register your models here.
 admin.site.register(Method)
+admin.site.register(Item)
 admin.site.register(Comment, CommentAdmin)
 admin.site.register(Product, AdminProduct)
 admin.site.register(Sub_Category, AdminCategory)
